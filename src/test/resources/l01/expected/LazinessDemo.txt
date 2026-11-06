@@ -1,0 +1,11 @@
+1) Pipeline built, no terminal operation:
+   (nothing printed above - the stream has not run)
+2) Terminal operation toList() runs it:
+  filter T001
+  filter T002
+  filter T003
+  map    T003
+  filter T004
+  map    T004
+   result = [T003, T004]
+3) limit(2) over 60 transactions inspected only 19

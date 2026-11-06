@@ -1,0 +1,3 @@
+Modern (Java 16): 11 over 1000.00 [T003, T019, T025, T026, T027, T038, T039, T042, T049, T055, T056]
+Not high value (Predicate.not): 49
+Same result with var in lambda: true

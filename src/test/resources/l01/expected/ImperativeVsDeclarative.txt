@@ -1,0 +1,2 @@
+Total debits (imperative):  16692.44
+Total debits (declarative): 16692.44

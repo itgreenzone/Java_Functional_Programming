@@ -1,0 +1,10 @@
+Java 8  Lambdas, java.util.function, Method references, Stream API, Optional, Default and static interface methods
+Java 9  takeWhile / dropWhile / ofNullable, List.of / Set.of / Map.of, Optional.or / ifPresentOrElse / stream, Private interface methods
+Java 10 var for local variables, Optional.orElseThrow(), Collectors.toUnmodifiableList
+Java 11 var in lambda parameters, Predicate.not, Optional.isEmpty
+Java 12 Collectors.teeing
+Java 14 Switch expressions
+Java 16 Records, Stream.toList(), Stream.mapMulti, Pattern matching for instanceof
+Java 17 Sealed classes
+Java 21 Pattern matching for switch, Record patterns, Sequenced collections, Virtual threads
+Beyond Java 21: unnamed variables _ (Java 22), Stream Gatherers (Java 24)

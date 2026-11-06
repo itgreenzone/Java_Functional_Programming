@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<!-- ================= PAGE 1: CHEAT SHEET ================= -->
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 01 · CHEAT SHEET</div><h1>Why Functional Programming in Java</h1></div>
+    <div class="sub">Java 8 → Java 21 · shared dataset: 10 customers,<br>15 accounts, 60 transactions</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><b>Declarative = WHAT, imperative = HOW.</b> Streams state the result; the library owns the loop.</li>
+          <li><b>Java is OO with functional features</b> (since Java 8), not a pure FP language: mutable by default, side effects allowed.</li>
+          <li><b>Behaviour parameterisation:</b> write the loop once, pass the rule. Strategy class → anonymous class → lambda.</li>
+          <li><b>Any interface with one abstract method</b> accepts a lambda, even one written before Java 8 (target typing).</li>
+          <li><b>Pure function:</b> same input → same output, no side effects.</li>
+          <li><b>Streams are lazy:</b> nothing runs until a terminal op (toList, count, reduce…). Elements flow one at a time.</li>
+          <li><b>Money:</b> <code>BigDecimal</code>, scale 2, <code>RoundingMode.HALF_UP</code>. Never <code>double</code>.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl">1 · Imperative vs declarative <span class="b">Java 8</span></div>
+<pre><span class="c">// HOW: loop + mutable total</span>
+<span class="t">BigDecimal</span> total = <span class="t">BigDecimal</span>.ZERO;
+<span class="k">for</span> (<span class="t">Transaction</span> t : txns) {
+    <span class="k">if</span> (t.<span class="m">type</span>() == <span class="t">TxnType</span>.DEBIT) {
+        total = total.<span class="m">add</span>(t.<span class="m">amount</span>());
+    }
+}
+<span class="c">// WHAT: rule + result            -> 16692.44</span>
+txns.<span class="m">stream</span>()
+    .<span class="m">filter</span>(t -&gt; t.<span class="m">type</span>() == <span class="t">TxnType</span>.DEBIT)
+    .<span class="m">map</span>(<span class="t">Transaction</span>::<span class="m">amount</span>)
+    .<span class="m">reduce</span>(<span class="t">BigDecimal</span>.ZERO, <span class="t">BigDecimal</span>::<span class="m">add</span>);</pre>
+        <div class="lbl">2 · Anonymous class → lambda (same old interface)</div>
+<pre><span class="m">filter</span>(txns, <span class="k">new</span> <span class="t">TransactionFilter</span>() { <span class="c">// 6 lines</span>
+    <span class="k">public boolean</span> <span class="m">matches</span>(<span class="t">Transaction</span> t) {
+        <span class="k">return</span> t.<span class="m">amount</span>()
+                .<span class="m">compareTo</span>(THRESHOLD) &gt; 0;
+    }
+});
+<span class="c">// lambda: 1 line, same result (11 txns)</span>
+<span class="m">filter</span>(txns,
+    t -&gt; t.<span class="m">amount</span>().<span class="m">compareTo</span>(THRESHOLD) &gt; 0);</pre>
+      </div>
+      <div class="box">
+        <h2>Do / Don't</h2>
+        <div class="dd">
+          <div class="do"><h3>✔ Do</h3><ul><li>Keep lambdas short; name rules</li><li>Prefer method references when clearer</li><li>Immutable data: records, <code>List.of</code>, <code>toList()</code></li><li>One stream op per line</li></ul></div>
+          <div class="dont"><h3>✘ Don't</h3><ul><li>Fill an outside list in <code>forEach</code></li><li>Put logic in <code>peek</code> (debug only)</li><li>Expect output without a terminal op</li><li>Turn every loop into a stream</li></ul></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>API used in L01</h2>
+        <table>
+          <tr><th>API</th><th>Signature</th><th>Returns</th><th>Since</th></tr>
+          <tr><td><code>Predicate&lt;T&gt;</code></td><td><code>boolean test(T t)</code></td><td>boolean</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Function&lt;T,R&gt;</code></td><td><code>R apply(T t)</code></td><td>R</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>andThen</code></td><td><code>andThen(Function&lt;? super R,? extends V&gt;)</code></td><td>Function&lt;T,V&gt;</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Stream.filter</code></td><td><code>filter(Predicate&lt;? super T&gt;)</code></td><td>Stream&lt;T&gt;</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Stream.map</code></td><td><code>map(Function&lt;? super T,? extends R&gt;)</code></td><td>Stream&lt;R&gt;</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Stream.reduce</code></td><td><code>reduce(T id, BinaryOperator&lt;T&gt;)</code></td><td>T</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Collectors.toList</code></td><td><code>toList()</code></td><td>List (no promise)</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>List.of</code></td><td><code>of(E... e)</code></td><td>immutable List</td><td><span class="b n">9</span></td></tr>
+          <tr><td><code>Predicate.not</code></td><td><code>not(Predicate&lt;? super T&gt;)</code></td><td>Predicate&lt;T&gt;</td><td><span class="b n">11</span></td></tr>
+          <tr><td><code>Stream.toList</code></td><td><code>toList()</code></td><td>unmodifiable List</td><td><span class="b n">16</span></td></tr>
+          <tr><td><code>record</code></td><td><code>record Transaction(...)</code></td><td>data carrier</td><td><span class="b n">16</span></td></tr>
+        </table>
+      </div>
+      <div class="box white">
+        <div class="lbl" style="margin-top:0">3 · Modern Java 21 style</div>
+<pre><span class="t">List</span>&lt;<span class="t">String</span>&gt; ids = txns.<span class="m">stream</span>()
+    .<span class="m">filter</span>(<span class="t">HighValueRule</span>::<span class="m">isHighValue</span>)
+    .<span class="m">map</span>(<span class="t">Transaction</span>::<span class="m">id</span>)     <span class="c">// record [16]</span>
+    .<span class="m">toList</span>();                <span class="c">// unmodifiable [16]</span>
+<span class="k">long</span> rest = txns.<span class="m">stream</span>()     <span class="c">// -> 49</span>
+    .<span class="m">filter</span>(<span class="t">Predicate</span>.<span class="m">not</span>(    <span class="c">// [11]</span>
+        <span class="t">HighValueRule</span>::<span class="m">isHighValue</span>))
+    .<span class="m">count</span>();</pre>
+        <div class="out">11 over 1000.00 [T003, T019, T025, T026, T027,<br>T038, T039, T042, T049, T055, T056]</div>
+        <div class="lbl">4 · Functions as values <span class="b">Java 8</span></div>
+<pre><span class="t">Function</span>&lt;<span class="t">BigDecimal</span>, <span class="t">BigDecimal</span>&gt; ADD_GST =
+    a -&gt; a.<span class="m">multiply</span>(<span class="k">new</span> <span class="t">BigDecimal</span>(<span class="s">"1.09"</span>))
+          .<span class="m">setScale</span>(2, <span class="t">RoundingMode</span>.HALF_UP);
+<span class="m">discountOf</span>(10).<span class="m">andThen</span>(ADD_GST)
+    .<span class="m">apply</span>(<span class="k">new</span> <span class="t">BigDecimal</span>(<span class="s">"59.90"</span>));   <span class="c">// 58.76</span></pre>
+      </div>
+      <div class="box">
+        <h2>Laziness: the conveyor belt</h2>
+        <div class="belt">
+          <div style="background:#0E3B2E">source<small>T001…T004</small></div><span>▶</span>
+          <div style="background:#1E8E5A">filter<small>&gt; 200.00</small></div><span>▶</span>
+          <div style="background:#1E8E5A">map<small>::id</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">toList()<small>terminal</small></div>
+        </div>
+        <p class="small">Order printed: <code>filter T001, filter T002, filter T003, map T003, filter T004, map T004</code>. No terminal op → nothing prints. <code>limit(2)</code> found 2 high-value txns after 19 of 60.</p>
+        <h2 style="margin-top:2mm">Java 8 → 21 timeline</h2>
+        <div class="tl">
+          <div class="v lts"><b>8</b>lambdas streams Optional</div>
+          <div class="v"><b>9</b>List.of</div>
+          <div class="v"><b>10</b>var</div>
+          <div class="v lts"><b>11</b>Predicate .not</div>
+          <div class="v"><b>12</b>teeing</div>
+          <div class="v"><b>14</b>switch expr.</div>
+          <div class="v"><b>16</b>records toList()</div>
+          <div class="v lts"><b>17</b>sealed</div>
+          <div class="v lts"><b>21</b>pattern switch, virtual threads</div>
+        </div>
+        <p class="small">Amber = LTS. Beyond Java 21: unnamed variables <code>_</code> (22), Stream Gatherers (24).</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 01</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<!-- ================= PAGE 2: STICKY NOTES ================= -->
+<div class="page page2">
+  <h1>Lesson 01 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>WHAT, not HOW</h3><p>Declarative code states the result.<br>The library runs the loop for you.</p></div>
+    <div class="note g"><h3>1 abstract method = lambda</h3><p>Any SAM interface takes a lambda, even an old one like <code>TransactionFilter</code>.</p></div>
+    <div class="note p"><h3>13 → 6 → 1</h3><p>strategy class → anonymous class → lambda.<br>Same 11 transactions every time.</p></div>
+    <div class="note bl"><h3>Lazy streams!</h3><p>No terminal op = nothing runs.<br><code>filter T003 → map T003</code> before T004.</p></div>
+    <div class="note o"><h3>Pure function</h3><p>Same input → same output.<br>No side effects. Easy to test.<br><code>fee(2500.00) = 12.50</code> always.</p></div>
+    <div class="note l"><h3>toList() [Java 16]</h3><p>Returns an unmodifiable list.<br><code>add()</code> → UnsupportedOperationException</p></div>
+    <div class="note g"><h3>Money = BigDecimal</h3><p>scale 2 · HALF_UP · never double.<br><code>59.90 → 58.76</code> (−10% then GST)</p></div>
+    <div class="note y"><h3>Java is OO + FP</h3><p>Functional features since Java 8.<br>Not pure FP: you choose the style.<br>LTS: 8 · 11 · 17 · 21</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 01</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

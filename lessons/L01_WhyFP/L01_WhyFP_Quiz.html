@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L01 Quiz · Why Functional Programming in Java · ITGreenZone</title>
+<style>
+  :root {
+    --forest: #0E3B2E; --green: #1E8E5A; --mint: #EAF4EE; --amber: #F2A93B;
+    --red: #C93C3C; --redbg: #FBECEC; --ink: #1A2421; --muted: #6B7D76; --code: #15211C;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-variant-ligatures: none; font-family: -apple-system, "Segoe UI", Calibri, Roboto, Arial, sans-serif; color: var(--ink); background: #F7FAF8; line-height: 1.45; }
+  header { background: var(--forest); color: #fff; padding: 20px 16px; }
+  header .wrap, main, footer { max-width: 820px; margin: 0 auto; }
+  header .kicker { color: var(--amber); font-weight: 700; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; }
+  header h1 { font-family: Cambria, Georgia, serif; margin: 6px 0 4px; font-size: 26px; }
+  header p { margin: 0; opacity: .85; font-size: 14px; }
+  main { padding: 16px; }
+  .toolbar { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 14px; }
+  .progress { font-size: 14px; color: var(--muted); }
+  .toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; user-select: none; }
+  .toggle input { width: 18px; height: 18px; accent-color: var(--green); }
+  .q { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .q .meta { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  .num { background: var(--forest); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+  .tag { background: var(--amber); color: var(--ink); font-size: 11px; font-weight: 700; border-radius: 10px; padding: 2px 8px; }
+  .q h2 { font-size: 16px; margin: 0 0 10px; }
+  pre { background: var(--code); color: #E8EFEB; padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 13px; line-height: 1.4; margin: 0 0 12px; font-family: "Courier New", Consolas, monospace; }
+  .opts { display: grid; gap: 8px; }
+  .opt { display: flex; gap: 10px; align-items: flex-start; border: 2px solid #D5E3DA; border-radius: 10px; padding: 10px 12px; cursor: pointer; background: #fff; text-align: left; font: inherit; color: inherit; width: 100%; }
+  .opt:hover { border-color: var(--green); }
+  .opt .letter { font-weight: 700; color: var(--green); min-width: 18px; }
+  .opt code { font-family: "Courier New", Consolas, monospace; font-size: 13.5px; white-space: pre-wrap; }
+  .opt.selected { border-color: var(--green); background: var(--mint); }
+  .opt.correct { border-color: var(--green); background: #D7F0E1; }
+  .opt.wrong { border-color: var(--red); background: var(--redbg); }
+  .opt:disabled { cursor: default; }
+  .explain { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--mint); font-size: 14px; }
+  .explain.show { display: block; }
+  .explain.bad { background: var(--redbg); }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 20px; }
+  button.btn { font: inherit; font-weight: 700; border: 0; border-radius: 10px; padding: 12px 20px; cursor: pointer; }
+  .primary { background: var(--green); color: #fff; }
+  .primary:disabled { background: #A9C7B7; cursor: not-allowed; }
+  .secondary { background: var(--amber); color: var(--ink); }
+  .score { display: none; background: var(--forest); color: #fff; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+  .score.show { display: block; }
+  .score b { font-size: 28px; color: var(--amber); font-family: Cambria, Georgia, serif; }
+  /* flashcards */
+  .flash { display: none; }
+  body.flashmode .quiz { display: none; }
+  body.flashmode .flash { display: block; }
+  .card { perspective: 1000px; height: 360px; margin-bottom: 14px; cursor: pointer; }
+  .card-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; }
+  .card.flipped .card-inner { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 14px; padding: 18px; overflow-y: auto; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+  .front { background: #fff; }
+  .back { background: var(--forest); color: #fff; transform: rotateY(180deg); }
+  .back .ans { color: var(--amber); font-weight: 700; font-size: 17px; margin-bottom: 8px; }
+  .back code { font-family: "Courier New", Consolas, monospace; }
+  .hint { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  .flashnav { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  footer { padding: 16px; font-size: 12px; color: var(--muted); text-align: center; }
+  @media (max-width: 520px) { header h1 { font-size: 21px; } pre { font-size: 12px; } .card { height: 420px; } }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="kicker">Lesson 01 · Quiz</div>
+  <h1>Why Functional Programming in Java</h1>
+  <p>10 questions · answer them all, then submit. Outputs use the shared course dataset.</p>
+</div></header>
+
+<main>
+  <div class="toolbar">
+    <span class="progress" id="progress">0 / 10 answered</span>
+    <label class="toggle"><input type="checkbox" id="flashToggle"> Flashcard mode</label>
+  </div>
+
+  <section class="quiz">
+    <div class="score" id="score"></div>
+    <div id="questions"></div>
+    <div class="actions">
+      <button class="btn primary" id="submitBtn" disabled>Submit answers</button>
+      <button class="btn secondary" id="retryBtn" style="display:none">Retry (reshuffle)</button>
+    </div>
+  </section>
+
+  <section class="flash">
+    <div class="card" id="card" tabindex="0" aria-label="Flashcard, press Enter to flip"><div class="card-inner">
+      <div class="face front" id="cardFront"></div>
+      <div class="face back" id="cardBack"></div>
+    </div></div>
+    <div class="flashnav">
+      <button class="btn secondary" id="prevCard">◀ Prev</button>
+      <span class="progress" id="cardPos"></span>
+      <button class="btn secondary" id="nextCard">Next ▶</button>
+    </div>
+  </section>
+</main>
+<footer>ITGreenZone · Java Functional Programming · Lesson 01</footer>
+
+<script>
+"use strict";
+// Each question: options[0] is the correct answer in the source; display order is shuffled.
+// "Predict the output" answers are verified by QuizAnswersTest.java in the course repo.
+const QUESTIONS = [
+  {
+    tag: "Predict the output",
+    q: "What does this print? (The first four transactions are T001 150.39, T002 75.62, T003 1221.40, T004 216.11.)",
+    code: `List<String> ids = SampleData.transactions().subList(0, 4).stream()
+    .peek(t -> System.out.print("f" + t.id().substring(3) + " "))
+    .filter(t -> t.amount().compareTo(new BigDecimal("200.00")) > 0)
+    .peek(t -> System.out.print("m" + t.id().substring(3) + " "))
+    .map(Transaction::id)
+    .toList();
+System.out.print(ids);`,
+    options: ["f1 f2 f3 m3 f4 m4 [T003, T004]", "f1 f2 f3 f4 m3 m4 [T003, T004]", "m3 m4 f1 f2 f3 f4 [T003, T004]", "f1 f2 f3 f4 [T003, T004]"],
+    why: "Streams are processed one element at a time (loop fusion). T003 passes the filter and goes straight to map before T004 is even examined. Filtering all elements first, then mapping, is how a chain of separate loops would behave, not a stream."
+  },
+  {
+    tag: "Predict the output",
+    q: "What does this print?",
+    code: `Stream<String> s = SampleData.transactions().stream()
+    .peek(t -> System.out.println("checking " + t.id()))
+    .filter(t -> t.amount().compareTo(new BigDecimal("200.00")) > 0)
+    .map(Transaction::id);
+System.out.println("done");`,
+    options: ["done", "60 \"checking\" lines, then done", "\"checking T001\", then done", "It does not compile: a stream must end with a terminal operation"],
+    why: "Intermediate operations are lazy. Without a terminal operation such as toList() or count(), the pipeline never runs, so peek never prints. The code compiles fine: an unused Stream is legal."
+  },
+  {
+    tag: "Predict the output",
+    q: "ADD_GST multiplies by 1.09 and discountOf(10) multiplies by 0.90, both rounding to 2 dp HALF_UP. What does this print?",
+    code: `System.out.println(
+    discountOf(10).andThen(ADD_GST).apply(new BigDecimal("59.90")));`,
+    options: ["58.76", "53.91", "65.29", "58.7609"],
+    why: "andThen runs left to right: 59.90 × 0.90 = 53.91, then 53.91 × 1.09 = 58.7619, rounded HALF_UP to 58.76. 53.91 is only the discount; 65.29 is only the GST; 58.7609 ignores rounding."
+  },
+  {
+    tag: "Predict the output",
+    q: "What happens when this runs on Java 21?",
+    code: `List<String> ids = Stream.of("T003", "T019").toList();
+ids.add("T025");
+System.out.println(ids);`,
+    options: ["UnsupportedOperationException is thrown", "[T003, T019, T025]", "[T003, T019]", "It does not compile: toList() needs Collectors"],
+    why: "Stream.toList() [Java 16] returns an unmodifiable list, so add() throws UnsupportedOperationException. collect(Collectors.toList()) [Java 8] gives no such guarantee and in practice returns an ArrayList you can change."
+  },
+  {
+    tag: "Which version introduced…",
+    q: "Which Java version introduced Stream.toList()?",
+    options: ["Java 16", "Java 8", "Java 11", "Java 21"],
+    why: "Stream.toList() arrived in Java 16, together with records becoming final. On Java 8 or 11 use collect(Collectors.toList()), or Collectors.toUnmodifiableList() [Java 10]."
+  },
+  {
+    tag: "Which version introduced…",
+    q: "Predicate.not(...) lets you negate a method reference, e.g. filter(Predicate.not(HighValueRule::isHighValue)). Which version added it?",
+    options: ["Java 11", "Java 8", "Java 9", "Java 17"],
+    why: "Predicate.not is a static method added in Java 11. Java 8 already had the instance method negate(), but you cannot call it directly on a method reference without a cast."
+  },
+  {
+    tag: "Spot the bug / best practice",
+    q: "A colleague wrote this. What is the best review comment?",
+    code: `List<String> ids = new ArrayList<>();
+txns.stream()
+    .filter(HighValueRule::isHighValue)
+    .forEach(t -> ids.add(t.id()));`,
+    options: [
+      "Return the result from the pipeline: .map(Transaction::id).toList() instead of mutating an outside list",
+      "Fine as it is; forEach is the standard way to collect results",
+      "Replace ArrayList with LinkedList so add() is faster",
+      "Use peek(t -> ids.add(t.id())) instead of forEach"
+    ],
+    why: "Filling an outside list from a lambda is a side effect: unclear, and unsafe if the stream is ever made parallel. Let the stream produce the result with map + toList (or collect). peek is for debugging only."
+  },
+  {
+    tag: "Spot the bug / best practice",
+    q: "Which lambda correctly replaces this anonymous class?",
+    code: `new Comparator<Customer>() {
+    @Override
+    public int compare(Customer a, Customer b) {
+        return a.joined().compareTo(b.joined());
+    }
+}`,
+    options: [
+      "(a, b) -> a.joined().compareTo(b.joined())",
+      "a -> a.joined()",
+      "(a, b) -> { a.joined().compareTo(b.joined()); }",
+      "(a, b) -> b.joined() - a.joined()"
+    ],
+    why: "compare takes two parameters and returns an int. A one-parameter lambda is a Function, not a Comparator. A block body needs an explicit return. LocalDate cannot be subtracted with the minus operator."
+  },
+  {
+    tag: "Concept",
+    q: "Which statement about Java and functional programming is correct?",
+    options: [
+      "Java is an object-oriented language that added functional features in Java 8; functional style is a discipline you choose",
+      "Since Java 8, Java is a pure functional language like Haskell",
+      "Lambdas in Java can only be used with the Stream API",
+      "Functional Java requires all data to be immutable, or it will not compile"
+    ],
+    why: "Java stays object-oriented: data is mutable by default and side effects are allowed. Lambdas work with any functional interface, not only streams. Immutability is a good practice, not a compiler rule."
+  },
+  {
+    tag: "Concept",
+    q: "TransactionFilter was written years before Java 8 and has one method: boolean matches(Transaction t). Why can you pass the lambda t -> t.amount().compareTo(LIMIT) > 0 where a TransactionFilter is expected?",
+    options: [
+      "It has exactly one abstract method, so it is a functional interface and the lambda's target type",
+      "Because Java 8 automatically converted every interface into java.util.function.Predicate",
+      "Only because it is annotated with @FunctionalInterface",
+      "It cannot; you must first change the parameter type to Predicate<Transaction>"
+    ],
+    why: "Any interface with a single abstract method is a functional interface. The compiler uses the expected type (target typing) to decide what the lambda implements. @FunctionalInterface is optional: it only adds a compile-time check."
+  }
+];
+
+const LETTERS = ["A", "B", "C", "D"];
+// Initial answer positions are deliberately varied; Retry reshuffles randomly.
+const INITIAL_ORDER = [[1,0,2,3],[0,1,2,3],[2,1,0,3],[3,1,2,0],[1,2,0,3],[2,0,3,1],[0,1,2,3],[3,0,1,2],[1,0,2,3],[2,1,3,0]];
+let orders = INITIAL_ORDER.map(o => o.slice());
+let answers = new Array(QUESTIONS.length).fill(null);
+let submitted = false;
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const looksLikeCode = s => /[(){};]|->|::/.test(s) && !/\s(a|the|is|so|and)\s/.test(s);
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function render() {
+  const box = $("questions");
+  box.innerHTML = "";
+  QUESTIONS.forEach((item, qi) => {
+    const div = document.createElement("div");
+    div.className = "q";
+    let html = `<div class="meta"><span class="num">${qi + 1}</span><span class="tag">${esc(item.tag)}</span></div><h2>${esc(item.q)}</h2>`;
+    if (item.code) html += `<pre>${esc(item.code)}</pre>`;
+    html += `<div class="opts" role="radiogroup" aria-label="Question ${qi + 1} options">`;
+    orders[qi].forEach((optIndex, pos) => {
+      const text = item.options[optIndex];
+      const shown = looksLikeCode(text) ? `<code>${esc(text)}</code>` : esc(text);
+      html += `<button type="button" class="opt" role="radio" aria-checked="false" data-q="${qi}" data-opt="${optIndex}"><span class="letter">${LETTERS[pos]}</span><span>${shown}</span></button>`;
+    });
+    html += `</div><div class="explain" id="exp${qi}"></div>`;
+    div.innerHTML = html;
+    box.appendChild(div);
+  });
+  box.querySelectorAll(".opt").forEach(btn => btn.addEventListener("click", onPick));
+  updateProgress();
+}
+
+function onPick(e) {
+  if (submitted) return;
+  const btn = e.currentTarget, qi = +btn.dataset.q;
+  answers[qi] = +btn.dataset.opt;
+  btn.parentElement.querySelectorAll(".opt").forEach(b => { b.classList.remove("selected"); b.setAttribute("aria-checked", "false"); });
+  btn.classList.add("selected");
+  btn.setAttribute("aria-checked", "true");
+  updateProgress();
+}
+
+function updateProgress() {
+  const n = answers.filter(a => a !== null).length;
+  $("progress").textContent = `${n} / ${QUESTIONS.length} answered`;
+  $("submitBtn").disabled = submitted || n < QUESTIONS.length;
+}
+
+function submit() {
+  submitted = true;
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const ok = answers[qi] === 0;
+    if (ok) score++;
+    document.querySelectorAll(`.opt[data-q="${qi}"]`).forEach(b => {
+      b.disabled = true;
+      const o = +b.dataset.opt;
+      if (o === 0) b.classList.add("correct");
+      else if (o === answers[qi]) b.classList.add("wrong");
+    });
+    const exp = $("exp" + qi);
+    exp.className = "explain show" + (ok ? "" : " bad");
+    exp.innerHTML = `<strong>${ok ? "✔ Correct." : "✘ Not quite."}</strong> Answer: ${esc(item.options[0])}<br>${esc(item.why)}`;
+  });
+  const pct = Math.round(score * 100 / QUESTIONS.length);
+  const msg = pct >= 80 ? "Excellent: ready for Lesson 02." : pct >= 60 ? "Good. Review the explanations below." : "Re-watch the laziness and timeline slides, then retry.";
+  $("score").innerHTML = `Your score: <b>${score} / ${QUESTIONS.length}</b> (${pct}%)<br>${msg}`;
+  $("score").classList.add("show");
+  $("submitBtn").disabled = true;
+  $("retryBtn").style.display = "inline-block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function retry() {
+  submitted = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  orders = QUESTIONS.map(() => shuffle([0, 1, 2, 3]));
+  $("score").classList.remove("show");
+  $("retryBtn").style.display = "none";
+  render();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ---- flashcards ----
+let cardIdx = 0;
+function showCard() {
+  const item = QUESTIONS[cardIdx];
+  $("card").classList.remove("flipped");
+  $("cardFront").innerHTML = `<div class="meta"><span class="num">${cardIdx + 1}</span> <span class="tag">${esc(item.tag)}</span></div><h2 style="font-size:16px">${esc(item.q)}</h2>${item.code ? `<pre>${esc(item.code)}</pre>` : ""}<div class="hint">Tap the card to see the answer</div>`;
+  $("cardBack").innerHTML = `<div class="ans">${esc(item.options[0])}</div><div>${esc(item.why)}</div>`;
+  $("cardPos").textContent = `${cardIdx + 1} / ${QUESTIONS.length}`;
+}
+$("card").addEventListener("click", () => $("card").classList.toggle("flipped"));
+$("card").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("card").classList.toggle("flipped"); } });
+$("prevCard").addEventListener("click", () => { cardIdx = (cardIdx + QUESTIONS.length - 1) % QUESTIONS.length; showCard(); });
+$("nextCard").addEventListener("click", () => { cardIdx = (cardIdx + 1) % QUESTIONS.length; showCard(); });
+$("flashToggle").addEventListener("change", e => { document.body.classList.toggle("flashmode", e.target.checked); if (e.target.checked) showCard(); });
+
+$("submitBtn").addEventListener("click", submit);
+$("retryBtn").addEventListener("click", retry);
+render();
+</script>
+</body>
+</html>

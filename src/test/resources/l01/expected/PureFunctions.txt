@@ -1,0 +1,4 @@
+Pure fee, call 1:   12.50
+Pure fee, call 2:   12.50
+Impure fee, call 1: 12.50
+Impure fee, call 2: 25.00  <- same input, different answer

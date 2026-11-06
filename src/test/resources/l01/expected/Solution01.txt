@@ -1,0 +1,3 @@
+Oldest 3 customers: [Chen Wei, Farah Aziz, Alice Tan]
+Top 3 balances:     [ACC-1006=100000.00, ACC-1015=50000.00, ACC-1004=48200.00]
+Month-end job: 15 accounts, total balance 300382.25
