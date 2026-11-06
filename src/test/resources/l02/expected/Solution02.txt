@@ -1,0 +1,3 @@
+Suspicious: [T003, T010, T023, T036, T042, T050, T057]
+Large debit OR foreign (FraudRule.or): 8
+Transfer fee on 2500.00: 12.50 | fee=1.00

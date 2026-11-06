@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body>
+<!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Functional interfaces <span style="font-size:22pt" class="amber">· my notes L02</span></h1>
+  <div class="sub">the contract behind every lambda: <span class="hl">one abstract method = one socket</span></div>
+
+  <div class="sec">
+    <h2>1 · SAM = Single Abstract Method</h2>
+    <div class="row" style="align-items:center">
+      <svg width="250" height="170" viewBox="0 0 250 170">
+        <path d="M20 60 L110 15 L200 60" fill="none" stroke="#23302B" stroke-width="2.4" stroke-linejoin="round"/>
+        <rect x="30" y="60" width="160" height="100" rx="6" fill="#FFF9C4" stroke="#23302B" stroke-width="2.2"/>
+        <text x="58" y="85" font-family="Caveat" font-weight="700" font-size="20">interface FeeRule</text>
+        <rect x="88" y="98" width="44" height="34" rx="6" fill="#fff" stroke="#1E8E5A" stroke-width="2.4"/>
+        <circle cx="102" cy="115" r="3.5" fill="#23302B"/><circle cx="118" cy="115" r="3.5" fill="#23302B"/>
+        <text x="72" y="150" font-family="Patrick" font-size="13">feeFor(txn) = SAM</text>
+        <path d="M215 115 C 200 110, 180 112, 140 115" fill="none" stroke="#C77A0A" stroke-width="2.4"/>
+        <rect x="205" y="100" width="34" height="30" rx="5" fill="#FFCC80" stroke="#23302B" stroke-width="2"/>
+        <text x="203" y="96" font-family="Caveat" font-weight="700" font-size="17" fill="#C77A0A">λ plug</text>
+      </svg>
+      <div class="sk t2 col">
+        <p><b>Counts:</b> exactly 1 abstract method</p>
+        <p style="margin-top:1.5mm"><b>Allowed, NOT counted:</b></p>
+        <ul>
+          <li>default methods <span class="code">[8]</span></li>
+          <li>static methods <span class="code">[8]</span></li>
+          <li>private methods <span class="code">[9]</span></li>
+          <li>equals / hashCode / toString (Object's)</li>
+        </ul>
+        <p style="margin-top:1.5mm">→ Comparator has compare + equals and is <span class="hlg">still functional</span>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec row" style="align-items:center">
+    <div class="col">
+      <h2>2 · @FunctionalInterface = guard dog</h2>
+      <p>Optional. But if someone adds a 2nd abstract method, it barks <b>at the interface</b>, not in 50 other files:</p>
+      <p style="margin-top:2mm"><span class="code">error: Unexpected @FunctionalInterface annotation</span></p>
+      <p style="margin-top:2mm">Standard: <span class="hl">always put it on my own SAMs.</span></p>
+    </div>
+    <svg width="170" height="130" viewBox="0 0 170 130">
+      <ellipse cx="80" cy="85" rx="48" ry="30" fill="#FFCC80" stroke="#23302B" stroke-width="2.2"/>
+      <circle cx="122" cy="58" r="24" fill="#FFCC80" stroke="#23302B" stroke-width="2.2"/>
+      <path d="M108 40 l-6 -18 l14 10 z" fill="#C77A0A" stroke="#23302B" stroke-width="1.6"/>
+      <circle cx="128" cy="54" r="3" fill="#23302B"/><circle cx="144" cy="64" r="4" fill="#23302B"/>
+      <path d="M42 112 v12 M62 114 v12 M98 114 v12 M118 112 v12" stroke="#23302B" stroke-width="2.4"/>
+      <path d="M33 78 q-18 -12 -12 -26" fill="none" stroke="#23302B" stroke-width="2.2"/>
+      <text x="88" y="30" font-family="Caveat" font-weight="700" font-size="22" fill="#C93C3C">WOOF!</text>
+    </svg>
+  </div>
+
+  <div class="sec">
+    <h2>3 · The four basic shapes <span class="code">java.util.function [8]</span></h2>
+    <svg width="660" height="170" viewBox="0 0 660 170">
+      <g font-family="Patrick" font-size="14" text-anchor="middle">
+        <!-- Supplier gift -->
+        <rect x="35" y="40" width="80" height="60" rx="4" fill="#FFC2D4" stroke="#23302B" stroke-width="2"/><path d="M75 40 v60 M35 62 h80" stroke="#C93C3C" stroke-width="3"/>
+        <path d="M60 40 q-12 -20 15 -6 q27 -14 15 6" fill="none" stroke="#C93C3C" stroke-width="2.4"/>
+        <path d="M120 70 h28 M140 62 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/><text x="157" y="75">T</text>
+        <text x="80" y="130" font-family="Caveat" font-weight="700" font-size="20">Supplier</text><text x="80" y="150">() → T · get()</text>
+        <!-- Consumer -->
+        <text x="190" y="75">T</text><path d="M200 70 h26 M218 62 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <path d="M232 45 h70 l-10 58 h-50 z" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><path d="M248 60 v30 M267 60 v30 M286 60 v30" stroke="#23302B" stroke-width="1.6"/>
+        <text x="260" y="130" font-family="Caveat" font-weight="700" font-size="20">Consumer</text><text x="260" y="150">T → void · accept()</text>
+        <!-- Function machine -->
+        <text x="350" y="75">T</text><path d="M360 70 h20 M372 62 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="384" y="42" width="72" height="56" rx="6" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/>
+        <circle cx="408" cy="70" r="10" fill="none" stroke="#23302B" stroke-width="2"/><circle cx="434" cy="70" r="7" fill="none" stroke="#23302B" stroke-width="2"/>
+        <path d="M460 70 h20 M472 62 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/><text x="490" y="75">R</text>
+        <text x="420" y="130" font-family="Caveat" font-weight="700" font-size="20">Function</text><text x="420" y="150">T → R · apply()</text>
+        <!-- Predicate gate -->
+        <text x="530" y="75">T</text><path d="M540 70 h18 M550 62 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <path d="M564 42 v56 M620 42 v56 M564 52 h56" stroke="#23302B" stroke-width="2.4"/>
+        <text x="580" y="80" font-family="Caveat" font-weight="700" font-size="24" fill="#1E8E5A">✓</text><text x="604" y="80" font-family="Caveat" font-weight="700" font-size="24" fill="#C93C3C">✗</text>
+        <text x="592" y="130" font-family="Caveat" font-weight="700" font-size="20">Predicate</text><text x="592" y="150">T → boolean · test()</text>
+      </g>
+    </svg>
+    <div class="row">
+      <div class="sk t1 col"><p><b>Bi…</b> = 2 inputs<br>BiFunction (T,U)→R<br>BiPredicate, BiConsumer</p></div>
+      <div class="sk t2 col"><p><b>…Operator</b> = same type<br>UnaryOperator T→T<br>BinaryOperator (T,T)→T</p></div>
+      <div class="sk t3 col"><p><b>Primitives</b> = no boxing<br>IntPredicate, ToIntFunction<br>IntUnaryOperator…</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 02</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:28pt">4 · Composition = snap the pieces together</h2>
+  <svg width="660" height="200" viewBox="0 0 660 200">
+    <g font-family="Patrick" font-size="14">
+      <text x="10" y="40" font-family="Caveat" font-weight="700" font-size="20">andThen: this first</text>
+      <text x="10" y="80">100.00</text><path d="M62 75 h22 M76 67 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+      <rect x="90" y="56" width="70" height="38" rx="6" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="100" y="80">fee +1</text>
+      <path d="M160 75 h22 M174 67 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+      <rect x="188" y="56" width="80" height="38" rx="6" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="198" y="80">GST ×1.09</text>
+      <path d="M268 75 h22 M282 67 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+      <text x="296" y="81" font-family="Caveat" font-weight="700" font-size="24" fill="#1E8E5A">110.09</text>
+
+      <text x="10" y="135" font-family="Caveat" font-weight="700" font-size="20">compose: argument first</text>
+      <text x="10" y="175">100.00</text><path d="M62 170 h22 M76 162 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+      <rect x="90" y="151" width="80" height="38" rx="6" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="100" y="175">GST ×1.09</text>
+      <path d="M170 170 h22 M184 162 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+      <rect x="198" y="151" width="70" height="38" rx="6" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="208" y="175">fee +1</text>
+      <path d="M268 170 h22 M282 162 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+      <text x="296" y="176" font-family="Caveat" font-weight="700" font-size="24" fill="#2D6CDF">110.00</text>
+    </g>
+    <!-- predicate logic -->
+    <rect x="390" y="20" width="260" height="170" rx="12" fill="#fff" stroke="#23302B" stroke-width="2" transform="rotate(1 520 105)"/>
+    <g font-family="Patrick" font-size="15">
+      <text x="405" y="48" font-family="Caveat" font-weight="700" font-size="20">Predicate logic (60 txns)</text>
+      <text x="405" y="78">isDebit</text><text x="610" y="78" font-family="Caveat" font-weight="700" font-size="20" fill="#1E8E5A">45</text>
+      <text x="405" y="104">isDebit.and(isLarge)</text><text x="616" y="104" font-family="Caveat" font-weight="700" font-size="20" fill="#1E8E5A">3</text>
+      <text x="405" y="130">isDebit.or(isLarge)</text><text x="610" y="130" font-family="Caveat" font-weight="700" font-size="20" fill="#1E8E5A">53</text>
+      <text x="405" y="156">isDebit.negate()</text><text x="610" y="156" font-family="Caveat" font-weight="700" font-size="20" fill="#1E8E5A">15</text>
+      <text x="405" y="180">Predicate.not(isLarge) [11]</text><text x="610" y="180" font-family="Caveat" font-weight="700" font-size="20" fill="#1E8E5A">49</text>
+    </g>
+  </svg>
+  <p>Before Java 8 I needed <span class="hlp">5 classes</span> (3 rules + AndCheck + NotCheck). Now: <span class="code">SUCCESSFUL.and(AT_LEAST_100).and(PAYPAL.negate())</span> → [P001, P005, P010].</p>
+
+  <div class="row sec" style="margin-top:5mm;align-items:center">
+    <svg width="230" height="140" viewBox="0 0 230 140">
+      <text x="5" y="22" font-family="Caveat" font-weight="700" font-size="20">5 · Boxing</text>
+      <rect x="15" y="40" width="80" height="64" rx="4" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><path d="M15 58 h80" stroke="#23302B" stroke-width="1.6"/>
+      <text x="38" y="88" font-family="Caveat" font-weight="700" font-size="22">455</text><text x="22" y="124" font-family="Patrick" font-size="13">Integer (boxed)</text>
+      <text x="140" y="88" font-family="Caveat" font-weight="700" font-size="28" fill="#1E8E5A">455</text><text x="128" y="124" font-family="Patrick" font-size="13">plain int ✓</text>
+    </svg>
+    <div class="sk t1 col">
+      <p><span class="code">Function&lt;Flight,Integer&gt;</span> puts every int in a box.</p>
+      <p style="margin-top:1.5mm"><span class="code">ToIntFunction&lt;Flight&gt;</span> + <span class="code">mapToInt</span>: no box.<br>Booked seats = <span class="hlg">1808</span>, nearly full = [TR808, SQ21].</p>
+    </div>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t2" style="width:88mm">
+      <h2>6 · Custom or built-in?</h2>
+      <svg width="300" height="141" viewBox="0 0 320 150">
+        <g font-family="Patrick" font-size="13">
+          <path d="M70 8 l60 22 l-60 22 l-60 -22 z" fill="#FFF9C4" stroke="#23302B" stroke-width="2"/><text x="35" y="34">domain name?</text>
+          <path d="M70 58 l60 22 l-60 22 l-60 -22 z" fill="#FFF9C4" stroke="#23302B" stroke-width="2"/><text x="24" y="84">checked exception?</text>
+          <path d="M70 108 l60 22 l-60 22 l-60 -22 z" fill="#FFF9C4" stroke="#23302B" stroke-width="2"/><text x="38" y="134">3+ params?</text>
+          <path d="M132 30 h40 M132 80 h40 M132 130 h40" stroke="#23302B" stroke-width="2"/><text x="140" y="24" font-size="12">yes</text><text x="140" y="74" font-size="12">yes</text><text x="140" y="124" font-size="12">yes</text>
+          <rect x="176" y="14" width="130" height="130" rx="10" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/>
+          <text x="190" y="50" font-family="Caveat" font-weight="700" font-size="20">write my own</text><text x="190" y="72">@FunctionalInterface</text><text x="190" y="94">FeeRule, FraudRule,</text><text x="190" y="114">TriFunction</text>
+        </g>
+      </svg>
+      <p>all "no" → reuse Function, Predicate…</p>
+    </div>
+    <div class="sk t1 col" style="background:#FFF9C4">
+      <h2>★ Remember</h2>
+      <ul>
+        <li>never overload <span class="code">run(Supplier)</span> + <span class="code">run(Callable)</span> → <span class="red">ambiguous</span></li>
+        <li>Supplier vs Callable: only Callable throws</li>
+        <li>old SAMs work: Runnable, Comparator, FileFilter</li>
+        <li>role noun + verb: FeeRule.feeFor</li>
+        <li>next → L03 lambdas in depth</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 02</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

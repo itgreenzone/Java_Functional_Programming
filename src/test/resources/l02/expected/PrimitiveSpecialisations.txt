@@ -1,0 +1,6 @@
+Total booked seats: 1808
+Nearly full (< 10 left): [TR808, SQ21]
+SQ318 capacity with 10% overbooking: 518
+  SQ318 has 16 seats left
+  SQ12 has 63 seats left
+  TR808 has 6 seats left

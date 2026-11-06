@@ -1,0 +1,11 @@
+Supplier       -> 2026-10-31
+Function       -> T003 TRANSFER 1221.40
+BiFunction     -> 12812.50
+UnaryOperator  -> ****1001
+BinaryOperator -> 165.50
+Predicate      -> [ACC-1013]
+BiPredicate    -> Alice Tan is GOLD: true
+Consumer       ->
+  ****1001 12500.00
+BiConsumer     ->
+  ACC-1001 interest = 312.50

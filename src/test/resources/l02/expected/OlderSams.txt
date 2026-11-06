@@ -1,0 +1,4 @@
+Runnable   -> EOD job ran
+Callable   -> settled total 2999.19
+Comparator -> first by name: Alice Tan
+FileFilter -> [payments_2026-11-01.csv, gateway_2026-11-01.csv]

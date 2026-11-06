@@ -1,0 +1,14 @@
+fee.andThen(gst)(100.00)  = 110.09
+fee.compose(gst)(100.00)  = 110.00
+identity(100.00)          = 100.00
+pipeline[fee, gst, fee]   = 111.09
+debit                     : 45
+debit AND large           : 3
+debit OR large            : 53
+debit.negate()            : 15
+Predicate.not(large) [11] : 49
+isEqual("USD") currency   : 2
+  audit: P005 settled
+  notify: P005 settled
+maxBy amount              : P005
+top 3 balances            : [ACC-1006, ACC-1015, ACC-1004]

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 02 · CHEAT SHEET</div><h1>Functional Interfaces: Rules and Standards</h1></div>
+    <div class="sub">java.util.function · Java 8 → Java 21<br>examples use the shared course dataset</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>The SAM rule</h2>
+        <ol>
+          <li><b>Exactly one abstract method</b> = functional interface = can be a lambda or method reference target.</li>
+          <li><b>Do not count:</b> <code>default</code> <span class="b">8</span>, <code>static</code> <span class="b">8</span>, <code>private</code> <span class="b n">9</span> methods, and public <code>Object</code> methods (<code>equals</code>, <code>hashCode</code>, <code>toString</code>).</li>
+          <li><b>Generic SAMs are fine:</b> <code>Converter&lt;A,B&gt; { B convert(A a); }</code></li>
+          <li><b>@FunctionalInterface</b> is optional: it adds a compile-time check and documents intent. Always use it on your own.</li>
+          <li><b>Older SAMs work too:</b> Runnable <span class="b">1.0</span>, Comparator <span class="b">1.2</span>, FileFilter <span class="b">1.2</span>, Callable <span class="b">5</span>.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl">1 · A domain functional interface</div>
+<pre><span class="k">@FunctionalInterface</span>
+<span class="k">public interface</span> <span class="t">FeeRule</span> {
+    <span class="t">BigDecimal</span> <span class="m">feeFor</span>(<span class="t">Transaction</span> txn); <span class="c">// SAM</span>
+    <span class="k">default</span> <span class="t">FeeRule</span> <span class="m">plus</span>(<span class="t">FeeRule</span> o) { ... }  <span class="c">// [8]</span>
+    <span class="k">static</span> <span class="t">FeeRule</span> <span class="m">flat</span>(<span class="t">String</span> a) { ... }   <span class="c">// [8]</span>
+    <span class="k">private static</span> <span class="t">BigDecimal</span> <span class="m">round</span>(...) {} <span class="c">// [9]</span>
+    <span class="k">boolean</span> <span class="m">equals</span>(<span class="t">Object</span> o);  <span class="c">// not counted</span>
+}
+<span class="c">// T003 1221.40 -> 0.50 + 0.1% = 1.72</span></pre>
+        <div class="lbl">2 · Compose instead of writing classes <span class="b">Java 8</span></div>
+<pre><span class="t">Predicate</span>&lt;<span class="t">Payment</span>&gt; SETTLE_TODAY = SUCCESSFUL
+    .<span class="m">and</span>(AT_LEAST_100)
+    .<span class="m">and</span>(PAYPAL.<span class="m">negate</span>());   <span class="c">// [P001, P005, P010]</span>
+
+ADD_FEE.<span class="m">andThen</span>(ADD_GST).<span class="m">apply</span>(hundred);  <span class="c">// 110.09</span>
+ADD_FEE.<span class="m">compose</span>(ADD_GST).<span class="m">apply</span>(hundred);  <span class="c">// 110.00</span>
+steps.<span class="m">stream</span>()
+    .<span class="m">reduce</span>(<span class="t">Function</span>.<span class="m">identity</span>(), <span class="t">Function</span>::<span class="m">andThen</span>);</pre>
+        <div class="lbl">3 · Primitive, no boxing</div>
+<pre><span class="t">ToIntFunction</span>&lt;<span class="t">Flight</span>&gt; BOOKED = <span class="t">Flight</span>::<span class="m">booked</span>;
+flights.<span class="m">stream</span>().<span class="m">mapToInt</span>(BOOKED).<span class="m">sum</span>(); <span class="c">// 1808</span></pre>
+      </div>
+      <div class="box">
+        <h2>Custom or built-in?</h2>
+        <div class="dd">
+          <div class="do"><h3>Write your own when</h3><ul><li>the name adds domain meaning</li><li>it must throw a checked exception</li><li>3+ parameters (TriFunction)</li></ul></div>
+          <div class="do"><h3 style="color:#2D6CDF">Reuse built-in when</h3><ul><li>the shape is generic</li><li>it crosses APIs (streams, Optional)</li><li>it is local or numeric</li></ul></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Catalogue (all Java 8)</h2>
+        <table>
+          <tr><th>Interface</th><th>Method</th><th>Shape</th><th>Use</th></tr>
+          <tr><td><code>Supplier&lt;T&gt;</code></td><td>get</td><td><code>() → T</code></td><td>lazy value, factory</td></tr>
+          <tr><td><code>Consumer&lt;T&gt;</code></td><td>accept</td><td><code>T → void</code></td><td>print, send, log</td></tr>
+          <tr><td><code>BiConsumer&lt;T,U&gt;</code></td><td>accept</td><td><code>(T,U) → void</code></td><td>Map.forEach</td></tr>
+          <tr><td><code>Function&lt;T,R&gt;</code></td><td>apply</td><td><code>T → R</code></td><td>map, convert</td></tr>
+          <tr><td><code>BiFunction&lt;T,U,R&gt;</code></td><td>apply</td><td><code>(T,U) → R</code></td><td>two inputs</td></tr>
+          <tr><td><code>UnaryOperator&lt;T&gt;</code></td><td>apply</td><td><code>T → T</code></td><td>same-type change</td></tr>
+          <tr><td><code>BinaryOperator&lt;T&gt;</code></td><td>apply</td><td><code>(T,T) → T</code></td><td>reduce, merge</td></tr>
+          <tr><td><code>Predicate&lt;T&gt;</code></td><td>test</td><td><code>T → boolean</code></td><td>filter</td></tr>
+          <tr><td><code>BiPredicate&lt;T,U&gt;</code></td><td>test</td><td><code>(T,U) → boolean</code></td><td>check a pair</td></tr>
+          <tr><td><code>IntPredicate</code></td><td>test</td><td><code>int → boolean</code></td><td>no boxing</td></tr>
+          <tr><td><code>ToIntFunction&lt;T&gt;</code></td><td>applyAsInt</td><td><code>T → int</code></td><td>mapToInt</td></tr>
+          <tr><td><code>IntUnaryOperator</code></td><td>applyAsInt</td><td><code>int → int</code></td><td>int math</td></tr>
+          <tr><td><code>ObjIntConsumer&lt;T&gt;</code></td><td>accept</td><td><code>(T,int) → void</code></td><td>print a pair</td></tr>
+        </table>
+      </div>
+      <div class="box white">
+        <h2>Composition methods</h2>
+        <table>
+          <tr><th>Method</th><th>Meaning</th><th>Since</th></tr>
+          <tr><td><code>f.andThen(g)</code></td><td>f first, then g</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>f.compose(g)</code></td><td>g first, then f</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Function.identity()</code></td><td>returns its input</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>p.and / or / negate</code></td><td>logic on predicates</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Predicate.not(p)</code></td><td>static negate, works on method refs</td><td><span class="b n">11</span></td></tr>
+          <tr><td><code>Predicate.isEqual(x)</code></td><td>Objects.equals(x, t)</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Consumer.andThen</code></td><td>run both, in order</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>BinaryOperator.minBy/maxBy</code></td><td>from a Comparator</td><td><span class="b">8</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>Do / Don't</h2>
+        <div class="dd">
+          <div class="do"><h3>✔ Do</h3><ul><li>Annotate your SAMs</li><li>Role noun + verb: <code>FeeRule.feeFor</code></li><li>Primitive types for numbers</li><li>Keep Functions pure</li></ul></div>
+          <div class="dont"><h3>✘ Don't</h3><ul><li>Overload <code>run(Supplier)</code> + <code>run(Callable)</code>: ambiguous</li><li>Add a 2nd abstract method</li><li><code>Function&lt;T,Integer&gt;</code> in hot paths</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 02</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 02 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>1 abstract method</h3><p>That is the whole rule.<br>default, static, private and Object methods don't count.</p></div>
+    <div class="note g"><h3>@FunctionalInterface</h3><p>Optional, but always use it.<br>Compiler catches a 2nd abstract method.</p></div>
+    <div class="note p"><h3>4 shapes</h3><p>Supplier () → T<br>Consumer T → void<br>Function T → R · Predicate T → boolean</p></div>
+    <div class="note bl"><h3>andThen vs compose</h3><p>f.andThen(g): f first.<br>f.compose(g): g first.<br><code>110.09</code> vs <code>110.00</code></p></div>
+    <div class="note o"><h3>No boxing!</h3><p>Numbers? Use IntPredicate, ToIntFunction, IntUnaryOperator.<br><code>mapToInt(Flight::booked)</code></p></div>
+    <div class="note l"><h3>Supplier vs Callable</h3><p>Same shape () → T.<br>Only Callable.call() may throw a checked exception.</p></div>
+    <div class="note g"><h3>Custom SAM when…</h3><p>domain name · checked exception · 3+ params (TriFunction)</p></div>
+    <div class="note y"><h3>Never overload by SAM</h3><p><code>run(Supplier)</code> + <code>run(Callable)</code><br>= "reference to run is ambiguous"</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 02</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

@@ -1,0 +1,2 @@
+Predicate rules -> settle today: [P001, P005, P010]
+Needs review (NOT successful): [P003, P006, P008, P012]

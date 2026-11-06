@@ -1,0 +1,4 @@
+record AboveThreshold(5000.00): [T025, T027, T038, T049, T055, T056]
+Predicate.not(above 500.00): 38
+Cashback rate DINING: 0.05
+Total cashback on debits: 123.43
