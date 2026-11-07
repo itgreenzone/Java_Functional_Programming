@@ -31,7 +31,8 @@ All lists are immutable, all records are immutable, and money is always `BigDeci
 | L03 | Lambda Expressions In Depth | 1 · Foundations | `l03_lambdas` | [lessons/L03_Lambdas](lessons/L03_Lambdas) | ✅ Done |
 | L04 | Method References | 1 · Foundations | `l04_method_references` | [lessons/L04_MethodReferences](lessons/L04_MethodReferences) | ✅ Done |
 | L05 | Optional Done Right | 1 · Foundations | `l05_optional` | [lessons/L05_Optional](lessons/L05_Optional) | ✅ Done |
-| L06–L14 | Stream API | 2 · Streams | | | Planned |
+| L06 | Stream Fundamentals | 2 · Streams | `l06_stream_fundamentals` | [lessons/L06_StreamFundamentals](lessons/L06_StreamFundamentals) | ✅ Done |
+| L07–L14 | Stream API | 2 · Streams | | | Planned |
 | L15–L18 | Functional Design in Modern Java | 3 · Design | | | Planned |
 | L19–L21 | Practice Lab, Capstone, Industry Case Studies | 4 · Practice | | | Planned |
 
@@ -44,6 +45,7 @@ src/main/java/com/itgreenzone/fp/
   l03_lambdas/                 same layout
   l04_method_references/       same layout
   l05_optional/                same layout
+  l06_stream_fundamentals/     same layout
 src/test/java/...       JUnit 5 tests (golden-file tests for every main())
 lessons/L<NN>_<Name>/   slides (.pptx), quiz (.html), cheat sheet + sticky notes (.pdf), sketch notes (.pdf)
 tools/materials/        generators used to build the lesson materials

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body><!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Streams <span style="font-size:22pt" class="amber">· my notes L06</span></h1>
+  <div class="sub">a <span class="hl">conveyor belt</span>, not a box: it describes work and stores nothing</div>
+
+  <div class="sec">
+    <h2>The belt: source → steps → terminal (the GO button)</h2>
+    <svg width="660" height="170" viewBox="0 0 660 170">
+      <g font-family="Patrick" font-size="14">
+        <path d="M20 110 h600" stroke="#23302B" stroke-width="3"/>
+        <path d="M20 128 h600" stroke="#23302B" stroke-width="3"/>
+        <circle cx="40" cy="119" r="8" fill="#fff" stroke="#23302B" stroke-width="2"/><circle cx="600" cy="119" r="8" fill="#fff" stroke="#23302B" stroke-width="2"/>
+        <rect x="20" y="45" width="110" height="55" rx="10" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/>
+        <text x="32" y="70" font-family="Caveat" font-weight="700" font-size="20">source</text><text x="32" y="90" font-size="12">payments.stream()</text>
+        <rect x="160" y="45" width="110" height="55" rx="10" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/>
+        <text x="172" y="70" font-family="Caveat" font-weight="700" font-size="20">filter</text><text x="172" y="90" font-size="12">amount ≥ 100</text>
+        <rect x="300" y="45" width="110" height="55" rx="10" fill="#FFCC80" stroke="#23302B" stroke-width="2"/>
+        <text x="312" y="70" font-family="Caveat" font-weight="700" font-size="20">map</text><text x="312" y="90" font-size="12">Payment::id</text>
+        <rect x="440" y="35" width="170" height="65" rx="10" fill="#FFC2D4" stroke="#23302B" stroke-width="2.5"/>
+        <text x="452" y="62" font-family="Caveat" font-weight="700" font-size="22" fill="#C93C3C">toList()  ← GO!</text><text x="452" y="85" font-size="12">terminal: pulls items</text>
+        <rect x="150" y="104" width="22" height="12" fill="#FFF27A" stroke="#23302B" stroke-width="1.5"/><text x="148" y="150" font-size="12">P001</text>
+        <rect x="320" y="104" width="22" height="12" fill="#FFF27A" stroke="#23302B" stroke-width="1.5"/><text x="318" y="150" font-size="12">P001</text>
+        <text x="20" y="20" font-size="14">no terminal → <tspan fill="#C93C3C">nothing runs at all</tspan> (withoutTerminal prints no trace)</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sec row">
+    <div class="sk t1 col">
+      <h2>One item at a time ↓</h2>
+      <p>filter P001 · map P001<br>filter P002 <span class="red">✗ 45.50 &lt; 100, dropped</span><br>filter P003 · map P003 · limit(2) full → STOP</p>
+      <p style="margin-top:1.5mm">= <span class="hl">vertical order</span> (loop fusion): one pass, no temporary lists</p>
+    </div>
+    <div class="sk t2 col" style="background:#FFEBEE">
+      <h2>sorted() = a dam 🌊</h2>
+      <p>water piles up until ALL items arrive:<br>filter P001…P005 first,<br>then map P001, P003, P005</p>
+      <p style="margin-top:1.5mm" class="red">stateful barrier</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Use it once, like a train ticket 🎫</h2>
+    <svg width="660" height="110" viewBox="0 0 660 110">
+      <g font-family="Patrick" font-size="15">
+        <rect x="10" y="20" width="160" height="70" rx="8" fill="#FFF9C4" stroke="#23302B" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="30" y="50" font-family="Caveat" font-weight="700" font-size="22">stream s</text><text x="30" y="75">s.count() → 2 ✓</text>
+        <path d="M180 55 h40 M212 47 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="230" y="20" width="160" height="70" rx="8" fill="#FFE0E0" stroke="#23302B" stroke-width="2"/>
+        <path d="M240 30 l140 50 M380 30 l-140 50" stroke="#C93C3C" stroke-width="3"/>
+        <text x="245" y="105" fill="#C93C3C">s.count() again</text>
+        <text x="410" y="45">IllegalStateException:</text>
+        <text x="410" y="65" font-size="13">"stream has already been</text>
+        <text x="410" y="83" font-size="13">operated upon or closed"</text>
+      </g>
+    </svg>
+    <p>fix → keep the <span class="code">List</span> or a <span class="code">Supplier&lt;Stream&lt;Payment&gt;&gt;</span> · the list still has <span class="hlg">12 payments</span></p>
+  </div>
+  <h2>Order of operations matters</h2>
+  <div class="sec row">
+    <div class="sk t2 col" style="background:#FFEBEE">
+      <h2>✗ limit(3) → sorted</h2>
+      <p>takes P001, P002, P003 by <b>position</b>,<br>then sorts only those 3</p>
+    </div>
+    <div class="sk t1 col" style="background:#E8F8EE">
+      <h2>✓ sorted → limit(3)</h2>
+      <p>top 3 debits:<br><span class="hl">T042 1432.93 · T057 962.80 · T050 903.91</span></p>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 06</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">Where streams come from</h2>
+  <div class="ideas sec">
+    <div class="idea sk t1"><p><span class="code">list.stream()</span> 4 GOLD customers</p></div>
+    <div class="idea sk t2"><p><span class="code">IntStream.rangeClosed(10, 12)</span> Q4 months</p></div>
+    <div class="idea sk t2"><p><span class="code">iterate(seed, f)</span> [8] ♾ needs limit</p></div>
+    <div class="idea sk t1"><p><span class="code">iterate(seed, test, f)</span> [9] = for loop</p></div>
+    <div class="idea sk t1"><p><span class="code">Stream.generate(s)</span> ♾ needs limit</p></div>
+    <div class="idea sk t2"><p><span class="code">Stream.ofNullable(x)</span> [9] 0 or 1</p></div>
+    <div class="idea sk t2"><p><span class="code">"PAYPAL".chars()</span> 'P' × 2</p></div>
+    <div class="idea sk t1"><p><span class="code">Files.lines(csv)</span> in try → 8 SUCCESS</p></div>
+  </div>
+
+  <div class="sec">
+    <h2>Short-circuit = stop as soon as you know</h2>
+    <svg width="660" height="110" viewBox="0 0 660 110">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="30" width="60" height="40" rx="6" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="22" y="55">P001</text>
+        <rect x="80" y="30" width="60" height="40" rx="6" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="92" y="55">P002</text>
+        <rect x="150" y="30" width="60" height="40" rx="6" fill="#FFC2D4" stroke="#23302B" stroke-width="2.5"/><text x="162" y="55">P003</text>
+        <rect x="220" y="30" width="60" height="40" rx="6" fill="#EEF3EF" stroke="#9AA6A1" stroke-width="2" stroke-dasharray="4 3"/><text x="232" y="55" fill="#9AA6A1">P004</text>
+        <rect x="290" y="30" width="60" height="40" rx="6" fill="#EEF3EF" stroke="#9AA6A1" stroke-width="2" stroke-dasharray="4 3"/><text x="302" y="55" fill="#9AA6A1">…</text>
+        <text x="150" y="95" fill="#C93C3C">anyMatch(FAILED) → true after 3</text>
+        <text x="380" y="45">iterate(1, n → n*2)</text>
+        <text x="380" y="65">.filter(n &gt; 1000).limit(3)</text>
+        <text x="380" y="88" fill="#1E8E5A">→ [1024, 2048, 4096] ✓ ends</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>Method map doodle</h2>
+      <ul>
+        <li><b>stateless:</b> filter, map, flatMap, peek, mapMulti [16]</li>
+        <li><b>stateful:</b> distinct, sorted (barriers) · limit, skip, take/dropWhile (keep a count or flag)</li>
+        <li><b>short-circuit:</b> limit, takeWhile [9], anyMatch, findFirst</li>
+        <li><b>terminal:</b> forEach, collect, reduce, count, toList() [16]</li>
+        <li class="red">gather: Beyond Java 21 (Java 24)</li>
+      </ul>
+    </div>
+    <div class="sk t2 col" style="background:#FFEBEE">
+      <h2>Properties</h2>
+      <ul>
+        <li>List → ORDERED ✓ · HashSet → ✗</li>
+        <li><span class="code">parallel().sequential()</span> → sequential: last call wins</li>
+        <li>order of ops matters: <span class="code">sorted</span> then <span class="code">limit</span> = top 3 debits</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>lazy until the terminal · one item at a time · sorted waits for everyone · use once · infinite needs a stop · source untouched · top debit <span class="hl">T042 1432.93</span> · next → L07 filtering, mapping &amp; slicing</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 06</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

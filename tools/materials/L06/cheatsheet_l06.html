@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 06 · CHEAT SHEET</div><h1>Stream Fundamentals</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><b>Pipeline = source → 0..n intermediate → 1 terminal.</b> <span class="b">8</span></li>
+          <li><b>Lazy:</b> nothing runs until the terminal op. No terminal means no work at all.</li>
+          <li><b>Vertical order (fusion):</b> each element goes through the whole pipeline before the next one starts.</li>
+          <li><b>Stateful barrier:</b> <code>sorted</code> (and <code>distinct</code>) must see the input first; <code>sorted</code> holds everything.</li>
+          <li><b>Short-circuit:</b> <code>limit</code>, <code>takeWhile</code>, <code>anyMatch</code>, <code>findFirst</code>… stop early, so infinite sources are fine.</li>
+          <li><b>One-shot:</b> a second terminal call throws <code>IllegalStateException</code>. Keep the list or a <code>Supplier&lt;Stream&gt;</code>.</li>
+          <li><b>Stores nothing</b> and never modifies its source.</li>
+          <li><code>parallel()</code>/<code>sequential()</code> set one flag; <b>the last call wins</b>.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Top 3 debits (after/StreamTopDebits)</div>
+<pre>txns.<span class="m">stream</span>()
+    .<span class="m">filter</span>(t -&gt; t.<span class="m">type</span>() == DEBIT)
+    .<span class="m">sorted</span>(<span class="t">Comparator</span>.<span class="m">comparing</span>(<span class="t">Transaction</span>::<span class="m">amount</span>)
+                       .<span class="m">reversed</span>())
+    .<span class="m">limit</span>(<span class="s">3</span>)       <span class="c">// sort FIRST, then limit</span>
+    .<span class="m">toList</span>();      <span class="c">// [16]</span></pre>
+        <div class="lbl">2 · Sources</div>
+<pre><span class="t">Stream</span>.<span class="m">iterate</span>(<span class="s">1</span>, n -&gt; n * <span class="s">2</span>)          <span class="c">// [8] infinite</span>
+<span class="t">Stream</span>.<span class="m">iterate</span>(start, d -&gt; !d.<span class="m">isAfter</span>(end),
+               d -&gt; d.<span class="m">plusWeeks</span>(<span class="s">1</span>))  <span class="c">// [9]</span>
+<span class="t">Stream</span>.<span class="m">ofNullable</span>(x)          <span class="c">// [9] 0 or 1</span>
+<span class="t">IntStream</span>.<span class="m">rangeClosed</span>(<span class="s">10</span>, <span class="s">12</span>) <span class="c">// 10 11 12</span>
+<span class="k">try</span> (<span class="k">var</span> l = <span class="t">Files</span>.<span class="m">lines</span>(csv)) {…} <span class="c">// close</span></pre>
+        <div class="lbl">3 · Reuse safely</div>
+<pre><span class="t">Supplier</span>&lt;<span class="t">Stream</span>&lt;<span class="t">Payment</span>&gt;&gt; s = list::<span class="m">stream</span>;
+s.<span class="m">get</span>().<span class="m">count</span>(); s.<span class="m">get</span>().<span class="m">anyMatch</span>(p);  <span class="c">// fresh</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Method map (core ops)</h2>
+        <table>
+          <tr><th>Operation</th><th>Kind</th><th>Notes</th><th>Since</th></tr>
+          <tr><td><code>filter · map · peek</code></td><td>inter.</td><td>stateless</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>flatMap · mapToInt</code></td><td>inter.</td><td>stateless</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>mapMulti</code></td><td>inter.</td><td>stateless, 1→n</td><td><span class="b">16</span></td></tr>
+          <tr><td><code>distinct · sorted</code></td><td>inter.</td><td><b>stateful</b></td><td><span class="b">8</span></td></tr>
+          <tr><td><code>limit · skip</code></td><td>inter.</td><td>stateful; limit short-circuits</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>takeWhile · dropWhile</code></td><td>inter.</td><td>stateful; takeWhile short-circuits</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>forEach · count · reduce</code></td><td>term.</td><td>visits all</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>collect · min · max</code></td><td>term.</td><td>visits all</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>anyMatch · findFirst</code></td><td>term.</td><td>short-circuit</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>toList()</code></td><td>term.</td><td>unmodifiable</td><td><span class="b">16</span></td></tr>
+          <tr><td><code>gather(Gatherer)</code></td><td>inter.</td><td>custom op</td><td><span class="b n">Beyond 21 · 24</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>Laziness trace (theory/LazinessAndFusion)</h2>
+<pre>filter(amount ≥ 100) → map(id) → limit(2)
+<span class="c">filter P001, map P001, filter P002,
+filter P003, map P003</span>        → [P001, P003]</pre>
+        <p class="small">With <code>sorted()</code> between them: all <b>filter</b> calls P001–P005 come first, then <b>map</b> P001, P003, P005.</p>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: the conveyor belt</h2>
+        <div class="belt">
+          <div style="background:#2D6CDF">source<small>list · iterate</small></div><span>▶</span>
+          <div style="background:#1E8E5A">filter<small>lazy</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">map<small>lazy</small></div><span>▶</span>
+          <div style="background:#0E3B2E">toList<small>terminal: GO</small></div>
+        </div>
+        <p class="small">The terminal op pulls one item at a time through the belt.</p>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td>Top 3 debits</td><td>T042 1432.93 · T057 962.80 · T050 903.91</td></tr>
+        <tr><td>Failed payments</td><td><code>[P003, P012]</code>; source still 12</td></tr>
+        <tr><td><code>anyMatch</code> elements inspected</td><td>3 (stops at the first match)</td></tr>
+        <tr><td>First powers of 2 over 1000</td><td><code>[1024, 2048, 4096]</code></td></tr>
+      </table>
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td>Weekly review dates (3-arg iterate)</td><td>2026-11-02 … 2026-11-30 (5)</td></tr>
+        <tr><td>Total seats over 8 flights</td><td>2078</td></tr>
+        <tr><td><code>HashSet</code> ORDERED?</td><td>false; <code>List</code>: true</td></tr>
+        <tr><td><code>parallel().sequential()</code></td><td><code>isParallel() == false</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td>call two terminals on one stream</td><td>keep the list / <code>Supplier&lt;Stream&gt;</code></td></tr>
+        <tr><td><code>limit(3).sorted(...)</code> for "top 3"</td><td><code>sorted(...).limit(3)</code></td></tr>
+        <tr><td><code>iterate(seed, f)</code> with no limit</td><td><code>limit</code>, <code>takeWhile</code> or 3-arg <code>iterate</code></td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>peek</code> for business logic</td><td><code>peek</code> only to debug</td></tr>
+        <tr><td><code>Files.lines(p)</code> left open</td><td><code>try (var l = Files.lines(p))</code></td></tr>
+        <tr><td><code>forEach(list::add)</code> into an outer list</td><td><code>toList()</code> / <code>collect</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 06</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 06 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>No terminal, no work</h3><p>Intermediate ops only describe.<br>The terminal op says GO.</p></div>
+    <div class="note g"><h3>One element at a time</h3><p>filter P001, map P001,<br>then P002… (vertical order)</p></div>
+    <div class="note p"><h3>sorted is a barrier</h3><p>It must see everything<br>before it emits the first element.</p></div>
+    <div class="note bl"><h3>Streams are one-shot</h3><p>Second terminal → IllegalStateException.<br>Use a <code>Supplier&lt;Stream&gt;</code>.</p></div>
+    <div class="note o"><h3>Infinite? Then limit it</h3><p><code>iterate(1, n -&gt; n * 2)</code> never ends<br>without limit / takeWhile.</p></div>
+    <div class="note l"><h3>Java 9 · 16</h3><p>9: iterate(3 args), takeWhile,<br>dropWhile, ofNullable<br>16: mapMulti, toList()</p></div>
+    <div class="note g"><h3>Order of ops matters</h3><p>sorted → limit = top 3.<br>limit → sorted = first 3, sorted.</p></div>
+    <div class="note y"><h3>The source is untouched</h3><p>A stream stores nothing.<br>Close <code>Files.lines</code> with try.</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 06</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

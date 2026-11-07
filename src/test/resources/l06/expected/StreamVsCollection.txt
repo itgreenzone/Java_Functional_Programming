@@ -1,0 +1,3 @@
+failed payments     : [P003, P012]
+source size after   : 12 (unchanged)
+reuse a stream      : IllegalStateException: stream has already been operated upon or closed

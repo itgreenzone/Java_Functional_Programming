@@ -1,0 +1,26 @@
+INTERMEDIATE filter                                       stateful=false shortCircuit=false Java 8
+INTERMEDIATE map                                          stateful=false shortCircuit=false Java 8
+INTERMEDIATE mapToInt/Long/Double                         stateful=false shortCircuit=false Java 8
+INTERMEDIATE mapToObj / boxed                             stateful=false shortCircuit=false Java 8
+INTERMEDIATE flatMap                                      stateful=false shortCircuit=false Java 8
+INTERMEDIATE mapMulti                                     stateful=false shortCircuit=false Java 16
+INTERMEDIATE peek                                         stateful=false shortCircuit=false Java 8
+INTERMEDIATE unordered / parallel / sequential / onClose  stateful=false shortCircuit=false Java 8
+INTERMEDIATE distinct                                     stateful=true  shortCircuit=false Java 8
+INTERMEDIATE sorted                                       stateful=true  shortCircuit=false Java 8
+INTERMEDIATE skip                                         stateful=true  shortCircuit=false Java 8
+INTERMEDIATE limit                                        stateful=true  shortCircuit=true  Java 8
+INTERMEDIATE takeWhile                                    stateful=true  shortCircuit=true  Java 9
+INTERMEDIATE dropWhile                                    stateful=true  shortCircuit=false Java 9
+TERMINAL     forEach / forEachOrdered                     stateful=false shortCircuit=false Java 8
+TERMINAL     toArray                                      stateful=false shortCircuit=false Java 8
+TERMINAL     reduce                                       stateful=false shortCircuit=false Java 8
+TERMINAL     collect                                      stateful=false shortCircuit=false Java 8
+TERMINAL     toList                                       stateful=false shortCircuit=false Java 16
+TERMINAL     count / min / max                            stateful=false shortCircuit=false Java 8
+TERMINAL     sum / average / summaryStatistics            stateful=false shortCircuit=false Java 8
+TERMINAL     anyMatch / allMatch / noneMatch              stateful=false shortCircuit=true  Java 8
+TERMINAL     findFirst / findAny                          stateful=false shortCircuit=true  Java 8
+TERMINAL     iterator / spliterator                       stateful=false shortCircuit=false Java 8
+after Java 8   : [mapMulti [16], takeWhile [9], dropWhile [9], toList [16]]
+Beyond Java 21 : Stream.gather(Gatherer) - final in Java 24

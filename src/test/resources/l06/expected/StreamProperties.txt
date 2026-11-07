@@ -1,0 +1,6 @@
+one-shot             : IllegalStateException: stream has already been operated upon or closed
+anyMatch inspected   : 3 of 12
+infinite + limit     : [1024, 2048, 4096]
+stateful distinct    : [CARD, PAYNOW, PAYPAL]
+encounter order      : List ORDERED=true, HashSet ORDERED=false
+parallel flag        : stream()=false, parallelStream()=true, parallel().sequential()=false

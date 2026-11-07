@@ -1,0 +1,11 @@
+list.stream()          : GOLD customers = 4
+Stream.of              : [CARD, PAYNOW, PAYPAL]
+Arrays.stream(int[])   : total seats = 2078
+IntStream.rangeClosed  : [10, 11, 12]
+iterate + limit [8]    : [2026-11-30, 2026-12-30, 2027-01-30]
+iterate 3-arg [9]      : [2026-11-02, 2026-11-09, 2026-11-16, 2026-11-23, 2026-11-30]
+generate + limit       : [PENDING, PENDING, PENDING]
+"PAYPAL".chars()       : count of 'P' = 2
+Stream.ofNullable [9]  : 0 / 1
+map.entrySet().stream(): [Bangkok=1, Colombo=1, Jakarta=2, Kuala Lumpur=2, Singapore=4]
+Files.lines            : SUCCESS rows = 8
