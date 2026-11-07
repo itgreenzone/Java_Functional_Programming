@@ -1,0 +1,6 @@
+String::toUpperCase("paynow")      : PAYNOW
+Transaction::amount(T003)          : 1221.40
+BigDecimal::add over all balances  : 300382.25
+String::equalsIgnoreCase(sgd, SGD) : true
+BigDecimal::movePointLeft(500, 2)  : 5.00
+cities sorted (compareToIgnoreCase): [Bangkok, Colombo, Jakarta, Kuala Lumpur, Singapore]

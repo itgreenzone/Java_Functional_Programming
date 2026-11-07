@@ -1,0 +1,6 @@
+Integer::parseInt("120")      : 120
+Math::max(301, 264)            : 301
+Objects::nonNull(null)         : false
+Fees::transferFee(2500.00)     : 12.50
+Fees::fee(1500.00, 0.25)       : 3.75
+Fees::isSuccessful (count)     : 8

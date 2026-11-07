@@ -1,0 +1,9 @@
+1+4 total of all amounts : 67086.98
+2   PARSE("59.90")        : 59.90
+3   NOT_NULL(null)        : false
+5   NEW_LIST size         : 0
+6   NEW_ARRAY(4) length   : 4
+7   UPPER("card")         : CARD
+8   logTo twice           : ok;ok;
+9   HIGH count            : 11
+10  TO_TEXT(42)           : 42

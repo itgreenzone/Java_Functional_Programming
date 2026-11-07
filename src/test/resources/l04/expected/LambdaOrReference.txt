@@ -1,0 +1,4 @@
+a -> Fees.fee(a, RATE) on 1500.00 : 3.75
+lambda vs named reference         : 11 = 11
+Predicate.not(::isDebit)          : 15
+i -> i.toString() / String::valueOf: 42 / 42

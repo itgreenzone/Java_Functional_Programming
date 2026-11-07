@@ -1,0 +1,6 @@
+SETTLED | P001 120.00
+SETTLED | P002 45.50
+SETTLED | P004 89.90
+"SGD"::equals("USD")   : false
+receiver evaluation    : creating both: new | 2 reference calls: | 2 lambda calls: new new
+null receiver          : lambda created; reference: NPE at creation; lambda: NPE at call

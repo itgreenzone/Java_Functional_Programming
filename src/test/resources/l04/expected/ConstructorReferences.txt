@@ -1,0 +1,8 @@
+ArrayList::new          : size 1
+BigDecimal::new("59.90") : 59.90
+Receipt::new            : Receipt[paymentId=P005, amount=1500.00]
+Customer::new           : C011 Kumar Raj SILVER
+String[]::new(3)        : length 3
+int[]::new(8)           : [0, 0, 0, 0, 0, 0, 0, 0]
+toArray(String[]::new)  : [P001, P002, P003, P004]
+toCollection(TreeSet::new): [CARD, PAYNOW, PAYPAL]

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body>
+<!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Method references <span style="font-size:22pt" class="amber">· my notes L04</span></h1>
+  <div class="sub">a lambda that only calls ONE method → <span class="hl">just name the method</span> with <b>::</b></div>
+
+  <div class="sec">
+    <h2>1 · Four kinds (+ arrays)</h2>
+    <svg width="660" height="190" viewBox="0 0 660 190">
+      <g font-family="Patrick" font-size="13">
+        <rect x="5" y="10" width="122" height="170" rx="12" fill="#FFF9C4" stroke="#23302B" stroke-width="2"/>
+        <path d="M45 40 l20 -10 l20 10 v24 l-20 10 l-20 -10 z M45 40 l20 10 l20 -10 M65 50 v24" fill="#fff" stroke="#23302B" stroke-width="2"/>
+        <text x="15" y="100" font-family="Caveat" font-weight="700" font-size="20">static</text>
+        <text x="15" y="120">Class::method</text><text x="15" y="140">Integer::parseInt</text><text x="15" y="160" fill="#1E8E5A">all → arguments</text>
+
+        <rect x="137" y="10" width="122" height="170" rx="12" fill="#C8F7DC" stroke="#23302B" stroke-width="2"/>
+        <circle cx="180" cy="50" r="13" fill="none" stroke="#23302B" stroke-width="3"/><circle cx="200" cy="50" r="13" fill="none" stroke="#23302B" stroke-width="3"/>
+        <text x="147" y="100" font-family="Caveat" font-weight="700" font-size="20">bound</text>
+        <text x="147" y="120">object::method</text><text x="147" y="140">printer::print</text><text x="147" y="160" fill="#1E8E5A">object is fixed</text>
+
+        <rect x="269" y="10" width="122" height="170" rx="12" fill="#D6E6FF" stroke="#23302B" stroke-width="2"/>
+        <path d="M295 60 h60 l-6 -16 h-40 z" fill="#fff" stroke="#23302B" stroke-width="2"/><circle cx="305" cy="64" r="6" fill="#23302B"/><circle cx="345" cy="64" r="6" fill="#23302B"/>
+        <text x="314" y="40" font-size="12">1st</text>
+        <text x="279" y="100" font-family="Caveat" font-weight="700" font-size="20">unbound</text>
+        <text x="279" y="120">Class::method</text><text x="279" y="140">String::toUpperCase</text><text x="279" y="160" fill="#2D6CDF">1st param drives!</text>
+
+        <rect x="401" y="10" width="122" height="170" rx="12" fill="#FFE0B2" stroke="#23302B" stroke-width="2"/>
+        <path d="M440 70 l30 -30 M460 30 l20 20 l-10 10 l-20 -20 z" fill="#fff" stroke="#23302B" stroke-width="3" stroke-linecap="round"/>
+        <text x="411" y="100" font-family="Caveat" font-weight="700" font-size="20">constructor</text>
+        <text x="411" y="120">Class::new</text><text x="411" y="140">BigDecimal::new</text><text x="411" y="160" fill="#C77A0A">→ new X(args)</text>
+
+        <rect x="533" y="10" width="122" height="170" rx="12" fill="#F3E5F5" stroke="#23302B" stroke-width="2"/>
+        <path d="M565 32 h48 v40 h-48 z M581 32 v40 M597 32 v40 M565 52 h48" fill="#fff" stroke="#23302B" stroke-width="2"/>
+        <text x="543" y="100" font-family="Caveat" font-weight="700" font-size="20">array</text>
+        <text x="543" y="120">Type[]::new</text><text x="543" y="140">String[]::new</text><text x="543" y="160" fill="#7B1FA2">int → length</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sec row" style="align-items:center">
+    <div style="width:95mm">
+      <h2>2 · Unbound: where do a and b go?</h2>
+      <svg width="340" height="130" viewBox="0 0 340 130">
+        <g font-family="Patrick" font-size="22">
+          <text x="10" y="40">(</text><text x="22" y="40" fill="#C93C3C">a</text><text x="36" y="40">,</text><text x="50" y="40" fill="#1E8E5A">b</text><text x="64" y="40">) -&gt;</text>
+          <text x="140" y="40" fill="#C93C3C">a</text><text x="154" y="40">.add(</text><text x="210" y="40" fill="#1E8E5A">b</text><text x="224" y="40">)</text>
+          <path d="M26 48 C 40 90, 120 100, 148 50" fill="none" stroke="#C93C3C" stroke-width="2"/>
+          <path d="M54 48 C 80 110, 190 110, 214 50" fill="none" stroke="#1E8E5A" stroke-width="2"/>
+          <text x="10" y="122" font-family="Caveat" font-weight="700" font-size="24" fill="#2D6CDF">= BigDecimal::add</text>
+        </g>
+      </svg>
+    </div>
+    <div class="sk t2 col">
+      <p><span class="red"><b>a</b></span> = the receiver (the object)</p>
+      <p><span class="green"><b>b</b></span> = the argument</p>
+      <p style="margin-top:1.5mm">perfect for <span class="code">reduce(ZERO, BigDecimal::add)</span> → <span class="hlg">300382.25</span></p>
+      <p style="margin-top:1.5mm">records [16] → free refs: <span class="code">Transaction::amount</span></p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>3 · Bound receiver = evaluated ONCE (eager)</h2>
+    <div class="row" style="align-items:center">
+      <svg width="300" height="140" viewBox="0 0 300 140">
+        <g font-family="Patrick" font-size="13">
+          <rect x="10" y="20" width="110" height="70" rx="8" fill="#FFCC80" stroke="#23302B" stroke-width="2"/>
+          <text x="22" y="50" font-family="Caveat" font-weight="700" font-size="18">newPrinter()</text><text x="30" y="72">factory</text>
+          <path d="M125 45 h40 M157 37 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+          <rect x="170" y="25" width="60" height="40" rx="6" fill="#fff" stroke="#23302B" stroke-width="2"/><text x="180" y="50">printer</text>
+          <text x="240" y="40" font-family="Caveat" font-weight="700" font-size="18" fill="#1E8E5A">ref: 1</text>
+          <text x="170" y="100" font-family="Caveat" font-weight="700" font-size="18" fill="#C93C3C">lambda: 1 per call</text>
+          <text x="10" y="125">creating both: new | 2 ref calls: | 2 lambda calls: new new</text>
+        </g>
+      </svg>
+      <div class="sk t1 col" style="background:#FFEBEE">
+        <p><b>null receiver?</b></p>
+        <p><span class="code">code::length</span> with code == null<br>→ <span class="red">NPE immediately</span>, at creation</p>
+        <p><span class="code">() -&gt; code.length()</span><br>→ NPE only when called</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 04</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">4 · The shrink ray: lambda → reference</h2>
+  <svg width="660" height="230" viewBox="0 0 660 230">
+    <g font-family="Patrick" font-size="15">
+      <path d="M250 20 l60 20 l-60 20 z" fill="#FFF27A" stroke="#23302B" stroke-width="2"/>
+      <path d="M312 40 l40 -14 M312 40 l40 0 M312 40 l40 14" stroke="#C77A0A" stroke-width="2"/>
+      <text x="230" y="80" font-family="Caveat" font-weight="700" font-size="18">shrink!</text>
+      <text x="10" y="110">t -&gt; t.amount()</text><text x="370" y="110" fill="#1E8E5A">Transaction::amount</text>
+      <text x="10" y="135">s -&gt; new BigDecimal(s)</text><text x="370" y="135" fill="#1E8E5A">BigDecimal::new</text>
+      <text x="10" y="160">r -&gt; printer.print(r)</text><text x="370" y="160" fill="#1E8E5A">printer::print</text>
+      <text x="10" y="185">n -&gt; new String[n]</text><text x="370" y="185" fill="#1E8E5A">String[]::new</text>
+      <text x="10" y="210">o -&gt; Objects.nonNull(o)</text><text x="370" y="210" fill="#1E8E5A">Objects::nonNull</text>
+      <path d="M240 105 h110 M240 130 h110 M240 155 h110 M240 180 h110 M240 205 h110" stroke="#9AA6A1" stroke-width="1.5" stroke-dasharray="5 5"/>
+    </g>
+  </svg>
+
+  <div class="row sec" style="margin-top:3mm">
+    <div class="sk t2 col" style="background:#E3F2FD">
+      <h2>5 · Keep the lambda when…</h2>
+      <ul>
+        <li>extra argument: <span class="code">a -&gt; fee(a, RATE)</span></li>
+        <li>a chain: <span class="code">t -&gt; t.amount().compareTo(LIMIT) &gt; 0</span></li>
+        <li>ambiguous overload</li>
+        <li>the lambda is simply clearer</li>
+      </ul>
+      <p style="margin-top:1mm">…or <span class="hl">give it a name</span> → <span class="code">::isHighValue</span></p>
+    </div>
+    <div class="sk t1" style="width:70mm">
+      <h2>6 · Integer::toString ?!</h2>
+      <svg width="240" height="100" viewBox="0 0 240 100">
+        <g font-family="Patrick" font-size="13">
+          <text x="70" y="18" font-family="Caveat" font-weight="700" font-size="17">Integer::toString</text>
+          <path d="M120 24 L50 60 M120 24 L190 60" stroke="#23302B" stroke-width="2"/>
+          <text x="5" y="78">static toString(int)</text><text x="150" y="78">i.toString()</text>
+          <text x="80" y="98" font-family="Caveat" font-weight="700" font-size="18" fill="#C93C3C">ambiguous!</text>
+        </g>
+      </svg>
+      <p>fix: <span class="code">i -&gt; i.toString()</span> or <span class="code">String::valueOf</span></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="sk t3" style="width:85mm">
+      <h2>7 · 5 parameters?</h2>
+      <p>JDK stops at <span class="code">BiFunction</span>. Make my own SAM:</p>
+      <p style="margin-top:1mm"><span class="code">CustomerFactory f = Customer::new;</span></p>
+      <p style="margin-top:1mm" class="red">Function&lt;String, Customer&gt; → invalid constructor reference</p>
+    </div>
+    <div class="sk t1 col" style="background:#FFF9C4">
+      <h2>★ Remember</h2>
+      <ul>
+        <li>:: = a lambda that calls ONE method</li>
+        <li>unbound: 1st param = receiver</li>
+        <li>bound: receiver evaluated once</li>
+        <li>good method names make refs shine</li>
+        <li>next → L05 Optional</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 04</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>
