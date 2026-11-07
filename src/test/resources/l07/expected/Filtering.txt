@@ -1,0 +1,5 @@
+debits > 500.00       : [T003, T005, T010, T023, T026, T028, T036, T042, T050, T052, T057]
+same, combined filter : [T003, T005, T010, T023, T026, T028, T036, T042, T050, T052, T057]
+not SGD (Java 11 not) : [T010 USD, T023 USD]
+overdrawn accounts    : [ACC-1013]
+500.0 vs 500.00       : equals=false, compareTo=0

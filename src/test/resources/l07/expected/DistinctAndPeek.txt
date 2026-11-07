@@ -1,0 +1,6 @@
+distinct cities        : [Singapore, Kuala Lumpur, Jakarta, Colombo, Bangkok]
+distinct records       : 9 of 10
+distinct, no equals    : 10 of 10
+1.0, 1.00, 1.0         : 2 distinct; after setScale(2): 1
+peek trace (P001-P004) : [in P001, in P002, in P003, FAILED P003, in P004, result [P003]]
+peek + count()         : count=12 peeked=0 | with filter: count=2 peeked=12

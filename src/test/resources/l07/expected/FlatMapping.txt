@@ -1,0 +1,6 @@
+map(accountsOf).count : 10 lists (Stream<List<Account>>)
+GOLD txns (flatMap)   : [T009, T012, T017, T018, T005, T020, T014, T019, T030, T002, T033, T051, T060, T001, T006, T007, T016, T037, T052]
+GOLD txns (mapMulti)  : [T009, T012, T017, T018, T005, T020, T014, T019, T030, T002, T033, T051, T060, T001, T006, T007, T016, T037, T052]
+flatten itineraries   : [SIN, NRT, SIN, LHR, SIN]
+airports              : [BKK, CGK, CMB, EWR, KUL, LHR, NRT, SIN]
+>= 95% full (mapMulti): [SQ318, TR808, SQ21]

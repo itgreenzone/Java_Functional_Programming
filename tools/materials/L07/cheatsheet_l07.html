@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 07 · CHEAT SHEET</div><h1>Filtering, Mapping &amp; Slicing</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><b>filter</b> keeps elements where the predicate is true. Money: <code>compareTo</code>/<code>signum</code>, never <code>equals</code> (scale!). <span class="b">8</span></li>
+          <li><b>map</b>: 1 in → 1 out (count and order unchanged). <b>mapToInt/Long/Double</b> for numbers; <b>mapToObj</b>/<b>boxed</b> back. <span class="b">8</span></li>
+          <li><b>flatMap</b>: the function returns a <i>Stream</i>; all are merged. 1 → 0..n. <span class="b">8</span></li>
+          <li><b>mapMulti</b>: push 0..n results into a consumer; no Stream per element. <span class="b">16</span></li>
+          <li><b>distinct</b> uses <code>equals</code>/<code>hashCode</code>, keeps the first. Records just work. <span class="b">8</span></li>
+          <li><b>peek</b> is for debugging only: <code>count()</code> may skip it. <span class="b">8</span></li>
+          <li><b>limit/skip</b> slice by position; <b>takeWhile/dropWhile</b> by condition, on <b>sorted</b> input. <span class="b">9</span></li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Practice 3: GOLD transactions (flatMap)</div>
+<pre>customers.<span class="m">stream</span>()
+    .<span class="m">filter</span>(c -&gt; c.<span class="m">tier</span>() == GOLD)
+    .<span class="m">flatMap</span>(c -&gt; <span class="m">accountsOf</span>(c).<span class="m">stream</span>())
+    .<span class="m">flatMap</span>(a -&gt; <span class="m">txnsOf</span>(a).<span class="m">stream</span>())
+    .<span class="m">map</span>(<span class="t">Transaction</span>::<span class="m">id</span>).<span class="m">toList</span>(); <span class="c">// 19</span></pre>
+        <div class="lbl">2 · mapMulti: 0 or 1 result</div>
+<pre>flights.<span class="m">stream</span>().&lt;<span class="t">String</span>&gt;<span class="m">mapMulti</span>((f, down) -&gt; {
+    <span class="k">if</span> (f.<span class="m">booked</span>() * <span class="s">100</span> &gt;= f.<span class="m">seats</span>() * <span class="s">95</span>)
+        down.<span class="m">accept</span>(f.<span class="m">code</span>());
+}).<span class="m">toList</span>();          <span class="c">// [SQ318, TR808, SQ21]</span></pre>
+        <div class="lbl">3 · Pagination (pages start at 1)</div>
+<pre>items.<span class="m">stream</span>()
+     .<span class="m">skip</span>((<span class="k">long</span>) (pageNo - <span class="s">1</span>) * size)
+     .<span class="m">limit</span>(size)
+     .<span class="m">toList</span>();          <span class="c">// past the end → []</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Operations</h2>
+        <table>
+          <tr><th>Operation</th><th>Shape</th><th>Note</th><th>Since</th></tr>
+          <tr><td><code>filter(Predicate)</code></td><td>n → ≤ n</td><td>stateless</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Predicate.not(p)</code></td><td>helper</td><td>negate a method ref</td><td><span class="b">11</span></td></tr>
+          <tr><td><code>map(Function)</code></td><td>1 → 1</td><td>type may change</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>mapToInt/Long/Double</code></td><td>1 → 1</td><td>primitive stream</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>mapToObj · boxed</code></td><td>1 → 1</td><td>back to objects</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>flatMap(T → Stream)</code></td><td>1 → 0..n</td><td>flattens</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>mapMulti(BiConsumer)</code></td><td>1 → 0..n</td><td>type witness</td><td><span class="b">16</span></td></tr>
+          <tr><td><code>distinct()</code></td><td>n → ≤ n</td><td>stateful, equals</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>peek(Consumer)</code></td><td>1 → 1</td><td>debug only</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>limit(n) · skip(n)</code></td><td>by position</td><td>limit short-circuits</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>takeWhile · dropWhile</code></td><td>by condition</td><td>sorted input!</td><td><span class="b">9</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>takeWhile vs filter (payments, &lt; 300.00)</h2>
+<pre>takeWhile (source)  → [P001, P002]
+filter              → 8 payments
+sorted + takeWhile  → the same 8 ✓</pre>
+        <p class="small">P003 (310.25) stops takeWhile. takeWhile = filter <b>only</b> when the input is sorted by the same condition.</p>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: map vs flatMap</h2>
+        <div class="belt">
+          <div style="background:#2D6CDF">Customer<small>4 GOLD</small></div><span>▶</span>
+          <div style="background:#1E8E5A">Account<small>flatMap: 6</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">Txn<small>flatMap: 19</small></div>
+        </div>
+        <p class="small"><code>map(accountsOf)</code> → <code>Stream&lt;List&lt;Account&gt;&gt;</code> (10 lists). <code>flatMap</code> → <code>Stream&lt;Account&gt;</code>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code (practice set)</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Practice</th><th>Result</th></tr>
+        <tr><td>1 · debits &gt; 500.00</td><td>11: T003, T005, T010 … T057</td></tr>
+        <tr><td>2 · names uppercase</td><td>[ALICE TAN, BALA KUMAR, …]</td></tr>
+        <tr><td>3 · GOLD transactions</td><td>19: T009, T012, T017, T018, T005 …</td></tr>
+      </table>
+      <table>
+        <tr><th>Practice</th><th>Result</th></tr>
+        <tr><td>4 · distinct cities</td><td>Singapore, Kuala Lumpur, Jakarta, Colombo, Bangkok</td></tr>
+        <tr><td>5 · first 5 by date</td><td>T001 (08-02) … T005 (08-16)</td></tr>
+        <tr><td>6 · page 2, size 5</td><td>[T006 … T010]; page 13 → []</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>amount.equals(bd("500.00"))</code></td><td><code>compareTo(...) == 0</code></td></tr>
+        <tr><td><code>map(c -&gt; accountsOf(c))</code></td><td><code>flatMap(c -&gt; accountsOf(c).stream())</code></td></tr>
+        <tr><td><code>takeWhile</code> on unsorted input</td><td><code>filter</code>, or sort first</td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>distinct</code> on a class without equals</td><td>a record, or equals/hashCode</td></tr>
+        <tr><td>save / send / count in <code>peek</code></td><td><code>forEach</code> or a loop</td></tr>
+        <tr><td><code>mapToDouble(amount)</code> for money</td><td>stay with <code>BigDecimal</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 07</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 07 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>Money: compareTo</h3><p>500.0 equals 500.00? <b>false</b>.<br>compareTo → 0. Use compareTo.</p></div>
+    <div class="note g"><h3>map = 1 → 1</h3><p>Count and order never change.<br>Only values (and maybe the type).</p></div>
+    <div class="note p"><h3>flatMap = 1 → many</h3><p>Function returns a Stream?<br>Then flatMap, not map.</p></div>
+    <div class="note bl"><h3>mapMulti [16]</h3><p><code>down.accept(x)</code> 0..n times.<br>Best for 0 or 1 result.</p></div>
+    <div class="note o"><h3>distinct needs equals</h3><p>Records: free.<br>Plain class: nothing removed.</p></div>
+    <div class="note l"><h3>peek = debug only</h3><p><code>.peek(..).count()</code><br>peeked = 0 on a List!</p></div>
+    <div class="note g"><h3>Paging</h3><p><code>skip((page-1)*size)</code><br><code>.limit(size)</code> · sort first</p></div>
+    <div class="note y"><h3>takeWhile [9]</h3><p>Stops at the first failure.<br>Sorted input only!</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 07</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

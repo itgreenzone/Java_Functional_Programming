@@ -1,0 +1,10 @@
+ 1 failed payments     : [P003, P012]
+ 2 PLATINUM upper      : [CHEN WEI, FARAH AZIZ]
+ 3 seats left          : 270
+ 4 TRAVEL policies     : [POL-505, POL-509]
+ 5 ACC-1012 categories : [TRANSFER, GROCERIES, DINING, UTILITIES]
+ 6 Singapore accounts  : [ACC-1001, ACC-1002, ACC-1004, ACC-1005, ACC-1006, ACC-1008, ACC-1014, ACC-1015]
+ 7 first 3 October     : [T038, T039, T040]
+ 8 payments page 3/4   : [P009, P010, P011, P012]
+ 9 before 11-06 12:00  : [TR808, SQ12]
+10 balance > 20000.00  : [C003 ACC-1004, C003 ACC-1006, C006 ACC-1009, C010 ACC-1015]

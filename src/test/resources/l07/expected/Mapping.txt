@@ -1,0 +1,6 @@
+upper names        : [ALICE TAN, BALA KUMAR, CHEN WEI, DEWI LESTARI, ETHAN LIM, FARAH AZIZ, GANESH PERERA, HANA SATO, IRFAN HAKIM, JASMINE ONG]
+first card         : CustomerCard[id=C001, upperName=ALICE TAN, tier=GOLD]
+mapToInt sum       : 1808 seats booked
+mapToDouble avg    : 84.1% load factor
+mapToObj           : [Page 1, Page 2, Page 3]
+boxed              : [16, 63, 6, 62, 27, 52, 2, 42]
