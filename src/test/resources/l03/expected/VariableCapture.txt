@@ -1,0 +1,6 @@
+cashback 5% of 80.00   : 4.00
+count() (good)         : 45
+AtomicInteger (smell)  : 45
+int[] (smell)          : 45
+for-each capture       : [SQ318, SQ12, TR808]
+index loop + copy      : [1.SQ318, 2.SQ12, 3.TR808]

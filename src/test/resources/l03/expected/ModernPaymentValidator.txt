@@ -1,0 +1,4 @@
+P003: failed payments cannot be settled
+P003: PayPal limit is 300.00
+P005: needs manual approval over 1000.00
+P012: failed payments cannot be settled

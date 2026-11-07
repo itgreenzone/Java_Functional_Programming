@@ -1,0 +1,8 @@
+() -> ...            : statement ready
+t -> ...             : T003
+(t) -> ...           : T003
+(Transaction t) -> ..: T003
+(a, b) -> ...        : 165.50
+block body           : 2512.50
+void-compatible      : [audited]
+value-compatible     : true [audited, audited]

@@ -1,0 +1,4 @@
+anonymous: anonymousClass=true, hidden=false
+lambda: anonymousClass=false, hidden=true
+anonymous class file: com.itgreenzone.fp.l03_lambdas.theory.LambdaVsAnonymous$1
+new object each call: true

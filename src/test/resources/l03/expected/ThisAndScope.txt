@@ -1,0 +1,4 @@
+lambda this.name       : payment-service
+anonymous this.name    : anonymous object
+lambda toString()      : ThisAndScope(payment-service)
+anonymous toString()   : anonymous.toString()

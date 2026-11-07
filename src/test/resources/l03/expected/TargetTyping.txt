@@ -1,0 +1,8 @@
+Predicate          : true
+Function<_,Boolean>: true
+HighValueCheck     : true
+Supplier / Callable: ok / ok
+argument context   : 11
+return context     : [T010, T023]
+conditional context: 60
+cast context       : cast gives the target type

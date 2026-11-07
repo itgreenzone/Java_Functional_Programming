@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body>
+<!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Lambdas in depth <span style="font-size:22pt" class="amber">· my notes L03</span></h1>
+  <div class="sub">a lambda = <span class="hl">a block of code you can pass around</span>, with strict rules</div>
+
+  <div class="sec">
+    <h2>1 · Anatomy</h2>
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick">
+        <rect x="20" y="40" width="160" height="50" rx="8" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/>
+        <text x="40" y="72" font-size="22">(a, b)</text>
+        <rect x="190" y="40" width="60" height="50" rx="8" fill="#FFCC80" stroke="#23302B" stroke-width="2"/>
+        <text x="203" y="73" font-size="24">-&gt;</text>
+        <rect x="260" y="40" width="200" height="50" rx="8" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/>
+        <text x="275" y="72" font-size="22">a.add(b)</text>
+        <text x="40" y="118" font-family="Caveat" font-weight="700" font-size="20">parameters</text>
+        <text x="196" y="118" font-family="Caveat" font-weight="700" font-size="20">arrow</text>
+        <text x="300" y="118" font-family="Caveat" font-weight="700" font-size="20">body = expression</text>
+        <text x="40" y="140" font-size="13">( ) optional for 1 inferred param</text>
+        <text x="300" y="140" font-size="13">its value is returned</text>
+        <rect x="480" y="20" width="170" height="110" rx="10" fill="#fff" stroke="#23302B" stroke-width="2" transform="rotate(1.5 565 75)"/>
+        <text x="495" y="45" font-family="Caveat" font-weight="700" font-size="19">block body</text>
+        <text x="495" y="70" font-size="14">a -&gt; {</text>
+        <text x="510" y="90" font-size="14">…;</text>
+        <text x="510" y="110" font-size="14" fill="#C93C3C">return x;  ← needed!</text>
+        <text x="495" y="126" font-size="14">}</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sec">
+    <h2>2 · Target typing = one shape-shifter, many sockets</h2>
+    <div class="row" style="align-items:center">
+      <svg width="400" height="160" viewBox="0 0 400 160">
+        <g font-family="Patrick" font-size="14">
+          <ellipse cx="80" cy="80" rx="70" ry="40" fill="#FFF27A" stroke="#23302B" stroke-width="2"/>
+          <text x="25" y="76" font-size="13">t -&gt; t.amount()</text><text x="25" y="94" font-size="13">.compareTo(LIMIT) &gt; 0</text>
+          <path d="M152 70 C 200 30, 230 30, 260 30" fill="none" stroke="#23302B" stroke-width="2"/>
+          <path d="M152 80 L 260 80" fill="none" stroke="#23302B" stroke-width="2"/>
+          <path d="M152 90 C 200 130, 230 130, 260 130" fill="none" stroke="#23302B" stroke-width="2"/>
+          <rect x="262" y="14" width="130" height="32" rx="6" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="272" y="35">Predicate</text>
+          <rect x="262" y="64" width="130" height="32" rx="6" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="272" y="85">Function&lt;_,Boolean&gt;</text>
+          <rect x="262" y="114" width="130" height="32" rx="6" fill="#FFC2D4" stroke="#23302B" stroke-width="2"/><text x="272" y="135">HighValueCheck</text>
+        </g>
+      </svg>
+      <div class="sk t2 col">
+        <p>The <b>context</b> decides: assignment, method argument, return, <span class="code">? :</span>, cast.</p>
+        <p style="margin-top:1.5mm">No context? <span class="code">Object o = () -&gt; "x";</span></p>
+        <p class="red">→ Object is not a functional interface</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>3 · Capture = the lambda packs a COPY in its backpack</h2>
+    <div class="row" style="align-items:center">
+      <svg width="210" height="170" viewBox="0 0 210 170">
+        <rect x="55" y="40" width="100" height="110" rx="22" fill="#FFCC80" stroke="#23302B" stroke-width="2.4"/>
+        <path d="M80 40 q25 -30 50 0" fill="none" stroke="#23302B" stroke-width="3"/>
+        <rect x="72" y="85" width="66" height="40" rx="8" fill="#fff" stroke="#23302B" stroke-width="2"/>
+        <text x="80" y="111" font-family="Patrick" font-size="15">rate=0.05</text>
+        <text x="62" y="70" font-family="Caveat" font-weight="700" font-size="20">λ backpack</text>
+      </svg>
+      <div class="col">
+        <div class="sk t1">
+          <p><span class="green"><b>✓</b></span> <span class="code">rate</span> set once → <span class="hlg">effectively final</span> → 80.00 × 5% = 4.00</p>
+          <p style="margin-top:1.5mm"><span class="red"><b>✗</b></span> <span class="code">ids.forEach(id -&gt; count++)</span><br><span class="red">must be final or effectively final</span></p>
+        </div>
+        <div class="sk t2" style="margin-top:3mm">
+          <p>for-each: new <b>f</b> each turn → [SQ318, SQ12, TR808] ✓<br>classic for: copy <span class="code">int pos = i + 1;</span> first</p>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:2mm">Why? the lambda may run <span class="hl">later</span> or on <span class="hl">another thread</span>, so its copy must never go stale. Fields are read live.</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 03</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">4 · this: window vs mirror</h2>
+  <div class="row sec" style="align-items:center">
+    <svg width="330" height="150" viewBox="0 0 330 150">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="20" width="140" height="100" rx="6" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/>
+        <path d="M80 20 v100 M10 70 h140" stroke="#23302B" stroke-width="2"/>
+        <text x="20" y="140" font-family="Caveat" font-weight="700" font-size="18">lambda = window</text>
+        <text x="18" y="52">sees the</text><text x="86" y="52">outer</text><text x="18" y="100">object</text><text x="86" y="100">service</text>
+        <ellipse cx="250" cy="70" rx="60" ry="52" fill="#E3E6E4" stroke="#23302B" stroke-width="2.4"/>
+        <path d="M225 45 l15 -10 M240 60 l20 -14" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+        <text x="215" y="80">sees</text><text x="208" y="98">itself</text>
+        <text x="190" y="140" font-family="Caveat" font-weight="700" font-size="18">anonymous = mirror</text>
+      </g>
+    </svg>
+    <div class="sk t1 col">
+      <p>lambda → <span class="code">payment-service</span></p>
+      <p>anonymous → <span class="code">anonymous object</span></p>
+      <p style="margin-top:1.5mm">No new scope in a lambda: <span class="code">String id; … id -&gt; …</span> <span class="red">already defined!</span></p>
+    </div>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t2 col" style="background:#FFEBEE">
+      <h2>5 · Counter hacks = smell</h2>
+      <p><span class="code">AtomicInteger</span>, <span class="code">int[] {0}</span> in forEach: compiles, gives 45… but hides mutable state, and the array races in parallel.</p>
+      <p style="margin-top:1.5mm">✓ <span class="code">filter(…).count()</span> → <span class="hlg">45</span></p>
+    </div>
+    <div class="sk t1 col">
+      <h2>6 · var [11]</h2>
+      <p><span class="code">(final var t) -&gt; …</span><br><span class="code">(@Audited var t) -&gt; …</span></p>
+      <p style="margin-top:1mm">all var or none!<br><span class="code">(a, _) -&gt; a</span> = preview in 21, final 22</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>7 · Checked exceptions: four roads</h2>
+    <svg width="660" height="170" viewBox="0 0 660 170">
+      <g font-family="Patrick" font-size="14">
+        <rect x="250" y="8" width="160" height="40" rx="8" fill="#FFC2D4" stroke="#23302B" stroke-width="2"/>
+        <text x="262" y="33">parse() throws ✗</text>
+        <path d="M330 48 C 300 70, 120 70, 90 95 M330 48 C 320 70, 260 80, 250 95 M330 48 C 340 70, 400 80, 410 95 M330 48 C 360 70, 540 70, 570 95" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="10" y="95" width="150" height="66" rx="8" fill="#fff" stroke="#23302B" stroke-width="2"/><text x="20" y="118" font-family="Caveat" font-weight="700" font-size="17">1 try/catch inside</text><text x="20" y="140">works, 7 lines</text>
+        <rect x="175" y="95" width="150" height="66" rx="8" fill="#fff" stroke="#23302B" stroke-width="2"/><text x="185" y="118" font-family="Caveat" font-weight="700" font-size="17">2 custom SAM</text><text x="185" y="140">R apply() throws E</text>
+        <rect x="340" y="95" width="150" height="66" rx="8" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="350" y="118" font-family="Caveat" font-weight="700" font-size="17">3 wrap once</text><text x="350" y="140">keep the cause!</text>
+        <rect x="505" y="95" width="150" height="66" rx="8" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="515" y="118" font-family="Caveat" font-weight="700" font-size="17">4 failure = value</text><text x="515" y="140">Optional / Result</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row">
+    <div class="sk t3" style="width:82mm">
+      <h2>8 · Under the hood</h2>
+      <p>anonymous → <span class="code">Outer$1.class</span> file, new object each time</p>
+      <p style="margin-top:1mm">lambda → <span class="code">invokedynamic</span> → <span class="hl">hidden class</span> [15], no file</p>
+      <p style="margin-top:1mm">never <span class="code">==</span> or lock on a lambda</p>
+    </div>
+    <div class="sk t1 col" style="background:#FFF9C4">
+      <h2>★ Remember</h2>
+      <ul>
+        <li>expression returns, block needs return</li>
+        <li>effectively final = never re-assigned</li>
+        <li>&gt; 3 lines → named method</li>
+        <li>next → L04 method references</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 03</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

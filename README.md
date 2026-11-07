@@ -28,7 +28,7 @@ All lists are immutable, all records are immutable, and money is always `BigDeci
 |---|---|---|---|---|---|
 | L01 | Why Functional Programming in Java | 1 · Foundations | `l01_why_fp` | [lessons/L01_WhyFP](lessons/L01_WhyFP) | ✅ Done |
 | L02 | Functional Interfaces: Rules and Standards | 1 · Foundations | `l02_functional_interfaces` | [lessons/L02_FunctionalInterfaces](lessons/L02_FunctionalInterfaces) | ✅ Done |
-| L03 | Lambda Expressions In Depth | 1 · Foundations | | | Planned |
+| L03 | Lambda Expressions In Depth | 1 · Foundations | `l03_lambdas` | [lessons/L03_Lambdas](lessons/L03_Lambdas) | ✅ Done |
 | L04 | Method References | 1 · Foundations | | | Planned |
 | L05 | Optional Done Right | 1 · Foundations | | | Planned |
 | L06–L14 | Stream API | 2 · Streams | | | Planned |
@@ -41,6 +41,7 @@ src/main/java/com/itgreenzone/fp/
   data/                 shared records, enums and SampleData
   l01_why_fp/           theory/ before/ after/ modern/ exercise/ solution/
   l02_functional_interfaces/   same layout
+  l03_lambdas/                 same layout
 src/test/java/...       JUnit 5 tests (golden-file tests for every main())
 lessons/L<NN>_<Name>/   slides (.pptx), quiz (.html), cheat sheet + sticky notes (.pdf), sketch notes (.pdf)
 tools/materials/        generators used to build the lesson materials

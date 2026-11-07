@@ -1,0 +1,3 @@
+(var a, var b)  : 165.50
+(final var t)   : T010/USD
+(@Audited var t): 533.03

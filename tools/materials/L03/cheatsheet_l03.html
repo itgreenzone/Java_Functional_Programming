@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 03 · CHEAT SHEET</div><h1>Lambda Expressions in Depth</h1></div>
+    <div class="sub">Java 8 → Java 21 · every error message<br>below is real javac output</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><b>Shape:</b> <code>(params) -&gt; expression</code> or <code>(params) -&gt; { statements; return x; }</code> <span class="b">8</span></li>
+          <li><b>Parentheses</b> are optional only for one parameter with an inferred type.</li>
+          <li><b>Expression body</b> returns its value automatically; a <b>block body</b> needs <code>return</code>.</li>
+          <li><b>Target typing:</b> a lambda has no type of its own; the context (assignment, argument, return, <code>?:</code>, cast) decides.</li>
+          <li><b>Capture:</b> locals must be final or <b>effectively final</b>. The lambda keeps a copy of the value. Fields are read live.</li>
+          <li><b>this</b> = the enclosing instance. A lambda adds no new scope, so a parameter cannot reuse a local's name.</li>
+          <li><b>var</b> in parameters <span class="b n">11</span>: all or none; use it only for <code>final</code> or annotations.</li>
+          <li><b>Checked exceptions:</b> java.util.function methods declare no <code>throws</code>.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Real compiler errors</h2>
+        <table>
+          <tr><th>Code</th><th>javac says</th></tr>
+          <tr><td><code>ids.forEach(id -&gt; count++);</code></td><td>local variables referenced from a lambda expression must be final or effectively final</td></tr>
+          <tr><td><code>String id; … id -&gt; id.trim()</code></td><td>variable id is already defined in method</td></tr>
+          <tr><td><code>(var a, b) -&gt; a + b</code></td><td>invalid lambda parameter declaration (cannot mix 'var' and implicitly-typed parameters)</td></tr>
+          <tr><td><code>Object o = () -&gt; "x";</code></td><td>incompatible types: Object is not a functional interface</td></tr>
+          <tr><td><code>map(s -&gt; Amounts.parse(s))</code></td><td>unreported exception InvalidAmountException; must be caught or declared to be thrown</td></tr>
+          <tr><td><code>(a, _) -&gt; a</code> on 21</td><td>unnamed variables are a preview feature (final in Java 22)</td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>Lambda vs anonymous class</h2>
+        <table>
+          <tr><th></th><th>Lambda</th><th>Anonymous class</th></tr>
+          <tr><td><b>this</b></td><td>enclosing instance</td><td>the anonymous object</td></tr>
+          <tr><td><b>.class file</b></td><td>none (invokedynamic)</td><td>Outer$1.class</td></tr>
+          <tr><td><b>run time</b></td><td>hidden class <span class="b n">15</span></td><td>normal class</td></tr>
+          <tr><td><b>state / 2+ methods</b></td><td>no</td><td>yes</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Syntax forms</h2>
+        <table>
+          <tr><th>Form</th><th>Example</th><th>Result</th></tr>
+          <tr><td>no params</td><td><code>() -&gt; "statement ready"</code></td><td>statement ready</td></tr>
+          <tr><td>one, inferred</td><td><code>t -&gt; t.id()</code></td><td>T003</td></tr>
+          <tr><td>explicit type</td><td><code>(Transaction t) -&gt; t.id()</code></td><td>T003</td></tr>
+          <tr><td>two params</td><td><code>(a, b) -&gt; a.add(b)</code></td><td>165.50</td></tr>
+          <tr><td>block body</td><td><code>a -&gt; { …; return a.add(fee); }</code></td><td>2512.50</td></tr>
+          <tr><td>var <span class="b n">11</span></td><td><code>(final var t) -&gt; t.id()</code></td><td>T010</td></tr>
+        </table>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Capture: effectively final, loops</div>
+<pre><span class="t">BigDecimal</span> rate = <span class="m">percent</span>(pct); <span class="c">// set once</span>
+<span class="k">return</span> a -&gt; a.<span class="m">multiply</span>(rate).<span class="m">setScale</span>(2, HALF_UP);
+<span class="k">for</span> (<span class="t">Flight</span> f : flights) list.<span class="m">add</span>(() -&gt; f.<span class="m">code</span>());
+<span class="k">for</span> (<span class="k">int</span> i = 0; …; i++) { <span class="k">int</span> pos = i + 1; … }</pre>
+        <div class="lbl">2 · Count without a captured counter</div>
+<pre><span class="c">// smell: AtomicInteger / int[] inside forEach</span>
+<span class="k">long</span> debits = txns.<span class="m">stream</span>()
+    .<span class="m">filter</span>(t -&gt; t.<span class="m">type</span>() == DEBIT)
+    .<span class="m">count</span>();                       <span class="c">// 45</span></pre>
+        <div class="lbl">3 · Checked exceptions: wrap once, keep the cause</div>
+<pre><span class="k">@FunctionalInterface</span>
+<span class="k">interface</span> <span class="t">ThrowingFunction</span>&lt;T,R,E <span class="k">extends</span> <span class="t">Exception</span>&gt; {
+    R <span class="m">apply</span>(T t) <span class="k">throws</span> E;
+}
+raw.<span class="m">stream</span>()
+   .<span class="m">map</span>(<span class="m">unchecked</span>(<span class="t">Amounts</span>::<span class="m">parse</span>))  <span class="c">// cause kept</span>
+   .<span class="m">toList</span>();</pre>
+      </div>
+      <div class="box">
+        <h2>4 patterns for checked exceptions</h2>
+        <ol>
+          <li>try/catch inside the lambda (verbose)</li>
+          <li>custom SAM that declares <code>throws</code>; caller handles it</li>
+          <li><code>unchecked(…)</code> wrapper, unwrap at the edge</li>
+          <li>failure as a value: <code>Optional</code> now, Result in L17</li>
+        </ol>
+      </div>
+      <div class="box">
+        <h2>Do / Don't</h2>
+        <div class="dd">
+          <div class="do"><h3>✔ Do</h3><ul><li>One expression; &gt; 3 lines → named method</li><li>No side effects in map / filter</li></ul></div>
+          <div class="dont"><h3>✘ Don't</h3><ul><li>Counter hacks</li><li>Empty catch to make it compile</li><li><code>==</code> or lock on a lambda</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 03</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 03 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>(params) -&gt; body</h3><p>Expression: value returned.<br>Block { }: needs return.<br>( ) optional for 1 inferred param.</p></div>
+    <div class="note g"><h3>Target typing</h3><p>Same lambda text →<br>Predicate, Function, or my own type.<br>The context decides.</p></div>
+    <div class="note p"><h3>Effectively final</h3><p>Captured locals are never re-assigned.<br>The lambda keeps a COPY.</p></div>
+    <div class="note bl"><h3>No counter hacks</h3><p>AtomicInteger / int[] in forEach = smell.<br><code>filter(…).count()</code> → 45</p></div>
+    <div class="note o"><h3>this = outer object</h3><p>Lambda: enclosing instance.<br>Anonymous class: itself.<br>No new scope.</p></div>
+    <div class="note l"><h3>var [11]: all or none</h3><p><code>(final var t) -&gt; …</code><br>Only for final or annotations.<br><code>_</code> = Java 22</p></div>
+    <div class="note g"><h3>Checked exceptions</h3><p>Custom SAM with throws,<br>or wrap once &amp; keep the cause.</p></div>
+    <div class="note y"><h3>&gt; 3 lines?</h3><p>Give it a name.<br>Extract a method, use a method reference (L04).</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 03</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

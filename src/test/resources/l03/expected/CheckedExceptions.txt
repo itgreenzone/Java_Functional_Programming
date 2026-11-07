@@ -1,0 +1,5 @@
+1 try/catch      : [120.00, 45.50, 999.99]
+2 custom SAM     : [120.00, 45.50, 999.99]
+2 caught checked : Invalid amount: abc
+3 unwrapped cause: InvalidAmountException - Invalid amount: abc
+4 skip invalid   : [120.00, 75.00]
