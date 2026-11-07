@@ -1,0 +1,5 @@
+1 count by method   : {CARD=5, PAYNOW=4, PAYPAL=3}
+2 total by method   : {CARD=2070.29, PAYNOW=1824.30, PAYPAL=535.25}
+3 summary by method : {CARD=5 / 2070.29, PAYNOW=4 / 1824.30, PAYPAL=3 / 535.25}
+4 SUCCESS only      : {CARD=3 / 1209.89, PAYNOW=3 / 1564.30, PAYPAL=2 / 225.00}
+5 gateway           : 12 payments, 4429.84 total, failed: P003, P012

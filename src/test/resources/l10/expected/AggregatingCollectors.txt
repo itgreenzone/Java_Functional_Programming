@@ -1,0 +1,8 @@
+joining           : Flights: [SQ318, SQ12, TR808, MH602, SQ938, UL309, SQ21, GA827]
+counting          : 12
+summingInt booked : 1808
+averagingInt      : 226.0
+summarizingInt    : count=8 sum=2078 min=160 max=471 average=259.75
+maxBy amount      : P005 1500.00
+reducing total    : 4429.84
+mapping+reducing  : 4429.84

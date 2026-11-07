@@ -1,0 +1,6 @@
+LIFE: 2 policies, 4250.00 [POL-501, POL-507]
+HEALTH: 2 policies, 2065.75 [POL-503, POL-506]
+MOTOR: 2 policies, 2550.50 [POL-502, POL-508]
+TRAVEL: 2 policies, 395.00 [POL-505, POL-509]
+HOME: 2 policies, 1565.25 [POL-504, POL-510]
+TOTAL: 10 policies, 10826.50

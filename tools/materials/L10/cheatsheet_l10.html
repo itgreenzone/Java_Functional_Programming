@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 10 · CHEAT SHEET</div><h1>Collectors I: Collecting Results</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li>A Collector = <b>supplier</b> (new container), <b>accumulator</b> (add one), <b>combiner</b> (merge two), <b>finisher</b>. <span class="b">8</span></li>
+          <li>Type or order matters? <code>toCollection(TreeSet::new)</code>. Never rely on <code>toSet()</code>/HashMap order.</li>
+          <li><code>toMap(k, v)</code> needs <b>unique keys</b>; otherwise give a <b>merge function</b>. Null values → NPE.</li>
+          <li>4th argument picks the map: <code>TreeMap::new</code>, <code>LinkedHashMap::new</code>, <code>EnumMap</code>.</li>
+          <li>Money: <code>reducing(ZERO, mapper, BigDecimal::add)</code>; never <code>summingDouble</code>.</li>
+          <li><code>teeing</code> = two collectors, one pass. <span class="b">12</span></li>
+          <li>Top level: prefer stream ops. Collectors shine as <b>downstream</b> (L11).</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Total per key with merge + sorted map</div>
+<pre>accounts.<span class="m">stream</span>().<span class="m">collect</span>(<span class="m">toMap</span>(
+    <span class="t">Account</span>::<span class="m">customerId</span>, <span class="t">Account</span>::<span class="m">balance</span>,
+    <span class="t">BigDecimal</span>::<span class="m">add</span>, <span class="t">TreeMap</span>::<span class="k">new</span>));
+<span class="c">// {C001=15700.50, C002=850.75, C003=163950.25, …}</span></pre>
+        <div class="lbl">2 · BigDecimal total as a collector</div>
+<pre>payments.<span class="m">stream</span>().<span class="m">collect</span>(
+    <span class="m">reducing</span>(ZERO, <span class="t">Payment</span>::<span class="m">amount</span>, <span class="t">BigDecimal</span>::<span class="m">add</span>));
+<span class="c">// 4429.84</span></pre>
+        <div class="lbl">3 · Count and total in one pass</div>
+<pre><span class="m">teeing</span>(<span class="m">counting</span>(),
+       <span class="m">reducing</span>(ZERO, <span class="t">Payment</span>::<span class="m">amount</span>,
+                <span class="t">BigDecimal</span>::<span class="m">add</span>),
+       <span class="t">CountAndTotal</span>::<span class="k">new</span>)
+<span class="c">// 12 payments, total 4429.84</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Collectors in this lesson</h2>
+        <table>
+          <tr><th>Collector</th><th>Gives</th><th>Since</th></tr>
+          <tr><td><code>toList / toSet</code></td><td>List / Set (no guarantees)</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>toCollection(Supplier)</code></td><td>your collection type</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>toUnmodifiableList/Set/Map</code></td><td>immutable, no nulls</td><td><span class="b">10</span></td></tr>
+          <tr><td><code>toMap(k, v[, merge[, map]])</code></td><td>Map</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>joining(sep, pre, suf)</code></td><td>String</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>counting / summingInt / averagingInt</code></td><td>Long / Integer / Double</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>summarizingInt/Long/Double</code></td><td>…SummaryStatistics</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>minBy / maxBy</code></td><td>Optional</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>reducing(id, mapper, op)</code></td><td>any, e.g. BigDecimal</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>collectingAndThen / mapping</code></td><td>wrapped result</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>filtering / flatMapping</code></td><td>wrapped result</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>teeing(c1, c2, merger)</code></td><td>merger result</td><td><span class="b">12</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>The toMap trap (real output)</h2>
+<pre>toMap(Customer::city, Customer::name)
+IllegalStateException: Duplicate key Singapore
+ (attempted merging values Alice Tan and Chen Wei)</pre>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: teeing</h2>
+        <div class="belt">
+          <div style="background:#0E3B2E">payments<small>12</small></div><span>▶</span>
+          <div style="background:#1E8E5A">counting<small>+ reducing</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">merger<small>12 · 4429.84</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td><code>summarizingInt(seats)</code></td><td>count=8 sum=2078 min=160 max=471 avg=259.75</td></tr>
+        <tr><td><code>maxBy(amount)</code></td><td>P005 1500.00</td></tr>
+        <tr><td><code>filtering(SUCCESS, counting())</code></td><td>8</td></tr>
+        <tr><td><code>teeing(minBy, maxBy)</code> balances</td><td>-150.25 .. 100000.00</td></tr>
+      </table>
+      <table>
+        <tr><th>Exercise: per method (toMap + merge)</th><th>Result</th></tr>
+        <tr><td>count</td><td>{CARD=5, PAYNOW=4, PAYPAL=3}</td></tr>
+        <tr><td>total</td><td>{CARD=2070.29, PAYNOW=1824.30, PAYPAL=535.25}</td></tr>
+        <tr><td>SUCCESS only</td><td>CARD 3 / 1209.89 · PAYNOW 3 / 1564.30 · PAYPAL 2 / 225.00</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>toMap(city, name)</code></td><td><code>toMap(city, name, merge, TreeMap::new)</code></td></tr>
+        <tr><td>value mapper returning null</td><td>filter first, or a default value</td></tr>
+        <tr><td>assert on <code>toSet().toString()</code></td><td>compare contents / TreeSet</td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>summingDouble(amount)</code></td><td><code>reducing(ZERO, .., add)</code></td></tr>
+        <tr><td>print <code>IntSummaryStatistics</code></td><td>format fields with <code>Locale.ROOT</code></td></tr>
+        <tr><td>3 maps kept in sync</td><td>one record + merge, or <code>teeing</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 10</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 10 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>Collector = 4 parts</h3><p>supplier · accumulator<br>combiner · finisher</p></div>
+    <div class="note g"><h3>toMap needs unique keys</h3><p>Else: Duplicate key …<br>Give a merge function!</p></div>
+    <div class="note p"><h3>Pick the map</h3><p>TreeMap = sorted<br>LinkedHashMap = first seen<br>EnumMap = enum order</p></div>
+    <div class="note bl"><h3>Money collector</h3><p><code>reducing(ZERO,</code><br><code>  mapper, BigDecimal::add)</code></p></div>
+    <div class="note o"><h3>toSet has no order</h3><p>Need order? toCollection(<br>TreeSet::new / LinkedHashSet::new)</p></div>
+    <div class="note l"><h3>teeing [12]</h3><p>Two collectors, one pass,<br>one merger.</p></div>
+    <div class="note g"><h3>filtering / flatMapping [9]</h3><p>Filter / flatMap INSIDE<br>a collector (groupingBy!).</p></div>
+    <div class="note y"><h3>Downstream power</h3><p>counting, summing, mapping…<br>shine inside groupingBy (L11).</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 10</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

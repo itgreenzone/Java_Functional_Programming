@@ -1,0 +1,6 @@
+collectingAndThen  : largest payment P005
+mapping + joining  : Alice Tan | Dewi Lestari | Ganesh Perera | Jasmine Ong
+filtering [9]      : 8 SUCCESS
+flatMapping [9]    : [ACC-1001, ACC-1002, ACC-1004, ACC-1005, ACC-1006, ACC-1008, ACC-1014, ACC-1015]
+teeing [12]        : 12 payments, total 4429.84
+teeing min..max    : -150.25 .. 100000.00

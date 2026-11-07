@@ -1,0 +1,5 @@
+toSet size             : 5 (HashSet: order not defined)
+toCollection(TreeSet)  : [Bangkok, Colombo, Jakarta, Kuala Lumpur, Singapore]
+hand-written collect   : [Bangkok, Colombo, Jakarta, Kuala Lumpur, Singapore]
+toCollection(Deque)    : peekLast=GA827
+toUnmodifiableSet [10] : size 2, add -> UnsupportedOperationException
