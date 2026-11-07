@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body><!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Terminal ops <span style="font-size:22pt" class="amber">· my notes L09</span></h1>
+  <div class="sub">the <span class="hl">GO button</span> decides what you get back</div>
+
+  <div class="sec">
+    <h2>What kind of answer do I need? 🤔</h2>
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick" font-size="13">
+        <rect x="270" y="10" width="120" height="40" rx="10" fill="#FFC2D4" stroke="#23302B" stroke-width="2"/><text x="290" y="36" font-size="15">stream ▶ GO</text>
+        <path d="M330 50 L70 90 M330 50 L200 90 M330 50 L330 90 M330 50 L460 90 M330 50 L590 90" stroke="#23302B" stroke-width="1.6" fill="none"/>
+        <rect x="10" y="90" width="120" height="50" rx="8" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="20" y="110">elements</text><text x="20" y="128" font-size="11">toList · forEach</text>
+        <rect x="140" y="90" width="120" height="50" rx="8" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="150" y="110">one value</text><text x="150" y="128" font-size="11">reduce · count</text>
+        <rect x="270" y="90" width="120" height="50" rx="8" fill="#D1C4E9" stroke="#23302B" stroke-width="2"/><text x="280" y="110">pick one</text><text x="280" y="128" font-size="11">min · max</text>
+        <rect x="400" y="90" width="120" height="50" rx="8" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="410" y="110">yes / no ✂</text><text x="410" y="128" font-size="11">any/all/noneMatch</text>
+        <rect x="530" y="90" width="120" height="50" rx="8" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="540" y="110">find one ✂</text><text x="540" y="128" font-size="11">findFirst · findAny</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sec">
+    <h2>reduce = a snowball rolling down the hill ⛄</h2>
+    <svg width="660" height="130" viewBox="0 0 660 130">
+      <g font-family="Patrick" font-size="13">
+        <path d="M10 30 L640 115" stroke="#9AA6A1" stroke-width="2" stroke-dasharray="6 4"/>
+        <circle cx="40" cy="38" r="12" fill="#fff" stroke="#23302B" stroke-width="2"/><text x="34" y="43">0</text>
+        <circle cx="170" cy="55" r="18" fill="#fff" stroke="#23302B" stroke-width="2"/><text x="140" y="90" font-size="12">+12500.00</text>
+        <circle cx="310" cy="73" r="24" fill="#fff" stroke="#23302B" stroke-width="2"/><text x="285" y="115" font-size="12">+3200.50 …</text>
+        <circle cx="560" cy="98" r="30" fill="#fff" stroke="#23302B" stroke-width="2"/><text x="470" y="40" fill="#1E8E5A" font-size="15">= 300382.25 (15 accounts)</text>
+        <text x="20" y="125">identity ZERO · op BigDecimal::add</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col" style="background:#FFEBEE">
+      <h2>Rule 1: associative</h2>
+      <p>(a−b)−c ≠ a−(b−c)<br><span class="code">reduce(0, a − b)</span>: seq −55,<br>parallel <span class="red">different</span> 💥</p>
+    </div>
+    <div class="sk t2 col" style="background:#FFEBEE">
+      <h2>Rule 2: true identity</h2>
+      <p>x + id == x · id = 0, not 100<br><span class="code">reduce(100, sum)</span>: seq 155,<br>parallel <span class="red">bigger</span> 💥</p>
+    </div>
+  </div>
+  <div class="sk t3" style="background:#E8F8EE">
+    <h2>3 forms</h2>
+    <p><span class="code">reduce(id, op)</span> → T (empty: id) · <span class="code">reduce(op)</span> → Optional (empty: empty) · <span class="code">reduce(id, acc, combiner)</span> → U (Flight → seats 2078)</p>
+  </div>
+  <div class="sec row" style="margin-top:5mm">
+    <div class="sk t2 col" style="background:#E3F2FD">
+      <h2>Exercise: month-end 📅</h2>
+      <p>SGD, USD × 1.3456, rounded per line<br>Aug debits 4031.61 · Sep 7328.44 · Oct 5832.65<br>largest Oct debit: T042 1432.93</p>
+    </div>
+    <div class="sk t1 col">
+      <h2>Numbers? simpler</h2>
+      <p><span class="code">mapToInt(Flight::seats).sum()</span> → 2078<br>beats <span class="code">reduce(0, acc, combiner)</span> for plain ints</p>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 09</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">Money 💰 and the empty box 📦</h2>
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>Average premium</h2>
+      <p>sum 10826.50 ÷ 10<br><span class="code">divide(n, 2, HALF_UP)</span> → <span class="hl">1082.65</span><br><span class="red">no scale → ArithmeticException on 1/3</span></p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Where do I round?</h2>
+      <p>USD → SGD at 1.3456<br>per line: <b>1947.75</b> ✓ (exercise rule)<br>at the end: 1947.74</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Empty stream = an empty classroom 🏫</h2>
+    <svg width="660" height="120" viewBox="0 0 660 120">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="15" width="200" height="90" rx="10" fill="#EEF3EF" stroke="#23302B" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="30" y="55">(nobody here)</text><text x="30" y="80" font-size="12">List.of().stream()</text>
+        <text x="240" y="35">"Is ANYONE late?" → <tspan fill="#C93C3C">false</tspan></text>
+        <text x="240" y="62">"Is EVERYONE on time?" → <tspan fill="#1E8E5A">true</tspan> (vacuous)</text>
+        <text x="240" y="89">"Is NOBODY absent-minded?" → <tspan fill="#1E8E5A">true</tspan></text>
+      </g>
+    </svg>
+    <p>validation tip: "all payments approved" is <b>true</b> for an empty batch → also check <span class="code">isEmpty()</span></p>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>toList() 🔒</h2>
+      <p>Java 16 · read-only · add() → <span class="red">UnsupportedOperationException</span> · nulls OK</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>forEachOrdered 🚶‍♂️</h2>
+      <p>keeps order even in parallel: SQ318, SQ12, TR808 …</p>
+    </div>
+    <div class="sk t3 col">
+      <h2>max → Optional</h2>
+      <p>highest: T049 7721.99<br>lowest: T046 18.35</p>
+    </div>
+  </div>
+
+  <div class="sk t2 sec" style="background:#E3F2FD">
+    <h2>Dashboard, one terminal op per question</h2>
+    <p>total balance 300382.25 (reduce) · highest T049 (max) · any overdrawn true (anyMatch) · avg premium 1082.65 (reduce + divide)</p>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>pick the op by the answer · toList read-only · reduce: associative + neutral identity · money: ZERO + add, divide with scale · empty: allMatch true · next → L10 Collectors I</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 09</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

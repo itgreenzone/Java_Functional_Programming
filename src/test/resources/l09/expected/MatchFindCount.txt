@@ -1,0 +1,9 @@
+count REFUNDED        : 1
+highest transaction   : T049 7721.99
+lowest transaction    : T046 18.35
+any overdrawn         : true
+all amounts > 0       : true
+none in EUR           : true
+empty stream          : anyMatch=false allMatch=true noneMatch=true
+findFirst FAILED      : Optional[P003]
+findAny FAILED (par.) : one of [P003, P012] = true

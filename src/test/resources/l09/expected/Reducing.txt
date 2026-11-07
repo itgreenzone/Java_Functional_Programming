@@ -1,0 +1,7 @@
+total balance (reduce)   : 300382.25
+largest amount (Optional): Optional[7721.99]
+total seats (3-arg)      : 2078 = mapToInt.sum 2078
+average premium          : 1082.65
+a - b                    : sequential=-55, parallel differs=true
+identity 100             : sequential=155, parallel bigger=true
+empty stream             : identity form=0, optional form=Optional.empty

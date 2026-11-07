@@ -1,0 +1,8 @@
+2026-08 debits=4031.61 credits=455.99 net=-3575.62 avgDebit=335.97
+2026-09 debits=7328.44 credits=19215.71 net=11887.27 avgDebit=431.08
+2026-10 debits=5832.65 credits=30722.84 net=24890.19 avgDebit=364.54
+2026-08 largest debit=T003 1221.40
+2026-09 largest debit=T026 1726.41
+2026-10 largest debit=T042 1432.93
+2026-11 (no data): debits=0 avgDebit=0.00 largest=Optional.empty
+USD lines [T010, T023]: per line=1947.75, at end=1947.74

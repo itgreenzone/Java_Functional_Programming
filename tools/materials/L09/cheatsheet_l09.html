@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 09 · CHEAT SHEET</div><h1>Terminal Operations &amp; Reduction</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li>One terminal op runs the pipeline. Pick it by the <b>kind of answer</b>: elements, one value, yes/no, one element. <span class="b">8</span></li>
+          <li><code>toList()</code> is <b>unmodifiable</b> and allows nulls. <code>Collectors.toList()</code> makes no promise. <span class="b">16</span></li>
+          <li><code>forEachOrdered</code> keeps encounter order in parallel; <code>forEach</code> does not.</li>
+          <li><b>reduce</b>: identity → T · no identity → Optional · 3-arg → U (with combiner).</li>
+          <li>The operator must be <b>associative</b> and the identity <b>neutral</b>, or parallel breaks.</li>
+          <li>Money: <code>reduce(ZERO, BigDecimal::add)</code>, then <code>divide(n, 2, HALF_UP)</code>. Guard empty.</li>
+          <li>Empty stream: <b>allMatch / noneMatch = true</b>, anyMatch = false.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Total balance (money)</div>
+<pre>accounts.<span class="m">stream</span>().<span class="m">map</span>(<span class="t">Account</span>::<span class="m">balance</span>)
+        .<span class="m">reduce</span>(<span class="t">BigDecimal</span>.ZERO, <span class="t">BigDecimal</span>::<span class="m">add</span>);
+<span class="c">// 300382.25</span></pre>
+        <div class="lbl">2 · Average premium, rounded</div>
+<pre>total.<span class="m">divide</span>(<span class="t">BigDecimal</span>.<span class="m">valueOf</span>(n),
+             <span class="s">2</span>, <span class="t">RoundingMode</span>.HALF_UP)
+<span class="c">// 10826.50 / 10 = 1082.65</span></pre>
+        <div class="lbl">3 · Highest, any, first</div>
+<pre>txns.<span class="m">stream</span>()
+    .<span class="m">max</span>(<span class="m">comparing</span>(<span class="t">Transaction</span>::<span class="m">amount</span>))
+<span class="c">// Optional[T049 7721.99]</span>
+accounts.<span class="m">stream</span>()
+    .<span class="m">anyMatch</span>(a -&gt; a.<span class="m">balance</span>().<span class="m">signum</span>() &lt; <span class="s">0</span>)
+<span class="c">// true (ACC-1013)</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Terminal operations</h2>
+        <table>
+          <tr><th>Operation</th><th>Returns</th><th>Note</th><th>Since</th></tr>
+          <tr><td><code>forEach / forEachOrdered</code></td><td>void</td><td>side effects</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>collect(Collector)</code></td><td>R</td><td>L10, L11</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>toList()</code></td><td>List (unmod.)</td><td>nulls ok</td><td><span class="b">16</span></td></tr>
+          <tr><td><code>toArray(String[]::new)</code></td><td>String[]</td><td>typed</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>reduce(id, op)</code></td><td>T</td><td>empty → id</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>reduce(op)</code></td><td>Optional&lt;T&gt;</td><td>empty → empty</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>reduce(id, acc, comb)</code></td><td>U</td><td>type change</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>count()</code></td><td>long</td><td></td><td><span class="b">8</span></td></tr>
+          <tr><td><code>min / max(cmp)</code></td><td>Optional&lt;T&gt;</td><td>add a tie-breaker</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>any/all/noneMatch</code></td><td>boolean</td><td>✂ short-circuit</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>findFirst / findAny</code></td><td>Optional&lt;T&gt;</td><td>✂ short-circuit</td><td><span class="b">8</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>The two reduce rules (real output)</h2>
+<pre>reduce(0, (a, b) -&gt; a - b)   seq -55, parallel ≠
+reduce(100, Integer::sum)    seq 155, parallel &gt;
+reduce(ZERO, BigDecimal::add) 300382.25 always ✓</pre>
+      </div>
+      <div class="box">
+        <h2>Empty stream results</h2>
+        <table>
+          <tr><th>anyMatch</th><th>allMatch</th><th>noneMatch</th><th>reduce(id,op)</th><th>max / findFirst</th></tr>
+          <tr><td>false</td><td>true</td><td>true</td><td>identity</td><td>Optional.empty</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Practice</th><th>Result</th></tr>
+        <tr><td>total balance</td><td>300382.25</td></tr>
+        <tr><td>highest transaction</td><td>T049 7721.99</td></tr>
+        <tr><td>any overdrawn account</td><td>true (ACC-1013)</td></tr>
+        <tr><td>average premium</td><td>1082.65</td></tr>
+      </table>
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td><code>toList().add(..)</code></td><td>UnsupportedOperationException</td></tr>
+        <tr><td><code>toUnmodifiableList()</code> + null</td><td>NullPointerException</td></tr>
+        <tr><td>USD at 1.3456, round per line</td><td>1947.75 (at end: 1947.74)</td></tr>
+        <tr><td>Oct 2026 debits (exercise)</td><td>5832.65 SGD</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>reduce(OPENING, add)</code></td><td><code>reduce(ZERO, add).add(OPENING)</code></td></tr>
+        <tr><td><code>divide(n)</code></td><td><code>divide(n, 2, HALF_UP)</code> + empty guard</td></tr>
+        <tr><td><code>forEach(list::add)</code></td><td><code>toList()</code> / <code>collect</code></td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>allMatch</code> as validation</td><td>check <code>isEmpty()</code> too</td></tr>
+        <tr><td><code>toList().add(..)</code></td><td><code>toCollection(ArrayList::new)</code></td></tr>
+        <tr><td><code>reduce(0, sum)</code> for ints</td><td><code>mapToInt(..).sum()</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 09</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 09 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>toList() is read-only</h3><p>Java 16 · add() throws.<br>Need to add? toCollection(ArrayList::new).</p></div>
+    <div class="note g"><h3>Money sum</h3><p><code>reduce(ZERO, BigDecimal::add)</code><br>No sum() for BigDecimal.</p></div>
+    <div class="note p"><h3>divide needs a scale</h3><p><code>divide(n, 2, HALF_UP)</code><br>and never divide by an empty count.</p></div>
+    <div class="note bl"><h3>3 forms of reduce</h3><p>id+op → T · op → Optional<br>id+acc+combiner → U</p></div>
+    <div class="note o"><h3>Associative + identity</h3><p>a−b and "starting balances"<br>break in parallel.</p></div>
+    <div class="note l"><h3>Empty stream</h3><p>allMatch = true · noneMatch = true<br>anyMatch = false</p></div>
+    <div class="note g"><h3>max returns Optional</h3><p>Highest txn: T049 7721.99.<br>Add thenComparing(id) for ties.</p></div>
+    <div class="note y"><h3>findFirst vs findAny</h3><p>First = encounter order.<br>Any = cheaper in parallel.</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 09</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

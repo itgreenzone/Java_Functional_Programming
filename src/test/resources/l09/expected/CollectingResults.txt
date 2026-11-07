@@ -1,0 +1,6 @@
+forEachOrdered (parallel): [SQ318, SQ12, TR808, MH602, SQ938, UL309, SQ21, GA827]
+forEach (parallel), sorted: [GA827, MH602, SQ12, SQ21, SQ318, SQ938, TR808, UL309]
+Stream.toList() [16]      : toList().add -> UnsupportedOperationException
+Collectors.toList()       : ArrayList size 13
+nulls                     : toList()=[SQ12, null], toUnmodifiableList()=NullPointerException
+toArray                   : String[] [SQ318, SQ12, TR808] vs Object[]

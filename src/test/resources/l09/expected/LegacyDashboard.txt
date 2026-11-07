@@ -1,0 +1,4 @@
+total balance   : 300382.25
+highest txn     : T049 7721.99
+any overdrawn   : true
+average premium : 1082.65
