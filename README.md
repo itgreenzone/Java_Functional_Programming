@@ -33,7 +33,8 @@ All lists are immutable, all records are immutable, and money is always `BigDeci
 | L05 | Optional Done Right | 1 · Foundations | `l05_optional` | [lessons/L05_Optional](lessons/L05_Optional) | ✅ Done |
 | L06 | Stream Fundamentals | 2 · Streams | `l06_stream_fundamentals` | [lessons/L06_StreamFundamentals](lessons/L06_StreamFundamentals) | ✅ Done |
 | L07 | Filtering, Mapping & Slicing | 2 · Streams | `l07_filter_map_slice` | [lessons/L07_FilterMapSlice](lessons/L07_FilterMapSlice) | ✅ Done |
-| L08–L14 | Stream API | 2 · Streams | | | Planned |
+| L08 | Sorting with Comparators | 2 · Streams | `l08_sorting` | [lessons/L08_SortingComparators](lessons/L08_SortingComparators) | ✅ Done |
+| L09–L14 | Stream API | 2 · Streams | | | Planned |
 | L15–L18 | Functional Design in Modern Java | 3 · Design | | | Planned |
 | L19–L21 | Practice Lab, Capstone, Industry Case Studies | 4 · Practice | | | Planned |
 
@@ -48,6 +49,7 @@ src/main/java/com/itgreenzone/fp/
   l05_optional/                same layout
   l06_stream_fundamentals/     same layout
   l07_filter_map_slice/        same layout
+  l08_sorting/                 same layout
 src/test/java/...       JUnit 5 tests (golden-file tests for every main())
 lessons/L<NN>_<Name>/   slides (.pptx), quiz (.html), cheat sheet + sticky notes (.pdf), sketch notes (.pdf)
 tools/materials/        generators used to build the lesson materials

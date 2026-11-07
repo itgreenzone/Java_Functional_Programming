@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 08 · CHEAT SHEET</div><h1>Sorting with Comparators</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><code>sorted()</code> = natural order: elements must be <b>Comparable</b>, else ClassCastException at run time. <span class="b">8</span></li>
+          <li><code>sorted(cmp)</code> works for any type. Build <code>cmp</code> from <b>keys</b>, not hand-written compare. <span class="b">8</span></li>
+          <li><b>One key DESC?</b> <code>comparing(key, reverseOrder())</code>. <b>Not</b> <code>.reversed()</code> at the end: it reverses the whole chain, nulls included.</li>
+          <li>Nullable key → <code>comparing(key, nullsLast(naturalOrder()))</code>.</li>
+          <li>Enums sort by <b>declaration order</b>; BigDecimal by value (10.0 = 10.00).</li>
+          <li>Sorts are <b>stable</b>; still end with a unique tie-breaker (id).</li>
+          <li>User text → <code>String.CASE_INSENSITIVE_ORDER</code>.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Ranking: tier DESC, total DESC, name ASC</div>
+<pre><span class="m">comparing</span>(<span class="t">CustomerView</span>::<span class="m">tier</span>, <span class="m">reverseOrder</span>())
+  .<span class="m">thenComparing</span>(<span class="t">CustomerView</span>::<span class="m">total</span>, <span class="m">reverseOrder</span>())
+  .<span class="m">thenComparing</span>(<span class="t">CustomerView</span>::<span class="m">name</span>);
+<span class="c">// C003 PLATINUM 163950.25, C006 …, C010 GOLD …</span></pre>
+        <div class="lbl">2 · Nullable key, most recent first</div>
+<pre>.<span class="m">sorted</span>(<span class="m">comparing</span>(<span class="t">Activity</span>::<span class="m">last</span>,
+                  <span class="m">nullsLast</span>(<span class="m">reverseOrder</span>()))
+        .<span class="m">thenComparing</span>(<span class="t">Activity</span>::<span class="m">account</span>))</pre>
+        <div class="lbl">3 · Map by value, top 3</div>
+<pre>map.<span class="m">entrySet</span>().<span class="m">stream</span>()
+   .<span class="m">sorted</span>(<span class="t">Map.Entry</span>.&lt;<span class="t">String</span>, <span class="t">Long</span>&gt;<span class="m">comparingByValue</span>(
+            <span class="m">reverseOrder</span>())
+        .<span class="m">thenComparing</span>(<span class="t">Map.Entry</span>.<span class="m">comparingByKey</span>()))
+   .<span class="m">limit</span>(<span class="s">3</span>)  <span class="c">// [ACC-1003=7, ACC-1004=6, ACC-1008=6]</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Comparator toolbox</h2>
+        <table>
+          <tr><th>Method</th><th>Use</th><th>Since</th></tr>
+          <tr><td><code>comparing(key)</code></td><td>sort by a Comparable key</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>comparing(key, cmp)</code></td><td>key with its own order</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>comparingInt/Long/Double</code></td><td>primitive key, no boxing</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>thenComparing(...)</code></td><td>tie-breaker</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>reversed()</code></td><td>reverse the WHOLE chain</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>naturalOrder / reverseOrder</code></td><td>Comparable types</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>nullsFirst / nullsLast</code></td><td>null-safe wrapper</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Map.Entry.comparingByKey/Value</code></td><td>sort map entries</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>String.CASE_INSENSITIVE_ORDER</code></td><td>ignore case</td><td><span class="b">1.2</span></td></tr>
+          <tr><td><code>list.sort(cmp)</code></td><td>in place, mutable list</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>list.reversed()</code></td><td>reverse view, no copy</td><td><span class="b">21</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>The reversed() gotcha (real output)</h2>
+<pre>(tier, name)             C002 C005 … | C003 C006
+(tier, name).reversed()  C006 C003 | … C005 C002 ✗
+(tier DESC, name)        C003 C006 | C001 C004 … ✓</pre>
+        <p class="small">reversed() also turns nullsLast into nulls <b>first</b> (Exercise08 task 3).</p>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: keys in order</h2>
+        <div class="belt">
+          <div style="background:#0E3B2E">tier<small>DESC</small></div><span>▶</span>
+          <div style="background:#1E8E5A">total<small>DESC · if tie</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">name<small>ASC · if tie</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td><code>customers.sorted()</code></td><td>ClassCastException</td></tr>
+        <tr><td>enums <code>sorted()</code></td><td>[SILVER, GOLD, GOLD, PLATINUM]</td></tr>
+        <tr><td>BigDecimal <code>sorted()</code></td><td>[-1, 9.5, 10.00, 10.0] (stable)</td></tr>
+        <tr><td><code>comparing(last)</code>, null key</td><td>NullPointerException</td></tr>
+      </table>
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td>natural vs case-insensitive</td><td>[CARD, PayPal, card, paynow] / [CARD, card, paynow, PayPal]</td></tr>
+        <tr><td><code>List.of(..).sort(..)</code></td><td>UnsupportedOperationException</td></tr>
+        <tr><td>bottom 3 via <code>reversed()</code></td><td>[C009, C002, C005]</td></tr>
+        <tr><td>stable by date</td><td>T009 stays before T010</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>(a, b) -&gt; a - b</code></td><td><code>comparingInt</code> / <code>Integer.compare</code></td></tr>
+        <tr><td><code>.thenComparing(..).reversed()</code></td><td><code>comparing(k, reverseOrder())</code></td></tr>
+        <tr><td><code>sorted()</code> on a record</td><td><code>sorted(comparing(..))</code></td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td>sort money as <code>double</code></td><td>BigDecimal key</td></tr>
+        <tr><td>a second sort to reverse</td><td><code>list.reversed()</code> [21]</td></tr>
+        <tr><td>no tie-breaker</td><td><code>.thenComparing(id)</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 08</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 08 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>sorted() needs Comparable</h3><p>A record? ClassCastException<br>at run time. Pass a Comparator.</p></div>
+    <div class="note g"><h3>comparing(key)</h3><p>Sort by keys, not by<br>hand-written compare().</p></div>
+    <div class="note p"><h3>reversed() = ALL</h3><p>It flips every key and the nulls.<br>One key DESC? reverseOrder().</p></div>
+    <div class="note bl"><h3>Null key?</h3><p><code>comparing(k,</code><br><code>  nullsLast(naturalOrder()))</code></p></div>
+    <div class="note o"><h3>Enums: declaration order</h3><p>SILVER &lt; GOLD &lt; PLATINUM.<br>Not alphabetical!</p></div>
+    <div class="note l"><h3>Map by value</h3><p>entrySet().stream()<br>.sorted(comparingByValue())</p></div>
+    <div class="note g"><h3>Stable + tie-breaker</h3><p>Equal keys keep input order.<br>End with .thenComparing(id).</p></div>
+    <div class="note y"><h3>Java 21 reversed()</h3><p>A view of the other end.<br>No comparator, no copy.</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 08</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

@@ -1,0 +1,7 @@
+premium, Java 7     : [POL-505 185.00, POL-509 210.00, POL-504 720.00]
+premium, comparing  : [POL-505 185.00, POL-509 210.00, POL-504 720.00]
+comparingInt seats  : [MH602 160, SQ21 161, GA827 162, UL309 222, SQ12 264, SQ938 303, TR808 335, SQ318 471]
+comparingDouble load: [MH602, GA827, SQ12, UL309, SQ938, SQ318, TR808, SQ21]
+city, reverseOrder  : [Singapore, Kuala Lumpur, Jakarta, Colombo, Bangkok]
+case                : natural [CARD, PayPal, card, paynow] | case-insensitive [CARD, card, paynow, PayPal]
+reverseOrder ints   : [471, 222, 160]

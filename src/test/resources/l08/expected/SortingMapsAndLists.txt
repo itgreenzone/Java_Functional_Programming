@@ -1,0 +1,6 @@
+count per account     : {ACC-1001=4, ACC-1002=2, ACC-1003=7, ACC-1004=6, ACC-1005=3, ACC-1007=3, ACC-1008=6, ACC-1009=4, ACC-1010=5, ACC-1011=4, ACC-1012=6, ACC-1013=4, ACC-1014=6}
+busiest 3 (by value)  : [ACC-1003=7, ACC-1004=6, ACC-1008=6]
+List.sort (copy)      : [GA827, MH602, SQ12, SQ21, SQ318, SQ938, TR808, UL309]
+List.sort (List.of)   : UnsupportedOperationException
+stream sorted         : first in source=SQ318, first sorted=GA827
+reversed() [21]       : [UL309, TR808, SQ938, SQ318, SQ21, SQ12, MH602, GA827]

@@ -1,0 +1,5 @@
+cities, sorted()     : [Bangkok, Colombo, Jakarta, Kuala Lumpur, Singapore]
+customers, sorted()  : ClassCastException: class com.itgreenzone.fp.data.Customer cannot be cast to class java.lang.Comparable
+by city (Comparator) : [Bangkok/C008, Colombo/C007, Jakarta/C004, Jakarta/C009, Kuala Lumpur/C002, Kuala Lumpur/C006, Singapore/C001, Singapore/C003, Singapore/C005, Singapore/C010]
+enum natural order   : [SILVER, GOLD, GOLD, PLATINUM]
+BigDecimal natural   : [-1, 9.5, 10.00, 10.0]
