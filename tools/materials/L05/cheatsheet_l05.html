@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 05 · CHEAT SHEET</div><h1>Optional, Done Right</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><b>Optional = a box with 0 or 1 value</b>, designed as a <b>return type</b> for "maybe no result". <span class="b">8</span></li>
+          <li><b>Not for</b> fields, parameters, collections, or replacing every null.</li>
+          <li><code>of(x)</code> needs non-null (else NPE) · <code>ofNullable(x)</code> adapts null · <code>empty()</code>.</li>
+          <li><b>orElse(x) is eager</b>: x is evaluated even when a value is present. <b>orElseGet(supplier) is lazy.</b> Constants → orElse; computations → orElseGet.</li>
+          <li><b>map</b> transforms · <b>filter</b> keeps if true · <b>flatMap</b> when the function returns Optional (else Optional&lt;Optional&gt;).</li>
+          <li>Never <code>get()</code> unchecked; never <code>isPresent()</code> + <code>get()</code>; never <code>return null</code> from an Optional method.</li>
+          <li>Empty collection, not <code>Optional&lt;List&gt;</code>.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Chain lookups (no null checks)</div>
+<pre><span class="k">return</span> <span class="m">findCustomer</span>(id)
+    .<span class="m">flatMap</span>(c -&gt; <span class="m">findAccount</span>(c.<span class="m">id</span>(), type))
+    .<span class="m">flatMap</span>(a -&gt; <span class="m">latestTxn</span>(a.<span class="m">number</span>()))
+    .<span class="m">map</span>(<span class="t">Transaction</span>::<span class="m">amount</span>);
+<span class="c">// C001 -&gt; Optional[447.37] · C999 -&gt; empty</span></pre>
+        <div class="lbl">2 · Eager vs lazy default</div>
+<pre>.<span class="m">orElse</span>(<span class="s">"UNKNOWN"</span>)                  <span class="c">// constant: fine</span>
+.<span class="m">orElseGet</span>(() -&gt; <span class="m">loadFromDb</span>(id))   <span class="c">// only if empty</span>
+.<span class="m">orElseThrow</span>(() -&gt; <span class="k">new</span> <span class="t">IllegalArgumentException</span>(
+        <span class="s">"Unknown customer "</span> + id))</pre>
+        <div class="lbl">3 · Java 9: or + stream</div>
+<pre><span class="m">latestOn</span>(id, SAVINGS).<span class="m">or</span>(() -&gt; <span class="m">latestOn</span>(id, CURRENT));
+numbers.<span class="m">stream</span>().<span class="m">map</span>(<span class="t">Repo</span>::<span class="m">findPolicy</span>)
+       .<span class="m">flatMap</span>(<span class="t">Optional</span>::<span class="m">stream</span>)   <span class="c">// drops empties</span>
+       .<span class="m">toList</span>();</pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>API</h2>
+        <table>
+          <tr><th>Method</th><th>Returns</th><th>Use</th><th>Since</th></tr>
+          <tr><td><code>of / ofNullable / empty</code></td><td>Optional&lt;T&gt;</td><td>create</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>map(Function)</code></td><td>Optional&lt;R&gt;</td><td>transform</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>flatMap(Function→Optional)</code></td><td>Optional&lt;R&gt;</td><td>chain lookups</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>filter(Predicate)</code></td><td>Optional&lt;T&gt;</td><td>keep if true</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>orElse(T)</code></td><td>T</td><td>eager default</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>orElseGet(Supplier)</code></td><td>T</td><td>lazy default</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>orElseThrow(Supplier)</code></td><td>T</td><td>domain exception</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>ifPresent(Consumer)</code></td><td>void</td><td>act if value</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>or(Supplier&lt;Optional&gt;)</code></td><td>Optional&lt;T&gt;</td><td>fallback source</td><td><span class="b n">9</span></td></tr>
+          <tr><td><code>ifPresentOrElse(c, r)</code></td><td>void</td><td>both branches</td><td><span class="b n">9</span></td></tr>
+          <tr><td><code>stream()</code></td><td>Stream&lt;T&gt;</td><td>0 or 1 element</td><td><span class="b n">9</span></td></tr>
+          <tr><td><code>orElseThrow()</code></td><td>T</td><td>honest get()</td><td><span class="b n">10</span></td></tr>
+          <tr><td><code>isEmpty()</code></td><td>boolean</td><td>!isPresent()</td><td><span class="b n">11</span></td></tr>
+          <tr><td><code>OptionalInt/Long/Double</code></td><td>getAsInt…</td><td>no boxing, no map</td><td><span class="b">8</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>Anti-patterns → fixes</h2>
+        <table>
+          <tr><th>Don't</th><th>Do</th></tr>
+          <tr><td><code>isPresent() + get()</code></td><td><code>map(...).orElse(...)</code></td></tr>
+          <tr><td><code>get()</code> unchecked</td><td><code>orElseThrow(() -&gt; new X(...))</code></td></tr>
+          <tr><td><code>Optional</code> field / parameter</td><td>nullable field + Optional getter</td></tr>
+          <tr><td><code>Optional&lt;List&lt;T&gt;&gt;</code></td><td>empty <code>List</code></td></tr>
+          <tr><td><code>return null;</code></td><td><code>return Optional.empty();</code></td></tr>
+          <tr><td><code>Optional.of(maybeNull)</code></td><td><code>Optional.ofNullable(...)</code></td></tr>
+          <tr><td><code>orElse(expensive())</code></td><td><code>orElseGet(() -&gt; expensive())</code></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: the chain</h2>
+        <div class="belt">
+          <div style="background:#2D6CDF">Customer?<small>findCustomer</small></div><span>▶</span>
+          <div style="background:#1E8E5A">Account?<small>flatMap</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">Txn?<small>flatMap</small></div><span>▶</span>
+          <div style="background:#0E3B2E">amount<small>map</small></div>
+        </div>
+        <p class="small">Any step empty → the rest is skipped → <code>Optional.empty</code></p>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call (theory/OrElseVsOrElseGet)</th><th>Result</th><th>default called?</th></tr>
+        <tr><td><code>orElse(C001)</code></td><td>Alice Tan</td><td><b style="color:#C93C3C">yes (wasted)</b></td></tr>
+        <tr><td><code>orElseGet(C001)</code></td><td>Alice Tan</td><td>no</td></tr>
+        <tr><td><code>orElse(C999)</code></td><td>Walk-in customer</td><td>yes</td></tr>
+        <tr><td><code>orElseGet(C999)</code></td><td>Walk-in customer</td><td>yes</td></tr>
+      </table>
+      <table>
+        <tr><th>latestAmount(customer, type)</th><th>Result</th></tr>
+        <tr><td><code>C001, SAVINGS</code></td><td><code>Optional[447.37]</code></td></tr>
+        <tr><td><code>C003, FIXED_DEPOSIT</code></td><td>empty: account has no transactions</td></tr>
+        <tr><td><code>C005, CURRENT</code></td><td>empty: no such account</td></tr>
+        <tr><td><code>C999, SAVINGS</code></td><td>empty: no such customer</td></tr>
+      </table>
+    </div>
+    <p class="small"><b>Primitive optionals:</b> <code>mapToInt(seatsLeft).max()</code> → <code>OptionalInt[63]</code> · average load factor → <code>84.1%</code> · empty list <code>max()</code> → <code>OptionalInt.empty</code>, <code>orElse(0)</code> → 0.
+    <b>Renewals within 30 days of 2026-11-07:</b> POL-502, POL-505, POL-508, POL-509.</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 05</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 05 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>Optional = return type</h3><p>"maybe no result".<br>Not fields, not parameters, not lists.</p></div>
+    <div class="note g"><h3>orElse is EAGER</h3><p><code>orElse(x)</code>: x always runs.<br><code>orElseGet(() -&gt; x)</code>: only if empty.</p></div>
+    <div class="note p"><h3>flatMap for lookups</h3><p>Function returns Optional?<br>map → Optional&lt;Optional&gt;. Use flatMap.</p></div>
+    <div class="note bl"><h3>No get()</h3><p>Throws "No value present".<br>Use orElse / orElseGet / orElseThrow.</p></div>
+    <div class="note o"><h3>Never return null</h3><p>from an Optional method.<br><code>return Optional.empty();</code></p></div>
+    <div class="note l"><h3>Java 9 · 10 · 11</h3><p>9: or, ifPresentOrElse, stream<br>10: orElseThrow()<br>11: isEmpty()</p></div>
+    <div class="note g"><h3>of vs ofNullable</h3><p><code>of(null)</code> → NPE now.<br>Legacy null API? <code>ofNullable</code>.</p></div>
+    <div class="note y"><h3>Empty list, not Optional&lt;List&gt;</h3><p>An empty collection already means "none".</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 05</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

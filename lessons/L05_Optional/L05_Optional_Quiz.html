@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L05 Quiz · Optional, Done Right · ITGreenZone</title>
+<style>
+  :root {
+    --forest: #0E3B2E; --green: #1E8E5A; --mint: #EAF4EE; --amber: #F2A93B;
+    --red: #C93C3C; --redbg: #FBECEC; --ink: #1A2421; --muted: #6B7D76; --code: #15211C;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-variant-ligatures: none; font-family: -apple-system, "Segoe UI", Calibri, Roboto, Arial, sans-serif; color: var(--ink); background: #F7FAF8; line-height: 1.45; }
+  header { background: var(--forest); color: #fff; padding: 20px 16px; }
+  header .wrap, main, footer { max-width: 820px; margin: 0 auto; }
+  header .kicker { color: var(--amber); font-weight: 700; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; }
+  header h1 { font-family: Cambria, Georgia, serif; margin: 6px 0 4px; font-size: 26px; }
+  header p { margin: 0; opacity: .85; font-size: 14px; }
+  main { padding: 16px; }
+  .toolbar { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 14px; }
+  .progress { font-size: 14px; color: var(--muted); }
+  .toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; user-select: none; }
+  .toggle input { width: 18px; height: 18px; accent-color: var(--green); }
+  .q { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .q .meta { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  .num { background: var(--forest); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+  .tag { background: var(--amber); color: var(--ink); font-size: 11px; font-weight: 700; border-radius: 10px; padding: 2px 8px; }
+  .q h2 { font-size: 16px; margin: 0 0 10px; }
+  pre { background: var(--code); color: #E8EFEB; padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 13px; line-height: 1.4; margin: 0 0 12px; font-family: "Courier New", Consolas, monospace; }
+  .opts { display: grid; gap: 8px; }
+  .opt { display: flex; gap: 10px; align-items: flex-start; border: 2px solid #D5E3DA; border-radius: 10px; padding: 10px 12px; cursor: pointer; background: #fff; text-align: left; font: inherit; color: inherit; width: 100%; }
+  .opt:hover { border-color: var(--green); }
+  .opt .letter { font-weight: 700; color: var(--green); min-width: 18px; }
+  .opt code { font-family: "Courier New", Consolas, monospace; font-size: 13.5px; white-space: pre-wrap; }
+  .opt.selected { border-color: var(--green); background: var(--mint); }
+  .opt.correct { border-color: var(--green); background: #D7F0E1; }
+  .opt.wrong { border-color: var(--red); background: var(--redbg); }
+  .opt:disabled { cursor: default; }
+  .explain { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--mint); font-size: 14px; }
+  .explain.show { display: block; }
+  .explain.bad { background: var(--redbg); }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 20px; }
+  button.btn { font: inherit; font-weight: 700; border: 0; border-radius: 10px; padding: 12px 20px; cursor: pointer; }
+  .primary { background: var(--green); color: #fff; }
+  .primary:disabled { background: #A9C7B7; cursor: not-allowed; }
+  .secondary { background: var(--amber); color: var(--ink); }
+  .score { display: none; background: var(--forest); color: #fff; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+  .score.show { display: block; }
+  .score b { font-size: 28px; color: var(--amber); font-family: Cambria, Georgia, serif; }
+  /* flashcards */
+  .flash { display: none; }
+  body.flashmode .quiz { display: none; }
+  body.flashmode .flash { display: block; }
+  .card { perspective: 1000px; height: 360px; margin-bottom: 14px; cursor: pointer; }
+  .card-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; }
+  .card.flipped .card-inner { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 14px; padding: 18px; overflow-y: auto; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+  .front { background: #fff; }
+  .back { background: var(--forest); color: #fff; transform: rotateY(180deg); }
+  .back .ans { color: var(--amber); font-weight: 700; font-size: 17px; margin-bottom: 8px; }
+  .back code { font-family: "Courier New", Consolas, monospace; }
+  .hint { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  .flashnav { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  footer { padding: 16px; font-size: 12px; color: var(--muted); text-align: center; }
+  @media (max-width: 520px) { header h1 { font-size: 21px; } pre { font-size: 12px; } .card { height: 420px; } }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="kicker">Lesson 05 · Quiz</div>
+  <h1>Optional, Done Right</h1>
+  <p>10 questions · answer them all, then submit. Outputs use the shared course dataset.</p>
+</div></header>
+
+<main>
+  <div class="toolbar">
+    <span class="progress" id="progress">0 / 10 answered</span>
+    <label class="toggle"><input type="checkbox" id="flashToggle"> Flashcard mode</label>
+  </div>
+
+  <section class="quiz">
+    <div class="score" id="score"></div>
+    <div id="questions"></div>
+    <div class="actions">
+      <button class="btn primary" id="submitBtn" disabled>Submit answers</button>
+      <button class="btn secondary" id="retryBtn" style="display:none">Retry (reshuffle)</button>
+    </div>
+  </section>
+
+  <section class="flash">
+    <div class="card" id="card" tabindex="0" aria-label="Flashcard, press Enter to flip"><div class="card-inner">
+      <div class="face front" id="cardFront"></div>
+      <div class="face back" id="cardBack"></div>
+    </div></div>
+    <div class="flashnav">
+      <button class="btn secondary" id="prevCard">◀ Prev</button>
+      <span class="progress" id="cardPos"></span>
+      <button class="btn secondary" id="nextCard">Next ▶</button>
+    </div>
+  </section>
+</main>
+<footer>ITGreenZone · Java Functional Programming · Lesson 05</footer>
+
+<script>
+"use strict";
+// Each question: options[0] is the correct answer in the source; display order is shuffled.
+// "Predict the output" answers are verified by l05 QuizAnswersTest.java in the course repo.
+const QUESTIONS = [
+ {
+  "tag": "Predict the output",
+  "q": "fallback prints \"F \" each time it runs. What does this print?",
+  "code": "Supplier<String> fallback = () -> {\n    System.out.print(\"F \");\n    return \"Default\";\n};\nOptional<String> name = Optional.of(\"Alice\");\nSystem.out.print(name.orElse(fallback.get()) + \" \");\nSystem.out.print(name.orElseGet(fallback));",
+  "options": [
+   "F Alice Alice",
+   "Alice Alice",
+   "F Alice F Alice",
+   "Default Alice"
+  ],
+  "why": "The argument of orElse is evaluated before orElse is called, so \"F \" prints even though a value is present. orElseGet only calls the supplier when the Optional is empty."
+ },
+ {
+  "tag": "Predict the output",
+  "q": "latestAmount = findCustomer(id).flatMap(findAccount).flatMap(latestTransaction).map(Transaction::amount). C001's savings account's latest transaction is T018 (447.37); C999 does not exist. What does this print?",
+  "code": "System.out.print(latestAmount(\"C001\", SAVINGS) + \" \"\n    + latestAmount(\"C999\", SAVINGS));",
+  "options": [
+   "Optional[447.37] Optional.empty",
+   "447.37 null",
+   "Optional[447.37] null",
+   "It throws NullPointerException for C999"
+  ],
+  "why": "Each flatMap step skips the rest when it finds nothing, so C999 gives Optional.empty, never null. Optional's toString prints Optional[value] or Optional.empty."
+ },
+ {
+  "tag": "Predict the output",
+  "q": "What does this print?",
+  "code": "try {\n    Optional.empty().orElseThrow();\n} catch (NoSuchElementException e) {\n    System.out.print(e.getMessage());\n}",
+  "options": [
+   "No value present",
+   "null",
+   "Optional.empty",
+   "It does not compile: orElseThrow needs a Supplier"
+  ],
+  "why": "orElseThrow() without arguments (Java 10) behaves like get(): it throws NoSuchElementException with the message \"No value present\"."
+ },
+ {
+  "tag": "Predict the output",
+  "q": "POL-502 and POL-509 exist; POL-999 does not. What does this print?",
+  "code": "System.out.print(Stream.of(\"POL-502\", \"POL-999\", \"POL-509\")\n    .map(BankRepository::findPolicy)\n    .flatMap(Optional::stream)\n    .map(Policy::number)\n    .toList());",
+  "options": [
+   "[POL-502, POL-509]",
+   "[POL-502, null, POL-509]",
+   "[POL-502, Optional.empty, POL-509]",
+   "It throws NoSuchElementException"
+  ],
+  "why": "Optional.stream() (Java 9) gives a stream of one element for a value and zero elements for empty, so flatMap simply drops the missing policy."
+ },
+ {
+  "tag": "Which version introduced…",
+  "q": "ifPresentOrElse(action, emptyAction) and or(supplier) were added to Optional in which Java version?",
+  "options": [
+   "Java 9",
+   "Java 8",
+   "Java 10",
+   "Java 11"
+  ],
+  "why": "Java 9 added ifPresentOrElse, or and stream. Java 10 added the no-argument orElseThrow(), and Java 11 added isEmpty()."
+ },
+ {
+  "tag": "Which version introduced…",
+  "q": "Optional.isEmpty() is available since which version?",
+  "options": [
+   "Java 11",
+   "Java 8",
+   "Java 9",
+   "Java 17"
+  ],
+  "why": "isEmpty() came in Java 11 as the readable opposite of isPresent(). On Java 8 you would write !opt.isPresent()."
+ },
+ {
+  "tag": "Spot the bug / best practice",
+  "q": "What is the best rewrite of this code?",
+  "code": "Optional<Customer> c = findCustomer(id);\nif (c.isPresent()) {\n    return c.get().name();\n}\nreturn \"UNKNOWN\";",
+  "options": [
+   "return findCustomer(id).map(Customer::name).orElse(\"UNKNOWN\");",
+   "return findCustomer(id).get().name();",
+   "return findCustomer(id).orElseGet(() -> null).name();",
+   "return findCustomer(id).isEmpty() ? \"UNKNOWN\" : findCustomer(id).get().name();"
+  ],
+  "why": "isPresent() + get() is just a null check with extra steps. map + orElse says the same thing in one line; orElse is fine because \"UNKNOWN\" is a constant."
+ },
+ {
+  "tag": "Spot the bug / best practice",
+  "q": "A method is declared as Optional<Policy> findPolicy(String number). In one branch it executes return null;. What is the problem?",
+  "options": [
+   "Callers trust the Optional and will not check for null, so they get a NullPointerException; return Optional.empty()",
+   "Nothing: null and Optional.empty() mean the same",
+   "It does not compile",
+   "Optional automatically converts null to empty"
+  ],
+  "why": "The whole point of returning Optional is that callers never need a null check. Returning null breaks that contract silently. Always return Optional.empty()."
+ },
+ {
+  "tag": "Concept",
+  "q": "Where is Optional intended to be used?",
+  "options": [
+   "As a method return type when 'no result' is a normal outcome",
+   "As the type of entity fields that may be null",
+   "As a method parameter for optional arguments",
+   "Wrapped around collections: Optional<List<T>>"
+  ],
+  "why": "The JDK designers intended Optional as a return type. For fields keep a nullable field with an Optional-returning getter; for parameters use overloads; for collections return an empty collection."
+ },
+ {
+  "tag": "Concept",
+  "q": "legacyNickname(\"C002\") returns null. What happens with Optional.of(legacyNickname(\"C002\"))?",
+  "options": [
+   "NullPointerException immediately; use Optional.ofNullable",
+   "It returns Optional.empty",
+   "It returns Optional[null]",
+   "It compiles to a warning but runs fine"
+  ],
+  "why": "Optional.of requires a non-null value and throws NullPointerException right away. Optional.ofNullable turns null into Optional.empty, which is the right adapter for null-returning legacy APIs."
+ }
+];
+
+const LETTERS = ["A", "B", "C", "D"];
+// Initial answer positions are deliberately varied; Retry reshuffles randomly.
+const INITIAL_ORDER = [[1,0,3,2],[0,2,1,3],[3,1,0,2],[2,0,1,3],[1,3,2,0],[0,2,3,1],[2,1,0,3],[3,0,2,1],[0,1,2,3],[1,2,3,0]];
+let orders = INITIAL_ORDER.map(o => o.slice());
+let answers = new Array(QUESTIONS.length).fill(null);
+let submitted = false;
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const looksLikeCode = s => /[(){};]|->|::/.test(s) && !/\s(a|the|is|so|and)\s/.test(s);
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function render() {
+  const box = $("questions");
+  box.innerHTML = "";
+  QUESTIONS.forEach((item, qi) => {
+    const div = document.createElement("div");
+    div.className = "q";
+    let html = `<div class="meta"><span class="num">${qi + 1}</span><span class="tag">${esc(item.tag)}</span></div><h2>${esc(item.q)}</h2>`;
+    if (item.code) html += `<pre>${esc(item.code)}</pre>`;
+    html += `<div class="opts" role="radiogroup" aria-label="Question ${qi + 1} options">`;
+    orders[qi].forEach((optIndex, pos) => {
+      const text = item.options[optIndex];
+      const shown = looksLikeCode(text) ? `<code>${esc(text)}</code>` : esc(text);
+      html += `<button type="button" class="opt" role="radio" aria-checked="false" data-q="${qi}" data-opt="${optIndex}"><span class="letter">${LETTERS[pos]}</span><span>${shown}</span></button>`;
+    });
+    html += `</div><div class="explain" id="exp${qi}"></div>`;
+    div.innerHTML = html;
+    box.appendChild(div);
+  });
+  box.querySelectorAll(".opt").forEach(btn => btn.addEventListener("click", onPick));
+  updateProgress();
+}
+
+function onPick(e) {
+  if (submitted) return;
+  const btn = e.currentTarget, qi = +btn.dataset.q;
+  answers[qi] = +btn.dataset.opt;
+  btn.parentElement.querySelectorAll(".opt").forEach(b => { b.classList.remove("selected"); b.setAttribute("aria-checked", "false"); });
+  btn.classList.add("selected");
+  btn.setAttribute("aria-checked", "true");
+  updateProgress();
+}
+
+function updateProgress() {
+  const n = answers.filter(a => a !== null).length;
+  $("progress").textContent = `${n} / ${QUESTIONS.length} answered`;
+  $("submitBtn").disabled = submitted || n < QUESTIONS.length;
+}
+
+function submit() {
+  submitted = true;
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const ok = answers[qi] === 0;
+    if (ok) score++;
+    document.querySelectorAll(`.opt[data-q="${qi}"]`).forEach(b => {
+      b.disabled = true;
+      const o = +b.dataset.opt;
+      if (o === 0) b.classList.add("correct");
+      else if (o === answers[qi]) b.classList.add("wrong");
+    });
+    const exp = $("exp" + qi);
+    exp.className = "explain show" + (ok ? "" : " bad");
+    exp.innerHTML = `<strong>${ok ? "✔ Correct." : "✘ Not quite."}</strong> Answer: ${esc(item.options[0])}<br>${esc(item.why)}`;
+  });
+  const pct = Math.round(score * 100 / QUESTIONS.length);
+  const msg = pct >= 80 ? "Excellent: Module 1 complete. Ready for Lesson 06." : pct >= 60 ? "Good. Review the explanations below." : "Re-watch the orElse/orElseGet and anti-pattern slides, then retry.";
+  $("score").innerHTML = `Your score: <b>${score} / ${QUESTIONS.length}</b> (${pct}%)<br>${msg}`;
+  $("score").classList.add("show");
+  $("submitBtn").disabled = true;
+  $("retryBtn").style.display = "inline-block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function retry() {
+  submitted = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  orders = QUESTIONS.map(() => shuffle([0, 1, 2, 3]));
+  $("score").classList.remove("show");
+  $("retryBtn").style.display = "none";
+  render();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ---- flashcards ----
+let cardIdx = 0;
+function showCard() {
+  const item = QUESTIONS[cardIdx];
+  $("card").classList.remove("flipped");
+  $("cardFront").innerHTML = `<div class="meta"><span class="num">${cardIdx + 1}</span> <span class="tag">${esc(item.tag)}</span></div><h2 style="font-size:16px">${esc(item.q)}</h2>${item.code ? `<pre>${esc(item.code)}</pre>` : ""}<div class="hint">Tap the card to see the answer</div>`;
+  $("cardBack").innerHTML = `<div class="ans">${esc(item.options[0])}</div><div>${esc(item.why)}</div>`;
+  $("cardPos").textContent = `${cardIdx + 1} / ${QUESTIONS.length}`;
+}
+$("card").addEventListener("click", () => $("card").classList.toggle("flipped"));
+$("card").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("card").classList.toggle("flipped"); } });
+$("prevCard").addEventListener("click", () => { cardIdx = (cardIdx + QUESTIONS.length - 1) % QUESTIONS.length; showCard(); });
+$("nextCard").addEventListener("click", () => { cardIdx = (cardIdx + 1) % QUESTIONS.length; showCard(); });
+$("flashToggle").addEventListener("change", e => { document.body.classList.toggle("flashmode", e.target.checked); if (e.target.checked) showCard(); });
+
+$("submitBtn").addEventListener("click", submit);
+$("retryBtn").addEventListener("click", retry);
+render();
+</script>
+</body>
+</html>

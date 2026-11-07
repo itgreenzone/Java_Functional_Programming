@@ -1,0 +1,8 @@
+ifPresent         : Bala Kumar
+ifPresentOrElse   : Hello Bala Kumar | Customer C999 not found
+orElseThrow(sup)  : Unknown customer C999
+orElseThrow()     : NoSuchElementException: No value present
+or                : Optional[Jasmine Ong]
+stream            : [POL-502, POL-509]
+isEmpty           : true / false
+premiumOrZero     : 1105.75 / 0

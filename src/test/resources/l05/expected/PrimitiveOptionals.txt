@@ -1,0 +1,6 @@
+max seats left        : OptionalInt[63]
+getAsInt()            : 63
+average load factor   : 84.1%
+largest booking       : OptionalLong[455]
+empty list max        : OptionalInt.empty
+empty list orElse(0)  : 0

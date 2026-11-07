@@ -1,0 +1,7 @@
+findCustomer(C001)  : Optional[Alice Tan]
+findCustomer(C999)  : Optional.empty
+Optional.of("SGD")  : Optional[SGD]
+Optional.empty()    : Optional.empty
+ofNullable(C001)    : Optional[Ali]
+ofNullable(C002)    : Optional.empty
+Optional.of(null) -> NullPointerException

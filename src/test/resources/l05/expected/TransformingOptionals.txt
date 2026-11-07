@@ -1,0 +1,8 @@
+map city C004             : Optional[Jakarta]
+filter active POL-509     : Optional[POL-509]
+filter active on 2026-11-13: Optional.empty
+map -> nested             : Optional[Optional[ACC-1012]]
+chain C001 SAVINGS        : Optional[447.37]
+chain C003 FIXED_DEPOSIT  : Optional.empty
+chain C005 CURRENT        : Optional.empty
+chain C999 SAVINGS        : Optional.empty

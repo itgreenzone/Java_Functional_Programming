@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body>
+<!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Optional <span style="font-size:22pt" class="amber">· my notes L05</span></h1>
+  <div class="sub">a <span class="hl">box</span> that holds 0 or 1 value · the return type says "maybe nothing"</div>
+
+  <div class="sec row" style="align-items:center">
+    <svg width="380" height="170" viewBox="0 0 380 170">
+      <g font-family="Patrick" font-size="14">
+        <path d="M20 70 l60 -25 l80 25 l-60 25 z" fill="#C8F7DC" stroke="#23302B" stroke-width="2"/>
+        <path d="M20 70 v60 l80 25 v-60 M100 95 l60 -25 v60 l-60 25" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/>
+        <circle cx="90" cy="60" r="14" fill="#FFF27A" stroke="#23302B" stroke-width="2"/>
+        <text x="60" y="35" font-family="Caveat" font-weight="700" font-size="18">Alice Tan</text>
+        <text x="25" y="168" font-family="Caveat" font-weight="700" font-size="19" fill="#1E8E5A">Optional[Alice Tan]</text>
+        <path d="M210 70 l60 -25 l80 25 l-60 25 z" fill="#FFE0E0" stroke="#23302B" stroke-width="2"/>
+        <path d="M210 70 v60 l80 25 v-60 M290 95 l60 -25 v60 l-60 25" fill="#FFC2D4" stroke="#23302B" stroke-width="2"/>
+        <text x="262" y="35" font-family="Caveat" font-weight="700" font-size="18">(nothing)</text>
+        <text x="225" y="168" font-family="Caveat" font-weight="700" font-size="19" fill="#C93C3C">Optional.empty</text>
+      </g>
+    </svg>
+    <div class="sk t2 col">
+      <p><span class="code">Optional.of(x)</span> x must not be null</p>
+      <p><span class="code">Optional.ofNullable(x)</span> null → empty</p>
+      <p><span class="code">Optional.empty()</span></p>
+      <p style="margin-top:1.5mm" class="red"><span class="code">Optional.of(null)</span> → NPE now!</p>
+    </div>
+  </div>
+
+  <div class="sec row">
+    <div class="sk t1 col">
+      <h2>✓ USE for</h2>
+      <p>method <b>return types</b> where "no result" is normal:<br><span class="code">findCustomer</span>, <span class="code">findPolicy</span>, <span class="code">latestTransaction</span></p>
+    </div>
+    <div class="sk t2 col" style="background:#FFEBEE">
+      <h2>✗ NOT for</h2>
+      <p>fields · parameters · <span class="code">Optional&lt;List&gt;</span> · replacing every null</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>orElse = cook the backup meal ALWAYS · orElseGet = only if the fridge is empty</h2>
+    <svg width="660" height="170" viewBox="0 0 660 170">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="20" width="300" height="140" rx="12" fill="#FFF9C4" stroke="#23302B" stroke-width="2"/>
+        <text x="25" y="48" font-family="Caveat" font-weight="700" font-size="22" fill="#C93C3C">orElse(defaultName())</text>
+        <path d="M40 90 h50 v40 h-50 z M50 90 v-12 h30 v12" fill="#FFCC80" stroke="#23302B" stroke-width="2"/>
+        <path d="M55 72 q5 -10 0 -18 M65 72 q5 -10 0 -18 M75 72 q5 -10 0 -18" fill="none" stroke="#9AA6A1" stroke-width="1.6"/>
+        <text x="110" y="95">evaluated FIRST,</text><text x="110" y="115">even for C001 (Alice)</text>
+        <text x="110" y="140" fill="#C93C3C">→ wasted call</text>
+        <rect x="340" y="20" width="310" height="140" rx="12" fill="#C8F7DC" stroke="#23302B" stroke-width="2"/>
+        <text x="355" y="48" font-family="Caveat" font-weight="700" font-size="22" fill="#1E8E5A">orElseGet(() -&gt; defaultName())</text>
+        <rect x="370" y="70" width="60" height="80" rx="6" fill="#fff" stroke="#23302B" stroke-width="2"/><path d="M370 100 h60" stroke="#23302B" stroke-width="2"/><circle cx="420" cy="88" r="3"/><circle cx="420" cy="118" r="3"/>
+        <text x="445" y="95">runs ONLY when</text><text x="445" y="115">the box is empty (C999)</text>
+        <text x="445" y="140" fill="#1E8E5A">→ lazy ✓</text>
+      </g>
+    </svg>
+    <p>constant default → <span class="code">orElse("UNKNOWN")</span> is fine · database / service / log / new object → <span class="hl">orElseGet</span></p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 05</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">Transform without opening the box</h2>
+  <svg width="660" height="150" viewBox="0 0 660 150">
+    <g font-family="Patrick" font-size="14">
+      <rect x="10" y="20" width="200" height="120" rx="10" fill="#fff" stroke="#23302B" stroke-width="2"/>
+      <text x="25" y="45" font-family="Caveat" font-weight="700" font-size="22" fill="#2D6CDF">map</text>
+      <rect x="25" y="65" width="40" height="34" rx="4" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="31" y="87" font-size="11">C004</text>
+      <path d="M70 82 h40 M102 74 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+      <rect x="118" y="65" width="70" height="34" rx="4" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="124" y="87" font-size="12">Jakarta</text>
+      <text x="25" y="128" font-size="13">empty stays empty</text>
+      <rect x="230" y="20" width="200" height="120" rx="10" fill="#fff" stroke="#23302B" stroke-width="2"/>
+      <text x="245" y="45" font-family="Caveat" font-weight="700" font-size="22" fill="#2D6CDF">filter</text>
+      <path d="M300 60 h70 l-25 30 v20 h-20 v-20 z" fill="#FFF27A" stroke="#23302B" stroke-width="2"/>
+      <text x="245" y="128" font-size="13">POL-509: 11-07 ✓  11-13 ✗</text>
+      <rect x="450" y="20" width="200" height="120" rx="10" fill="#fff" stroke="#23302B" stroke-width="2"/>
+      <text x="465" y="45" font-family="Caveat" font-weight="700" font-size="22" fill="#2D6CDF">flatMap</text>
+      <rect x="465" y="60" width="60" height="50" rx="4" fill="#FFC2D4" stroke="#23302B" stroke-width="2"/><rect x="477" y="70" width="36" height="30" rx="3" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/>
+      <path d="M530 85 h35 M557 77 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+      <rect x="575" y="70" width="40" height="30" rx="3" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/>
+      <text x="465" y="128" font-size="13">box in a box → one box</text>
+    </g>
+  </svg>
+
+  <div class="sec">
+    <h2>The relay: one empty runner stops the race</h2>
+    <svg width="660" height="120" viewBox="0 0 660 120">
+      <g font-family="Patrick" font-size="15">
+        <rect x="10" y="30" width="130" height="44" rx="10" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="22" y="58">findCustomer</text>
+        <path d="M145 52 h30 M167 44 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="180" y="30" width="130" height="44" rx="10" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="190" y="58">flatMap account</text>
+        <path d="M315 52 h30 M337 44 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="350" y="30" width="130" height="44" rx="10" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="362" y="58">flatMap latest</text>
+        <path d="M485 52 h30 M507 44 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="520" y="30" width="130" height="44" rx="10" fill="#D1C4E9" stroke="#23302B" stroke-width="2"/><text x="532" y="58">map amount</text>
+        <text x="10" y="105">C001 → <tspan fill="#1E8E5A">Optional[447.37]</tspan>   ·   C003 FD → no txns   ·   C005 CURRENT → no account   ·   C999 → no customer</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>Toolbox</h2>
+      <ul>
+        <li><span class="code">ifPresentOrElse</span>, <span class="code">or</span>, <span class="code">stream</span> [9]</li>
+        <li><span class="code">orElseThrow()</span> [10] = honest get()</li>
+        <li><span class="code">isEmpty()</span> [11]</li>
+        <li><span class="code">flatMap(Optional::stream)</span> drops empties → [POL-502, POL-509]</li>
+      </ul>
+    </div>
+    <div class="sk t2 col" style="background:#FFEBEE">
+      <h2>✗ Don'ts</h2>
+      <ul>
+        <li><span class="code">get()</span> → "No value present"</li>
+        <li><span class="code">isPresent()</span> + <span class="code">get()</span></li>
+        <li><span class="code">return null;</span> from Optional method</li>
+        <li>Optional fields / params / lists</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>box for return types · orElse eager, orElseGet lazy · flatMap for lookups · empty list, not Optional&lt;List&gt; · <span class="hl">Module 1 done!</span> next → L06 Stream fundamentals</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 05</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

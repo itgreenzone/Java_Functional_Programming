@@ -1,0 +1,4 @@
+C001 SAVINGS -> T018 447.37
+C003 FIXED_DEPOSIT -> no data
+C005 CURRENT -> no data
+C999 SAVINGS -> no data

@@ -1,0 +1,6 @@
+1 isPresent+get  : Chen Wei | good: Chen Wei / UNKNOWN
+2 get() no check : get() on empty -> No value present
+3 field          : bad=Optional.empty good=Optional.empty
+5 Optional<List> : bad=Optional.empty good=[]
+5 C003 policies  : [POL-504, POL-505]
+7 ofNullable     : Optional.empty

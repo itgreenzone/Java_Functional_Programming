@@ -1,0 +1,6 @@
+Activity[customerId=C001, transactionId=T018, amount=447.37]
+Activity[customerId=C003, transactionId=T028, amount=823.39]
+Activity[customerId=C009, transactionId=T039, amount=4231.84]
+C009 has no SAVINGS, used CURRENT: T039
+C999 isEmpty: true
+C001 orElseThrow(): T018
