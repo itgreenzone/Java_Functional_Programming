@@ -1,0 +1,8 @@
+commonPool parallelism = cores - 1 : true
+ArrayList(16).trySplit()            : 8 + 8
+LinkedList(16).trySplit()           : 16 + 0
+ArrayList spliterator               : [ORDERED, SIZED, SUBSIZED]
+List.of spliterator                 : [ORDERED, SIZED, SUBSIZED]
+Stream.iterate size unknown         : true
+parallel()..sequential() isParallel : false
+threads = caller + commonPool only  : true

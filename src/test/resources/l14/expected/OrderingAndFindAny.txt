@@ -1,0 +1,7 @@
+toList() keeps order            : true
+forEach: same 12 ids (any order): true
+forEachOrdered keeps order      : true
+matches over 500.00             : [P005, P008, P010]
+findFirst (parallel)            : P005
+findAny is one of the matches   : true
+unordered().limit(3) is valid   : true

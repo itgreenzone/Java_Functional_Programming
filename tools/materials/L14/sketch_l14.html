@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body><!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Parallel streams <span style="font-size:22pt" class="amber">· my notes L14</span></h1>
+  <div class="sub">more workers is <span class="hl">not always faster</span></div>
+
+  <div class="sec">
+    <h2>Split, run, combine 🍕</h2>
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="45" width="120" height="50" rx="10" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="22" y="68">ArrayList(16)</text><text x="22" y="86" font-size="12">Spliterator</text>
+        <path d="M135 60 L185 35 M135 80 L185 105" stroke="#23302B" stroke-width="2"/>
+        <rect x="190" y="15" width="90" height="38" rx="8" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="208" y="40">8 items</text>
+        <rect x="190" y="88" width="90" height="38" rx="8" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="208" y="113">8 items</text>
+        <path d="M285 34 h50 M285 107 h50" stroke="#23302B" stroke-width="2"/>
+        <rect x="340" y="15" width="130" height="38" rx="8" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="350" y="40">worker-1</text>
+        <rect x="340" y="88" width="130" height="38" rx="8" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="350" y="113">caller (main)</text>
+        <path d="M475 34 L530 62 M475 107 L530 78" stroke="#23302B" stroke-width="2"/>
+        <rect x="535" y="45" width="115" height="50" rx="10" fill="#D1C4E9" stroke="#23302B" stroke-width="2"/><text x="548" y="68">combine</text><text x="548" y="86" font-size="12">in order</text>
+        <text x="10" y="145" fill="#C93C3C">LinkedList(16) → 16 + 0: no real split</text>
+        <text x="380" y="145">commonPool = cores − 1</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sec">
+    <h2>Shared list = lost items 💥</h2>
+    <svg width="660" height="120" viewBox="0 0 660 120">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="10" width="90" height="34" rx="6" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="20" y="32">thread A</text>
+        <rect x="10" y="60" width="90" height="34" rx="6" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="20" y="82">thread B</text>
+        <path d="M105 27 L200 48 M105 77 L200 56" stroke="#C93C3C" stroke-width="2.5"/>
+        <rect x="205" y="30" width="170" height="44" rx="8" fill="#FFC2D4" stroke="#C93C3C" stroke-width="2.5"/><text x="215" y="57">ArrayList slot 42</text>
+        <text x="395" y="35" fill="#C93C3C">95301 · 94292 · 100000</text>
+        <text x="395" y="58">same code, 3 runs!</text>
+        <text x="395" y="85" fill="#1E8E5A">fix: .toList() → always 100000</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>reduce rules ⚖</h2>
+      <p>associative: (a−b)−c ≠ a−(b−c) ✗<br>1..10 minus: −55 seq, parallel differs<br>identity neutral: reduce(10, +) → 65 seq, more in parallel<br>fix: 10 + sum() → 65 ✓</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Order 📋</h2>
+      <p><span class="code">toList()</span> keeps order ✓<br><span class="code">forEach</span> any order<br><span class="code">forEachOrdered</span> order, slower<br><span class="code">findFirst</span> → P005 always<br><span class="code">findAny</span> → P005/P008/P010</p>
+    </div>
+  </div>
+  <div class="row sec">
+    <div class="sk t2 col">
+      <h2>One pool per JVM 🏊</h2>
+      <p>all parallel streams share <span class="code">commonPool</span><br>+ CompletableFuture async (no executor)<br><span class="red">a blocking call parks a shared worker</span></p>
+    </div>
+    <div class="sk t1 col">
+      <h2>Last call wins 🚦</h2>
+      <p><span class="code">.parallel().filter(..).sequential()</span><br>→ isParallel() = false<br>one flag for the WHOLE pipeline</p>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 14</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">CPU vs waiting 🧠 ⏳</h2>
+  <div class="sec">
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick" font-size="15">
+        <rect x="10" y="10" width="310" height="130" rx="12" fill="#A8F0C6" stroke="#1E8E5A" stroke-width="2.5"/>
+        <text x="25" y="38" font-family="Caveat" font-weight="700" font-size="24" fill="#1E8E5A">parallel stream [8]</text>
+        <text x="25" y="64">CPU work, data in memory</text>
+        <text x="25" y="88">few platform threads (commonPool)</text>
+        <text x="25" y="112">large N × Q, measured with JMH</text>
+        <text x="25" y="132" font-size="13" fill="#C93C3C">blocking inside → starves the pool</text>
+        <rect x="340" y="10" width="310" height="130" rx="12" fill="#B3E5FC" stroke="#1565C0" stroke-width="2.5"/>
+        <text x="355" y="38" font-family="Caveat" font-weight="700" font-size="24" fill="#1565C0">virtual threads [21]</text>
+        <text x="355" y="64">many blocking tasks (HTTP, JDBC)</text>
+        <text x="355" y="88">one cheap thread per task</text>
+        <text x="355" y="112">12 enrichments: in order, all virtual</text>
+        <text x="355" y="132" font-size="13">waiting is cheap, CPU is not added</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>Should it be parallel? ✅</h2>
+      <p>12 payments → NOT (N × Q too small)<br>5M prices × heavy maths → candidate: measure<br>10k REST calls → NOT: virtual threads<br>shared HashMap → NOT: fix first</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Measure right ⏱</h2>
+      <p>JMH: warm-up, forks, return results<br>realistic data, target hardware<br><span class="red">one nanoTime ✗</span></p>
+    </div>
+  </div>
+
+  <div class="sk t2 sec" style="background:#E3F2FD">
+    <h2>Worked example: fee report</h2>
+    <p>loop · parallel <span class="code">collect(groupingBy)</span> with a pure fee() · <span class="code">unordered + groupingByConcurrent + teeing</span>, sorted at the edge → TRANSFER 8 debits 17.97 … TOTAL FEES 42.95, every run ✓</p>
+  </div>
+
+  <div class="sk t1 sec">
+    <h2>Exercise: fix 3 broken pipelines 🔧</h2>
+    <p>reduce(float, add) → float.add(reduce(ZERO, add)): 4529.84 · findAny → findFirst: P005 · shared ArrayList → toList(): [P001, P002, P004, …] · tests repeat 50×</p>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>sequential by default · no shared state · associative + neutral identity · findFirst for "first" · never block the common pool · JMH, not guesses · next → L15 FP principles (Module 3)</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 14</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

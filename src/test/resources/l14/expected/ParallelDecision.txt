@@ -1,0 +1,5 @@
+12 payments, simple sum     : NOT parallel(): [N x Q = 12 is too small]
+5M prices, risk maths       : CANDIDATE: measure with JMH, then decide
+10k REST enrichment calls   : NOT parallel(): [blocking I/O: use virtual threads / an executor, not the commonPool]
+1M rows from a LinkedList   : NOT parallel(): [source splits badly: LINKED_LIST, order-sensitive operations (limit/findFirst/forEachOrdered/sorted) cost extra]
+forEach into shared HashMap : NOT parallel(): [shared mutable state: incorrect, fix this first]

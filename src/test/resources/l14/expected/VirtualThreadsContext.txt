@@ -1,0 +1,3 @@
+enriched with virtual threads : 12 results, in order=true, all virtual=true
+first two                    : [P001:virtual, P002:virtual]
+parallel stream: platform    : true

@@ -1,0 +1,8 @@
+reduce(0, a - b) sequential       : -55
+parallel gives a different value  : true
+reduce(10, +) sequential          : 65
+parallel adds 10 more than once   : true
+10 + sum(), sequential / parallel : 65 / 65
+BigDecimal total stable           : true
+toList() in parallel, 100000      : 100000 in order=true
+AtomicLong count / count()        : 33334 / 33334

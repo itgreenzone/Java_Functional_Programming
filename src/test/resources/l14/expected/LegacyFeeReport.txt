@@ -1,0 +1,8 @@
+TRANSFER: 8 debits, fees 17.97
+GROCERIES: 7 debits, fees 3.69
+DINING: 10 debits, fees 5.00
+TRAVEL: 1 debits, fees 4.32
+UTILITIES: 8 debits, fees 4.76
+SHOPPING: 4 debits, fees 4.05
+INSURANCE: 5 debits, fees 3.16
+TOTAL FEES 42.95
