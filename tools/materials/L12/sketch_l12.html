@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body><!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Primitive streams <span style="font-size:22pt" class="amber">· my notes L12</span></h1>
+  <div class="sub">numbers travel <span class="hl">without boxes</span></div>
+
+  <div class="sec">
+    <h2>Boxed vs primitive 📦</h2>
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick" font-size="14">
+        <text x="10" y="20">Stream&lt;Integer&gt;: every number in its own box</text>
+        <g>
+          <rect x="10" y="30" width="60" height="44" rx="6" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="24" y="58">471</text>
+          <rect x="80" y="30" width="60" height="44" rx="6" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="94" y="58">264</text>
+          <rect x="150" y="30" width="60" height="44" rx="6" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="164" y="58">335</text>
+          <text x="220" y="58">… objects, garbage</text>
+        </g>
+        <text x="10" y="100">IntStream: plain ints on a belt</text>
+        <rect x="10" y="108" width="300" height="34" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/>
+        <text x="22" y="131">471 · 264 · 335 · 160 · 303 · 222 · 161 · 162</text>
+        <path d="M330 125 h40 M362 117 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <text x="380" y="118" fill="#1E8E5A">sum() → 2078</text>
+        <text x="380" y="140" fill="#1E8E5A">summaryStatistics() → 8 · 2078 · 160 · 471 · 259.75</text>
+        <text x="380" y="58" fill="#C93C3C">1000 == 1000 → false!</text>
+        <text x="380" y="80" fill="#C93C3C">(cache: -128..127)</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sec">
+    <h2>Getting in and out 🔁</h2>
+    <svg width="660" height="120" viewBox="0 0 660 120">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="35" width="150" height="46" rx="10" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="28" y="63">Stream&lt;Flight&gt;</text>
+        <rect x="255" y="35" width="130" height="46" rx="10" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="285" y="63">IntStream</text>
+        <rect x="480" y="35" width="170" height="46" rx="10" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="495" y="63">Stream&lt;Integer&gt;</text>
+        <path d="M165 48 h85 M242 40 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/><text x="175" y="30">mapToInt</text>
+        <path d="M250 70 h-85 M173 62 l-8 8 l8 8" fill="none" stroke="#23302B" stroke-width="2"/><text x="175" y="100">mapToObj</text>
+        <path d="M390 58 h85 M467 50 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/><text x="400" y="30">boxed()</text>
+        <text x="400" y="100" fill="#C93C3C">needed for any Collector!</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>range vs rangeClosed 📏</h2>
+      <p><span class="code">range(1, 5)</span> → 1 2 3 4 = <b>10</b><br><span class="code">rangeClosed(1, 5)</span> → 1..5 = <b>15</b><br><span class="code">iterate(1, r -&gt; r &lt;= 42, r -&gt; r + 10)</span> [9]<br>→ [1, 11, 21, 31, 41]</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Empty stream? 🫙</h2>
+      <p><span class="code">sum()</span> → 0<br><span class="code">average()</span> → OptionalDouble.empty<br><span class="red">getAsDouble() → NoSuchElementException</span><br>use orElse(..)</p>
+    </div>
+  </div>
+  <div class="row sec">
+    <div class="sk t2 col">
+      <h2>One pass, 5 answers 📊</h2>
+      <p><span class="code">mapToInt(f -&gt; f.seats() - f.booked())</span><br><span class="code">.summaryStatistics()</span><br>empty seats: min=2 max=63 avg=33.75<br><span class="red">toString uses your locale → Locale.ROOT</span></p>
+    </div>
+    <div class="sk t1 col">
+      <h2>Zip with index 🔢</h2>
+      <p><span class="code">range(0, n).boxed()</span><br><span class="code">.collect(toMap(i -&gt; i + 1, ..))</span><br>→ {1=SQ318, 2=SQ12, …, 8=GA827}</p>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 12</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">Money is not a double 💰</h2>
+  <div class="sec">
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick" font-size="15">
+        <rect x="10" y="10" width="310" height="130" rx="12" fill="#FFC2D4" stroke="#C93C3C" stroke-width="2.5"/>
+        <text x="25" y="38" font-family="Caveat" font-weight="700" font-size="24" fill="#C93C3C">double ✗</text>
+        <text x="25" y="64">0.1 + 0.2 = 0.30000000000000004</text>
+        <text x="25" y="88">10 × 0.1 (loop) = 0.9999999999999999</text>
+        <text x="25" y="112">0.1+0.2+0.3 = 0.6000000000000001</text>
+        <text x="25" y="132" font-size="13">0.3+0.2+0.1 = 0.6  ← order matters!</text>
+        <rect x="340" y="10" width="310" height="130" rx="12" fill="#A8F0C6" stroke="#1E8E5A" stroke-width="2.5"/>
+        <text x="355" y="38" font-family="Caveat" font-weight="700" font-size="24" fill="#1E8E5A">BigDecimal ✓</text>
+        <text x="355" y="64">reduce(ZERO, add) → 4429.84</text>
+        <text x="355" y="88">divide(n, 2, HALF_UP) → 369.15</text>
+        <text x="355" y="112">long cents: 442984 → 4429.84</text>
+        <text x="355" y="132" font-size="13">10 × 0.10 = 1.00 exactly</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>chars() 🔤</h2>
+      <p><span class="code">"SIN".chars()</span> → [83, 73, 78] <span class="red">ints!</span><br><span class="code">mapToObj(c -&gt; (char) c)</span> → [S, I, N]<br>flight codes: '8' appears 5 times<br>"Pay 💳": chars=6, codePoints=5</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Random streams 🎲</h2>
+      <p><span class="code">new Random(42).ints(6, 1, 7)</span><br>→ [3, 4, 1, 3, 1, 2], every run<br>tests: seed it · secrets: SecureRandom<br>RandomGenerator [17]</p>
+    </div>
+  </div>
+
+  <div class="sk t2 sec" style="background:#E3F2FD">
+    <h2>Worked example: flight load report</h2>
+    <p>BEFORE: List&lt;Integer&gt; + MAX_VALUE loop · AFTER [8]: mapToInt + summaryStatistics · MODERN: record FlightLoad with exact BigDecimal % and a cross-multiplying comparator · SQ21 98.76% … MH602 61.25% · TOTAL 87.01% · all 3 agree ✓</p>
+  </div>
+
+  <div class="sk t1 sec">
+    <h2>Exercise: seats + PNRs ✈</h2>
+    <p>occupancy % per flight {GA827=74.07, …, SQ21=98.76} · ≥ 90%: [SQ21, SQ318, SQ938, TR808] · PNR chars: Q=5 is the most frequent · 16 digits in 8 PNRs</p>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>primitives = no boxes · range is half-open · empty average is Optional · box before a Collector · money: BigDecimal or cents · chars() are ints · next → L13 advanced operations</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 12</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

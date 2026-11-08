@@ -1,0 +1,10 @@
+range(1, 5).sum()        : 10
+rangeClosed(1, 5).sum()  : 15
+total seats              : 2078
+total seats (no flights) : 0
+average seats            : OptionalDouble[259.75]
+average seats (empty)    : OptionalDouble.empty
+max booked               : OptionalInt[455]
+statistics               : count=8 sum=2078 min=160 max=471 avg=259.75
+iterate + limit          : [1, 2, 4, 8, 16, 32, 64, 128]
+iterate with predicate   : [1, 11, 21, 31, 41]

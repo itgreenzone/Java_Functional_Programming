@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 12 · CHEAT SHEET</div><h1>Primitive Streams &amp; Numeric Work</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li>Three primitive streams only: <code>IntStream</code>, <code>LongStream</code>, <code>DoubleStream</code>. <span class="b">8</span></li>
+          <li><code>range(1, 5)</code> = 1..4 (half-open); <code>rangeClosed(1, 5)</code> = 1..5.</li>
+          <li><code>sum()</code> of nothing = 0; <code>average/min/max</code> of nothing = <b>empty Optional</b>.</li>
+          <li>Need a Collector? <code>boxed()</code> or <code>mapToObj</code> first.</li>
+          <li>Boxed values are objects: compare with <code>equals</code>, never <code>==</code>.</li>
+          <li><b>Money is never double.</b> BigDecimal (scale 2, HALF_UP) or <code>long</code> cents.</li>
+          <li><code>chars()</code> gives ints (UTF-16 units); <code>codePoints()</code> gives real characters.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Several statistics in one pass</div>
+<pre>flights.<span class="m">stream</span>().<span class="m">mapToInt</span>(<span class="t">Flight</span>::<span class="m">seats</span>)
+       .<span class="m">summaryStatistics</span>();
+<span class="c">// count=8 sum=2078 min=160 max=471 avg=259.75</span></pre>
+        <div class="lbl">2 · Money total and average</div>
+<pre><span class="t">var</span> t = payments.<span class="m">stream</span>().<span class="m">map</span>(<span class="t">Payment</span>::<span class="m">amount</span>)
+    .<span class="m">reduce</span>(ZERO, <span class="t">BigDecimal</span>::<span class="m">add</span>);   <span class="c">// 4429.84</span>
+t.<span class="m">divide</span>(<span class="m">valueOf</span>(n), 2, HALF_UP);  <span class="c">// 369.15</span></pre>
+        <div class="lbl">3 · Character frequency</div>
+<pre>words.<span class="m">stream</span>().<span class="m">flatMapToInt</span>(<span class="t">String</span>::<span class="m">chars</span>)
+     .<span class="m">mapToObj</span>(c -&gt; (<span class="k">char</span>) c)
+     .<span class="m">collect</span>(<span class="m">groupingBy</span>(<span class="m">identity</span>(), <span class="t">TreeMap</span>::<span class="k">new</span>,
+                         <span class="m">counting</span>()));</pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>API map</h2>
+        <table>
+          <tr><th>Call</th><th>Gives</th><th>Since</th></tr>
+          <tr><td><code>range / rangeClosed</code></td><td>IntStream / LongStream</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>iterate(seed, next).limit(n)</code></td><td>infinite, then limited</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>iterate(seed, hasNext, next)</code></td><td>a for-loop as a stream</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>mapToInt / mapToLong / mapToDouble</code></td><td>object → primitive</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>boxed() / mapToObj(f)</code></td><td>primitive → object</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>asLongStream / asDoubleStream</code></td><td>widen, no cast</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>sum()</code></td><td>int / long / double</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>average()</code></td><td>OptionalDouble</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>min() / max()</code></td><td>OptionalInt / Long / Double</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>summaryStatistics()</code></td><td>Int/Long/DoubleSummaryStatistics</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>String.chars() / codePoints()</code></td><td>IntStream</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Random.ints(n, from, to)</code></td><td>IntStream, to exclusive</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>RandomGenerator.of(..)</code></td><td>modern algorithms</td><td><span class="b">17</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>double vs BigDecimal (real output)</h2>
+<pre>0.1 + 0.2               0.30000000000000004
+10 x 0.1 loop/reduce    0.9999999999999999
+10 x 0.1 .sum()         1.0
+0.1+0.2+0.3             0.6000000000000001
+0.3+0.2+0.1             0.6
+10 x 0.10 BigDecimal    1.00</pre>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: conversions</h2>
+        <div class="belt">
+          <div style="background:#0E3B2E">Stream&lt;Flight&gt;<small>objects</small></div><span>▶</span>
+          <div style="background:#1E8E5A">IntStream<small>mapToInt</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">Stream&lt;Integer&gt;<small>boxed()</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td><code>IntStream.of(1000, 1000).boxed()</code></td><td>== false, equals true (100: both true)</td></tr>
+        <tr><td><code>"SIN".chars().boxed()</code></td><td>[83, 73, 78]</td></tr>
+        <tr><td>"Pay " + card emoji</td><td>chars=6 codePoints=5</td></tr>
+        <tr><td><code>new Random(42).ints(6, 1, 7)</code></td><td>[3, 4, 1, 3, 1, 2] on every run</td></tr>
+      </table>
+      <table>
+        <tr><th>Worked example / exercise</th><th>Result</th></tr>
+        <tr><td>fullest flight</td><td>SQ21 SIN-EWR 159/161 98.76%</td></tr>
+        <tr><td>overall load</td><td>1808/2078 = 87.01%</td></tr>
+        <tr><td>empty seats</td><td>min=2 max=63 avg=33.75</td></tr>
+        <tr><td>flights ≥ 90% booked</td><td>[SQ21, SQ318, SQ938, TR808]</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>map(..).reduce(0, Integer::sum)</code></td><td><code>mapToInt(..).sum()</code></td></tr>
+        <tr><td><code>average().getAsDouble()</code></td><td><code>average().orElse(0)</code> or check</td></tr>
+        <tr><td><code>a == b</code> on Integers</td><td><code>a.equals(b)</code></td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>mapToDouble(amount).sum()</code></td><td><code>reduce(ZERO, BigDecimal::add)</code></td></tr>
+        <tr><td><code>divide(n)</code> without scale</td><td><code>divide(n, 2, HALF_UP)</code></td></tr>
+        <tr><td><code>Random</code> for OTPs / tokens</td><td><code>SecureRandom</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 12</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 12 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>3 primitive streams</h3><p>IntStream · LongStream<br>DoubleStream. No CharStream!</p></div>
+    <div class="note g"><h3>range is half-open</h3><p>range(1, 5) → 1..4 = 10<br>rangeClosed(1, 5) → 15</p></div>
+    <div class="note p"><h3>Empty average</h3><p>OptionalDouble.empty<br>sum() of nothing = 0</p></div>
+    <div class="note bl"><h3>Never double for money</h3><p>0.1 + 0.2 =<br>0.30000000000000004</p></div>
+    <div class="note o"><h3>Boxed == trap</h3><p>1000 == 1000 → false<br>use equals()</p></div>
+    <div class="note l"><h3>One pass, 5 answers</h3><p>summaryStatistics()<br>count sum min max avg</p></div>
+    <div class="note g"><h3>chars() gives ints</h3><p>"SIN" → [83, 73, 78]<br>mapToObj(c -&gt; (char) c)</p></div>
+    <div class="note y"><h3>Collector? Box first</h3><p>boxed() / mapToObj<br>then groupingBy, toMap…</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 12</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

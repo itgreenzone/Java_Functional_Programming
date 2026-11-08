@@ -1,0 +1,10 @@
+0.1 + 0.2                : 0.30000000000000004
+10 x 0.1, for loop       : 0.9999999999999999
+10 x 0.1, reduce         : 0.9999999999999999
+10 x 0.1, DoubleStream.sum: 1.0
+order matters (reduce)   : 0.6000000000000001 vs 0.6
+10 x 0.10, BigDecimal    : 1.00
+payments total (reduce)  : 4429.84
+payments average         : 369.15
+payments total (cents)   : 442984 -> 4429.84
+payments total (double)  : 4429.84  (correct here by luck; 10 x 0.1 was not)

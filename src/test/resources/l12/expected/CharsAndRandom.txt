@@ -1,0 +1,10 @@
+"SIN".chars() boxed    : [83, 73, 78]
+"SIN" as characters    : [S, I, N]
+flight codes           : [SQ318, SQ12, TR808, MH602, SQ938, UL309, SQ21, GA827]
+char frequency         : {0=3, 1=3, 2=4, 3=3, 6=1, 7=1, 8=5, 9=2, A=1, G=1, H=1, L=1, M=1, Q=4, R=1, S=4, T=1, U=1}
+digits / letters       : 22 digits, 16 letters
+first non-repeated     : G  (in SINGAPORE AIRLINES)
+"Pay " + card emoji    : chars=6 codePoints=5
+dice, seed 42          : [3, 4, 1, 3, 1, 2]
+dice, seed 42 again    : [3, 4, 1, 3, 1, 2]
+5 seats on MH602 (seed 7): [45, 46, 77, 101, 125]
