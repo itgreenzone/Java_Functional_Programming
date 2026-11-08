@@ -1,0 +1,17 @@
+1 opening ACC-1001      : 13608.84
+2 running ACC-1001      : [13340.77, 13104.84, 12947.37, 12500.00]
+3 statement ACC-1014    :
+    OPENING 19235.05
+    2026-08-02 T001 -150.39 = 19084.66
+    2026-08-18 T006 174.30 = 19258.96
+    2026-08-19 T007 206.07 = 19465.03
+    2026-09-01 T016 136.04 = 19601.07
+    2026-09-30 T037 -39.45 = 19561.62
+    2026-10-12 T052 -661.62 = 18900.00
+    CLOSING 18900.00
+4 lowest ACC-1013       : -4382.09
+5 went negative         : [ACC-1003, ACC-1008, ACC-1010, ACC-1013]
+6 250 in batches of 100 : [100, 100, 50]
+7 batches of 100        : [BATCH 1: 12 payments P001..P012 total 4429.84]
+7 batches of 5          : [BATCH 1: 5 payments P001..P005 total 2065.65, BATCH 2: 5 payments P006..P010 total 1954.19, BATCH 3: 2 payments P011..P012 total 410.00]
+8 control totals match  : true

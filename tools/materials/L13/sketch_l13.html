@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body><!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Advanced ops <span style="font-size:22pt" class="amber">· my notes L13</span></h1>
+  <div class="sub">when the built-ins are <span class="hl">not enough</span></div>
+
+  <div class="sec">
+    <h2>My own collector 🧰</h2>
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="20" width="140" height="80" rx="10" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="22" y="48" font-family="Caveat" font-weight="700" font-size="21">Acc::new</text><text x="22" y="72" font-size="12">empty: count 0</text><text x="22" y="90" font-size="12">sum 0.00</text>
+        <path d="M155 60 h20 M167 52 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="180" y="20" width="140" height="80" rx="10" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="192" y="48" font-family="Caveat" font-weight="700" font-size="21">Acc::add</text><text x="192" y="72" font-size="12">count++, sum, min, max</text>
+        <path d="M325 60 h20 M337 52 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="350" y="20" width="140" height="80" rx="10" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="362" y="48" font-family="Caveat" font-weight="700" font-size="21">Acc::merge</text><text x="362" y="72" font-size="12">parallel only!</text><text x="362" y="90" font-size="12">empty side? handle it</text>
+        <path d="M495 60 h20 M507 52 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="520" y="20" width="130" height="80" rx="10" fill="#D1C4E9" stroke="#23302B" stroke-width="2"/><text x="532" y="48" font-family="Caveat" font-weight="700" font-size="21">finish</text><text x="532" y="72" font-size="12">→ record</text><text x="532" y="90" font-size="12">MoneyStats</text>
+        <text x="10" y="130">→ count=12 sum=4429.84 min=18.80 max=1500.00 avg=369.15 · parallel = same ✓</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sec">
+    <h2>Streams from nowhere 🌱</h2>
+    <svg width="660" height="120" viewBox="0 0 660 120">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="10" width="200" height="44" rx="8" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="20" y="30">iterate(Aug, ≤ Nov, +1) [9]</text><text x="20" y="47" font-size="12">2026-08 … 2026-11</text>
+        <rect x="230" y="10" width="200" height="44" rx="8" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="240" y="30">generate(..).limit(3)</text><text x="240" y="47" font-size="12">------ ------ ------</text>
+        <rect x="450" y="10" width="200" height="44" rx="8" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="460" y="30">concat(DEP, ARR)</text><text x="460" y="47" font-size="12">DEP SQ318 … ARR GA827</text>
+        <text x="10" y="85">deep: customers ⟶ accounts ⟶ transactions (flatMap × 2) → 27 for Singapore</text>
+        <text x="10" y="108" fill="#C93C3C">no limit, no predicate → never ends!</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>merge / compute 🗂</h2>
+      <p><span class="code">totals.merge(id, bal, add)</span><br><span class="code">computeIfAbsent(id, k -&gt; new ArrayList&lt;&gt;())</span><br>one by one → in place<br>whole list → stream toMap</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Map → new map 🔁</h2>
+      <p><span class="code">entrySet().stream()</span><br>sort by value → <b>LinkedHashMap</b><br>top 3: C003, C010, C006<br><span class="red">HashMap loses the order</span></p>
+    </div>
+  </div>
+  <div class="row sec">
+    <div class="sk t2 col">
+      <h2>Lazy paging 📄</h2>
+      <p>Iterator → Spliterator → <span class="code">StreamSupport.stream</span><br>count() → fetches=4<br>findFirst() → fetches=1</p>
+    </div>
+    <div class="sk t1 col" style="background:#E8F8EE">
+      <h2>Beyond Java 21 🔭</h2>
+      <p>Gatherers (Java 24): windowFixed · windowSliding · scan<br>this course: IntStream indexes + loops</p>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 13</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">Batches, windows, running totals</h2>
+  <div class="sec">
+    <svg width="660" height="170" viewBox="0 0 660 170">
+      <g font-family="Patrick" font-size="14">
+        <text x="10" y="20">chunk(1..250, 100):</text>
+        <rect x="10" y="30" width="240" height="30" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="100" y="51">100</text>
+        <rect x="255" y="30" width="240" height="30" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="345" y="51">100</text>
+        <rect x="500" y="30" width="120" height="30" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="545" y="51">50</text>
+        <text x="10" y="90">windows([1..5], 3):</text>
+        <g font-size="15">
+          <rect x="150" y="72" width="30" height="26" fill="#FFF" stroke="#23302B"/><text x="160" y="91">1</text>
+          <rect x="180" y="72" width="30" height="26" fill="#FFF" stroke="#23302B"/><text x="190" y="91">2</text>
+          <rect x="210" y="72" width="30" height="26" fill="#FFF" stroke="#23302B"/><text x="220" y="91">3</text>
+          <rect x="240" y="72" width="30" height="26" fill="#FFF" stroke="#23302B"/><text x="250" y="91">4</text>
+          <rect x="270" y="72" width="30" height="26" fill="#FFF" stroke="#23302B"/><text x="280" y="91">5</text>
+          <rect x="147" y="69" width="96" height="32" fill="none" stroke="#1E8E5A" stroke-width="2.5" rx="4"/>
+          <rect x="177" y="102" width="96" height="10" fill="none" stroke="#F2A93B" stroke-width="2.5" rx="4"/>
+          <rect x="207" y="114" width="96" height="10" fill="none" stroke="#C93C3C" stroke-width="2.5" rx="4"/>
+        </g>
+        <text x="330" y="91">[[1,2,3], [2,3,4], [3,4,5]]</text>
+        <text x="10" y="150">running total: 3314.36 → 9412.30 → 15244.95   </text>
+        <text x="380" y="150" fill="#1E8E5A">loop ✓ O(n)</text>
+        <text x="480" y="150" fill="#C93C3C">acc[0] in map ✗</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sk t2 sec" style="background:#E3F2FD">
+    <h2>Worked example: payment statistics</h2>
+    <p>BEFORE: 4 hand-synced HashMaps · AFTER [8]: 4 groupingBy passes + 2 Optionals · MODERN: <span class="code">groupingBy(method, TreeMap::new, mapping(amount, moneyStats()))</span> · CARD: count=5 sum=2070.29 … avg=414.06 · all 3 agree ✓</p>
+  </div>
+
+  <div class="sk t1 sec">
+    <h2>Exercise A: running balance 🏦</h2>
+    <p>opening = closing − net SGD movements · ACC-1014: OPENING 19235.05 → T001 −150.39 = 19084.66 → … → CLOSING 18900.00 · lowest ACC-1013: −4382.09</p>
+  </div>
+
+  <div class="sk t1 sec">
+    <h2>Exercise B: payment-file batches 📦</h2>
+    <p>batches of 5: P001..P005 2065.65 · P006..P010 1954.19 · P011..P012 410.00 · control totals = 4429.84 ✓ · batches of 100: 1 batch of 12</p>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>Collector.of + test parallel · limit infinite streams · merge in place, streams for new maps · indexes for batches · loops for running totals · lazy paging · next → L14 parallel streams</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 13</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

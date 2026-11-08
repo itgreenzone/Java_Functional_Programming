@@ -1,0 +1,7 @@
+statement months     : [2026-08, 2026-09, 2026-10, 2026-11]
+weekly reminders     : [2026-11-02, 2026-11-09, 2026-11-16, 2026-11-23]
+generate + limit     : [------, ------, ------]
+concat               : [DEP SQ318, DEP SQ12, DEP TR808, DEP MH602, DEP SQ938, DEP UL309, DEP SQ21, ARR GA827]
+ofNullable           : 2
+SG customers' txns   : 27
+Optional::stream     : [Alice Tan, Chen Wei]

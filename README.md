@@ -38,7 +38,8 @@ All lists are immutable, all records are immutable, and money is always `BigDeci
 | L10 | Collectors I: Collecting Results | 2 · Streams | `l10_collectors` | [lessons/L10_Collectors](lessons/L10_Collectors) | ✅ Done |
 | L11 | Grouping & Partitioning | 2 · Streams | `l11_grouping` | [lessons/L11_GroupingPartitioning](lessons/L11_GroupingPartitioning) | ✅ Done |
 | L12 | Primitive Streams & Numeric Work | 2 · Streams | `l12_primitive_streams` | [lessons/L12_PrimitiveStreams](lessons/L12_PrimitiveStreams) | ✅ Done |
-| L13–L14 | Stream API | 2 · Streams | | | Planned |
+| L13 | Advanced Stream Operations | 2 · Streams | `l13_advanced` | [lessons/L13_AdvancedOperations](lessons/L13_AdvancedOperations) | ✅ Done |
+| L14 | Parallel Streams & Performance | 2 · Streams | | | Planned |
 | L15–L18 | Functional Design in Modern Java | 3 · Design | | | Planned |
 | L19–L21 | Practice Lab, Capstone, Industry Case Studies | 4 · Practice | | | Planned |
 
@@ -58,6 +59,7 @@ src/main/java/com/itgreenzone/fp/
   l10_collectors/              same layout
   l11_grouping/                same layout
   l12_primitive_streams/       same layout
+  l13_advanced/                same layout
 src/test/java/...       JUnit 5 tests (golden-file tests for every main())
 lessons/L<NN>_<Name>/   slides (.pptx), quiz (.html), cheat sheet + sticky notes (.pdf), sketch notes (.pdf)
 tools/materials/        generators used to build the lesson materials

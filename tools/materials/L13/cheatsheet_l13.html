@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 13 · CHEAT SHEET</div><h1>Advanced Stream Operations</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><code>Collector.of(supplier, accumulator, combiner, finisher, chars…)</code>. <span class="b">8</span></li>
+          <li>The <b>combiner</b> only runs in parallel: test sequential <b>and</b> parallel.</li>
+          <li><code>iterate</code>/<code>generate</code> are infinite: add <code>limit</code> or a predicate <span class="b">9</span>.</li>
+          <li>In place, one by one: <code>merge</code>/<code>compute</code>. New map from a collection: a stream.</li>
+          <li>Batches and windows: <code>IntStream</code> over <b>indexes</b> + <code>subList</code>.</li>
+          <li>Running totals carry state: use a <b>loop</b>. Never mutate outside variables in <code>map</code>.</li>
+          <li>Lazy paging: <code>StreamSupport</code> over an Iterator; short-circuit early.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · A custom collector</div>
+<pre><span class="t">Collector</span>.<span class="m">of</span>(<span class="t">Acc</span>::<span class="k">new</span>, <span class="t">Acc</span>::<span class="m">add</span>, <span class="t">Acc</span>::<span class="m">merge</span>,
+             <span class="t">Acc</span>::<span class="m">finish</span>, UNORDERED);
+<span class="c">// count=12 sum=4429.84 … avg=369.15</span></pre>
+        <div class="lbl">2 · Chunks of n</div>
+<pre><span class="t">IntStream</span>.<span class="m">range</span>(0, (list.<span class="m">size</span>() + n - 1) / n)
+  .<span class="m">mapToObj</span>(i -&gt; list.<span class="m">subList</span>(i * n,
+      <span class="t">Math</span>.<span class="m">min</span>(list.<span class="m">size</span>(), (i + 1) * n)))
+  .<span class="m">toList</span>();   <span class="c">// 250 by 100: [100, 100, 50]</span></pre>
+        <div class="lbl">3 · Lazy paged stream</div>
+<pre><span class="t">StreamSupport</span>.<span class="m">stream</span>(<span class="t">Spliterators</span>
+  .<span class="m">spliteratorUnknownSize</span>(it, ORDERED), <span class="k">false</span>);</pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>API map</h2>
+        <table>
+          <tr><th>Call</th><th>Purpose</th><th>Since</th></tr>
+          <tr><td><code>Collector.of(..)</code></td><td>custom terminal aggregation</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Stream.iterate(seed, next)</code></td><td>infinite sequence</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Stream.iterate(seed, hasNext, next)</code></td><td>for-loop as a stream</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>Stream.generate(supplier)</code></td><td>infinite, from a supplier</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Stream.concat(a, b)</code></td><td>a, then b</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Stream.ofNullable(x)</code></td><td>0 or 1 element</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>Optional.stream()</code></td><td>0 or 1 element</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>Map.merge / compute / computeIfAbsent</code></td><td>update in place</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Map.replaceAll</code></td><td>update every value</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>StreamSupport.stream(spliterator, par)</code></td><td>stream any source</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>takeWhile / dropWhile</code></td><td>stop at a condition</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>Gatherers.windowFixed / scan</code></td><td>Beyond Java 21</td><td><span class="b">24</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>Running total: loop vs stream</h2>
+<pre>loop            O(n)    recommended
+prefix sums     O(n²)   correct, slow
+acc[0] in map() ✗      breaks in parallel
+monthly SGD debits → [3314.36, 9412.30, 15244.95]</pre>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: lazy paging</h2>
+        <div class="belt">
+          <div style="background:#0E3B2E">page 1<small>25 rows</small></div><span>▶</span>
+          <div style="background:#1E8E5A">findFirst<small>T001</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">stop<small>fetches=1</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td>iterate Aug..Nov <span class="b">9</span></td><td>[2026-08, 2026-09, 2026-10, 2026-11]</td></tr>
+        <tr><td>SG customers → accounts → txns</td><td>27 transactions</td></tr>
+        <tr><td>top 3 balances (LinkedHashMap)</td><td>{C003=163950.25, C010=68900.00, C006=36400.40}</td></tr>
+        <tr><td><code>compute</code> per type</td><td>{CURRENT=4, FIXED_DEPOSIT=2, SAVINGS=9}</td></tr>
+      </table>
+      <table>
+        <tr><th>Worked example / exercise</th><th>Result</th></tr>
+        <tr><td>CARD stats</td><td>count=5 sum=2070.29 min=89.90 max=999.99 avg=414.06</td></tr>
+        <tr><td>ACC-1014 statement</td><td>OPENING 19235.05 … CLOSING 18900.00</td></tr>
+        <tr><td>batches of 5</td><td>2065.65 · 1954.19 · 410.00 = 4429.84 ✓</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td>combiner that ignores an empty side</td><td>handle both, test in parallel</td></tr>
+        <tr><td><code>generate(..)</code> without limit</td><td><code>.limit(n)</code> / iterate predicate</td></tr>
+        <tr><td>sorted entries into a HashMap</td><td><code>LinkedHashMap::new</code></td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td>outside variable mutated in <code>map</code></td><td>a loop (or a Gatherer, Java 24+)</td></tr>
+        <tr><td>adding SGD and USD</td><td>filter or group by currency</td></tr>
+        <tr><td>load all pages, then filter</td><td>lazy stream + findFirst / limit</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 13</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 13 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>Collector.of</h3><p>supplier · accumulator<br>combiner · finisher · chars</p></div>
+    <div class="note g"><h3>Test the combiner</h3><p>sequential == parallel?<br>only parallel calls it</p></div>
+    <div class="note p"><h3>Infinite streams</h3><p>generate / iterate<br>always limit or a predicate</p></div>
+    <div class="note bl"><h3>merge vs toMap</h3><p>one by one → merge<br>whole list → stream</p></div>
+    <div class="note o"><h3>Batches</h3><p>IntStream over chunk indexes<br>(size + n - 1) / n</p></div>
+    <div class="note l"><h3>Running total = state</h3><p>use a loop<br>never acc[0] in map()</p></div>
+    <div class="note g"><h3>Lazy paging</h3><p>StreamSupport + Iterator<br>findFirst → 1 fetch</p></div>
+    <div class="note y"><h3>Beyond Java 21</h3><p>Gatherers (Java 24):<br>windowFixed · scan</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 13</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

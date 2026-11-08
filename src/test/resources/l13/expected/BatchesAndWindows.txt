@@ -1,0 +1,8 @@
+250 items, chunks of 100 : [100, 100, 50]
+payments in chunks of 5  : [P001..P005, P006..P010, P011..P012]
+windows of 3 over 1..5   : [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+zip                      : [SQ12=NRT, TR808=BKK, MH602=KUL]
+monthly SGD debits       : {2026-08=3314.36, 2026-09=6097.94, 2026-10=5832.65}
+2-month moving average   : [4706.15, 5965.30]
+running total (loop)     : [3314.36, 9412.30, 15244.95]
+running total (O(n^2))   : [3314.36, 9412.30, 15244.95]
