@@ -1,0 +1,12 @@
+Java 8  : customer Alice Tan | account ACC-1013
+Java 16 : PLATINUM customer Chen Wei | customer Alice Tan
+Java 14 : risk SUCCESS=0 PENDING=2 REFUNDED=5 FAILED=10
+Java 21 : customer Alice Tan
+Java 21 : PLATINUM customer Chen Wei (Singapore)
+Java 21 : OVERDRAWN account ACC-1013 -150.25
+Java 21 : account ACC-1001
+Java 21 : foreign money USD 533.03
+Java 21 : money SGD 1.00
+Java 21 : unknown Integer
+Java 21 : null!
+nested  : T023: capped fee USD 10.00 | T001: fee SGD 0.50

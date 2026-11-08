@@ -1,0 +1,5 @@
+validation              : SGD 10.01 | currency must be 3 capital letters: sgd | currency mismatch: SGD vs USD
+debit total per currency: {SGD=SGD 15244.95, USD=USD 1447.49}
+record keys (acct+month): 29 distinct
+top 3 SGD spenders      : [ACC-1004=2915.69, ACC-1012=2372.16, ACC-1003=1798.71]
+records are equal by value: true

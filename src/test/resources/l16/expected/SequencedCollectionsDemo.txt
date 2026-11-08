@@ -1,0 +1,7 @@
+List [21]          : first=P001 last=P012 reversed first 3=[P012, P011, P010]
+List (Java 8)      : first=P001 last=P012
+reversed() is view : [P002, P001, P000]
+by date            : T001 2026-08-02 .. T060 2026-10-30
+SequencedMap       : first=2026-08=3314.36 last=2026-10=5832.65 reversed={2026-10=5832.65, 2026-09=6097.94, 2026-08=3314.36}
+LinkedHashMap queue: polled P003=PAYPAL, remaining {P008=CARD, P012=PAYNOW}
+SequencedSet       : [Singapore, Kuala Lumpur, Jakarta, Colombo, Bangkok] first=Singapore last=Bangkok

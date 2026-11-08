@@ -1,0 +1,13 @@
+CL-01 APPROVED (large) 5000.00
+CL-02 REJECTED (policy expired)
+CL-03 PARTIAL 9600.00 (over limit)
+CL-04 UNDER REVIEW (documents missing)
+CL-05 APPROVED 380.50
+CL-06 REJECTED (unknown policy)
+CL-07 APPROVED (large) 7200.00
+CL-08 PARTIAL 13100.00 (over limit)
+4 count by kind      : {APPROVED=3, PARTIAL=2, REJECTED=2, UNDER_REVIEW=1}
+6 total paid         : 35280.50
+7 rejected           : [CL-02: policy expired, CL-06: unknown policy]
+8 paid per policy type: {LIFE=5000.00, HEALTH=9600.00, MOTOR=13100.00, TRAVEL=380.50, HOME=7200.00}
+9 last outcome       : CL-08 PARTIAL 13100.00 (over limit)

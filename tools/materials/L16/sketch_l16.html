@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body><!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Records &amp; patterns <span style="font-size:22pt" class="amber">· my notes L16</span></h1>
+  <div class="sub">a value is <span class="hl">exactly one of</span> a known set</div>
+
+  <div class="sec">
+    <h2>Sealed = a closed box of shapes 📦</h2>
+    <svg width="660" height="160" viewBox="0 0 660 160">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="10" width="640" height="140" rx="14" fill="none" stroke="#23302B" stroke-width="2.5" stroke-dasharray="8 5"/>
+        <text x="22" y="34" font-family="Caveat" font-weight="700" font-size="22">sealed PaymentResult permits …</text>
+        <rect x="25" y="50" width="140" height="80" rx="10" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="40" y="75">Approved</text><text x="40" y="95" font-size="12">id, method, amount</text><text x="40" y="115" font-size="12">8 payments</text>
+        <rect x="180" y="50" width="140" height="80" rx="10" fill="#FFC2D4" stroke="#23302B" stroke-width="2"/><text x="195" y="75">Declined</text><text x="195" y="95" font-size="12">id, method, reason</text><text x="195" y="115" font-size="12">2 payments</text>
+        <rect x="335" y="50" width="140" height="80" rx="10" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="350" y="75">Pending</text><text x="350" y="95" font-size="12">id, since</text><text x="350" y="115" font-size="12">P008</text>
+        <rect x="490" y="50" width="140" height="80" rx="10" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="505" y="75">Refunded</text><text x="505" y="95" font-size="12">id, amount</text><text x="505" y="115" font-size="12">P006</text>
+      </g>
+    </svg>
+    <p style="font-family:Patrick;font-size:14px;margin:4px 0 0 4px">each box carries only ITS data · no nullable "sometimes" fields · add a 5th box → compiler lists every switch to fix</p>
+  </div>
+
+  <div class="sec">
+    <h2>Taking it apart 🔧</h2>
+    <svg width="660" height="110" viewBox="0 0 660 110">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="20" width="260" height="50" rx="10" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="20" y="50">Approved("P005", "PAYNOW", 1500.00)</text>
+        <path d="M275 45 h40 M307 37 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <text x="325" y="35">case Approved(var id, var m, var amt)</text>
+        <text x="325" y="58" fill="#1E8E5A">when amt ≥ 1000 → "P005 APPROVED large"</text>
+        <text x="10" y="100" fill="#C93C3C">general "case Approved a" first? → compile error (dominated)</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>Records 🧾</h2>
+      <p>compact constructor: validate + scale 2<br><span class="code">Money.of("SGD", "10.005")</span> → SGD 10.01<br>SGD + USD → <span class="red">currency mismatch</span><br>local record inside a method [16]</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Evolution 🪜</h2>
+      <p>8: instanceof + cast<br>14: switch expressions<br>16: instanceof patterns, records<br>17: sealed · 21: pattern switch</p>
+    </div>
+  </div>
+  <div class="row sec">
+    <div class="sk t2 col">
+      <h2>case null [21] 🕳</h2>
+      <p><span class="code">case null -&gt; "null!"</span><br>no NullPointerException from switch<br>over Object: default required<br>over sealed: no default</p>
+    </div>
+    <div class="sk t1 col" style="background:#E8F8EE">
+      <h2>Streams + switch 🌊</h2>
+      <p><span class="code">groupingBy(r -&gt; switch (r) {..})</span><br>{APPROVED=8, DECLINED=2, PENDING=1, REFUNDED=1}<br>settled (Approved only) = 2999.19</p>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 16</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">First, last, reversed [21] ↔</h2>
+  <div class="sec">
+    <svg width="660" height="120" viewBox="0 0 660 120">
+      <g font-family="Patrick" font-size="15">
+        <g>
+          <rect x="60" y="30" width="60" height="40" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="70" y="56">P001</text>
+          <rect x="120" y="30" width="60" height="40" fill="#FFF" stroke="#23302B" stroke-width="2"/><text x="130" y="56">P002</text>
+          <rect x="180" y="30" width="60" height="40" fill="#FFF" stroke="#23302B" stroke-width="2"/><text x="193" y="56">…</text>
+          <rect x="240" y="30" width="60" height="40" fill="#FFF" stroke="#23302B" stroke-width="2"/><text x="250" y="56">P011</text>
+          <rect x="300" y="30" width="60" height="40" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="310" y="56">P012</text>
+        </g>
+        <text x="60" y="95">getFirst()</text><text x="300" y="95">getLast()</text>
+        <text x="400" y="45">reversed() → [P012, P011, …]</text>
+        <text x="400" y="70" fill="#C93C3C">a VIEW: changes show through</text>
+        <text x="400" y="95">maps: firstEntry · pollFirstEntry</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sk t2 sec" style="background:#E3F2FD">
+    <h2>Worked example: payment outcome report</h2>
+    <p>BEFORE: if/else on status + final else catch-all · AFTER [8]: abstract Outcome + 4 subclasses (open) · MODERN: sealed records + exhaustive switches · 12 lines + APPROVED=8 DECLINED=2 PENDING=1 REFUNDED=1 settled=2999.19 · all 3 agree ✓</p>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>Exercise: claims 🏥</h2>
+      <p>Approved · PartiallyApproved · Rejected · UnderReview<br>CL-03: 12000 → PARTIAL 9600.00<br>total paid 35280.50</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Beyond Java 21 🔭</h2>
+      <p>unnamed patterns <span class="code">_</span>: Java 22<br>primitive patterns: preview<br>this course: Java 21 only</p>
+    </div>
+  </div>
+
+  <div class="sk t1 sec">
+    <h2>Claim rules (course rules) 📋</h2>
+    <p>unknown policy → Rejected · incident after expiry → Rejected · documents missing → UnderReview · claimed &gt; 10 × premium → PartiallyApproved(10 × premium) · else Approved(claimed) · {APPROVED=3, PARTIAL=2, REJECTED=2, UNDER_REVIEW=1}</p>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>validate in compact constructors · one record per alternative · seal the set · no default · guarded cases first · case null · getFirst/getLast/reversed · next → L17 functional error handling (Result = Success | Failure)</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 16</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

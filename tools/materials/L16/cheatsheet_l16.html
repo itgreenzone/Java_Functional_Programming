@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 16 · CHEAT SHEET</div><h1>Records, Sealed Types &amp; Patterns</h1></div>
+    <div class="sub">Java 16 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li>Records: validate and normalise in the <b>compact constructor</b>. <span class="b">16</span></li>
+          <li>One record per alternative; close the set with <code>sealed … permits</code>. <span class="b">17</span></li>
+          <li>Switch over a sealed type: <b>every case, no default</b>.</li>
+          <li>Specific (guarded) cases <b>before</b> general ones (dominance).</li>
+          <li><code>case null</code> when null is possible. <span class="b">21</span></li>
+          <li>Record <code>equals</code> uses component equals: BigDecimal scale matters.</li>
+          <li><code>getFirst/getLast/reversed</code> (a view) over index maths. <span class="b">21</span></li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · An algebraic data type</div>
+<pre><span class="k">sealed interface</span> <span class="t">PaymentResult</span>
+    <span class="k">permits</span> <span class="t">Approved</span>, <span class="t">Declined</span>, <span class="t">Pending</span>, <span class="t">Refunded</span> {}
+<span class="k">record</span> <span class="t">Approved</span>(<span class="t">String</span> id, <span class="t">String</span> m, <span class="t">BigDecimal</span> amt)
+    <span class="k">implements</span> <span class="t">PaymentResult</span> {}</pre>
+        <div class="lbl">2 · Pattern switch with a guard</div>
+<pre><span class="k">switch</span> (r) {
+  <span class="k">case</span> <span class="t">Approved</span>(<span class="k">var</span> i, <span class="k">var</span> m, <span class="k">var</span> a) <span class="k">when</span> <span class="m">big</span>(a) -&gt; ..
+  <span class="k">case</span> <span class="t">Approved</span> x -&gt; ..
+  <span class="k">case</span> <span class="t">Declined</span> d -&gt; ..   <span class="c">// … no default</span>
+}</pre>
+        <div class="lbl">3 · instanceof pattern in a stream</div>
+<pre>.<span class="m">map</span>(r -&gt; r <span class="k">instanceof</span> <span class="t">Approved</span> a ? a.<span class="m">amount</span>() : ZERO)</pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Version map</h2>
+        <table>
+          <tr><th>Feature</th><th>Final</th></tr>
+          <tr><td>switch expressions (arrow, yield)</td><td><span class="b">14</span></td></tr>
+          <tr><td>text blocks</td><td><span class="b">15</span></td></tr>
+          <tr><td>records, local records</td><td><span class="b">16</span></td></tr>
+          <tr><td>pattern matching for instanceof</td><td><span class="b">16</span></td></tr>
+          <tr><td>sealed classes / interfaces</td><td><span class="b">17</span></td></tr>
+          <tr><td>pattern matching for switch, case null</td><td><span class="b">21</span></td></tr>
+          <tr><td>record patterns (nested), guards</td><td><span class="b">21</span></td></tr>
+          <tr><td>SequencedCollection / SequencedMap</td><td><span class="b">21</span></td></tr>
+          <tr><td>unnamed patterns <code>_</code></td><td>22: Beyond Java 21</td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>Sequenced collections (real output)</h2>
+<pre>payments.getFirst() / getLast()  P001 / P012
+payments.reversed() first 3      [P012, P011, P010]
+monthly.firstEntry()             2026-08=3314.36
+LinkedHashMap.pollFirstEntry()   P003=PAYPAL</pre>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: ADT</h2>
+        <div class="belt">
+          <div style="background:#0E3B2E">Payment<small>status flag</small></div><span>▶</span>
+          <div style="background:#1E8E5A">PaymentResult<small>sealed</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">switch<small>exhaustive</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td><code>Money.of("SGD", "10.005")</code></td><td>SGD 10.01</td></tr>
+        <tr><td>SGD plus USD</td><td>currency mismatch: SGD vs USD</td></tr>
+        <tr><td>count by kind</td><td>{APPROVED=8, DECLINED=2, PENDING=1, REFUNDED=1}</td></tr>
+        <tr><td><code>describeJava21(null)</code></td><td>null!</td></tr>
+      </table>
+      <table>
+        <tr><th>Worked example / exercise</th><th>Result</th></tr>
+        <tr><td>outcome report, 3 versions</td><td>… settled=2999.19 (identical)</td></tr>
+        <tr><td>claims by kind</td><td>{APPROVED=3, PARTIAL=2, REJECTED=2, UNDER_REVIEW=1}</td></tr>
+        <tr><td>claims total paid</td><td>35280.50</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td>status flag + nullable fields</td><td>one record per alternative</td></tr>
+        <tr><td><code>default</code> over a sealed type</td><td>list every case</td></tr>
+        <tr><td>final <code>else</code> catch-all</td><td>exhaustive switch expression</td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td>general case before guarded</td><td>specific cases first</td></tr>
+        <tr><td>raw BigDecimal in a record</td><td>normalise scale in constructor</td></tr>
+        <tr><td><code>list.get(list.size() - 1)</code></td><td><code>list.getLast()</code> <span class="b">21</span></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 16</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 16 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>Compact constructor</h3><p>validate · normalise<br>List.copyOf</p></div>
+    <div class="note g"><h3>Sealed + records</h3><p>= algebraic data type<br>exactly one of …</p></div>
+    <div class="note p"><h3>No default</h3><p>over a sealed type:<br>let the compiler check</p></div>
+    <div class="note bl"><h3>Record pattern</h3><p>case Approved(var id,<br>var m, var amt) -&gt;</p></div>
+    <div class="note o"><h3>Guards</h3><p>case X x when cond<br>specific cases first!</p></div>
+    <div class="note l"><h3>instanceof [16]</h3><p>o instanceof Customer c<br>&amp;&amp; c.tier() == …</p></div>
+    <div class="note g"><h3>case null [21]</h3><p>handle null in the<br>switch, not before it</p></div>
+    <div class="note y"><h3>Sequenced [21]</h3><p>getFirst · getLast<br>reversed() is a view</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 16</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>
