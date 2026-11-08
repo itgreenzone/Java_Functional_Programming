@@ -1,0 +1,6 @@
+T001 150.39 SGD -> fee 0.50
+T010 533.03 USD -> fee 6.66
+T023 914.46 USD -> fee 10.00
+T042 1432.93 SGD -> fee 3.58
+TOTAL FEES {SGD=42.95, USD=16.66} on 45 debits
+audit T023: [base=2.29, min=2.29, fx=11.43, cap=10.00]

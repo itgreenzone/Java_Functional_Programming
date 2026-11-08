@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 15 · CHEAT SHEET</div><h1>Functional Programming Principles</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><b>Pure core, I/O at the edges.</b> Pass dates/Clock in; never <code>now()</code> in logic.</li>
+          <li>Records are <b>shallow</b>: <code>List.copyOf</code> in the compact constructor. <span class="b">16</span></li>
+          <li><code>unmodifiableList</code> is a <b>view</b>; <code>List.copyOf</code> is a copy. <span class="b">10</span></li>
+          <li>Withers return new values; no setters.</li>
+          <li>Factories, currying and partial application replace flags and if/else.</li>
+          <li>Compose: <code>reduce(identity(), Function::andThen)</code>.</li>
+          <li>Supplier = lazy. Memoize <b>pure</b> functions only; never recursive <code>computeIfAbsent</code>.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Safe record</div>
+<pre><span class="k">record</span> <span class="t">Statement</span>(<span class="t">String</span> account, <span class="t">List</span>&lt;<span class="t">String</span>&gt; ids) {
+  <span class="t">Statement</span> { ids = <span class="t">List</span>.<span class="m">copyOf</span>(ids); }
+}</pre>
+        <div class="lbl">2 · Curry and partially apply</div>
+<pre><span class="t">Function</span>&lt;<span class="t">BigDecimal</span>,
+         <span class="t">Function</span>&lt;<span class="t">BigDecimal</span>, <span class="t">BigDecimal</span>&gt;&gt; fee =
+    rate -&gt; amount -&gt; <span class="m">money</span>(amount.<span class="m">multiply</span>(rate));
+<span class="k">var</span> standard = fee.<span class="m">apply</span>(<span class="k">new</span> <span class="t">BigDecimal</span>(<span class="s">"0.0025"</span>));</pre>
+        <div class="lbl">3 · A pipeline from a list of steps</div>
+<pre>steps.<span class="m">stream</span>().<span class="m">reduce</span>(<span class="t">Function</span>.<span class="m">identity</span>(),
+                      <span class="t">Function</span>::<span class="m">andThen</span>);</pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>API map</h2>
+        <table>
+          <tr><th>API</th><th>Use</th><th>Since</th></tr>
+          <tr><td><code>Function.andThen / compose</code></td><td>g(f(x)) / f(g(x))</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Function.identity()</code></td><td>neutral step</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>UnaryOperator / BiFunction</code></td><td>steps, 2-arg rules</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Predicate.and/or/negate</code></td><td>combine rules</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Predicate.not</code></td><td>negate a reference</td><td><span class="b">11</span></td></tr>
+          <tr><td><code>Supplier</code>, <code>orElseGet</code></td><td>laziness</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>Clock.fixed / LocalDate.now(clock)</code></td><td>testable time</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>List.of / List.copyOf</code></td><td>immutable lists</td><td><span class="b">9/10</span></td></tr>
+          <tr><td><code>record</code> + compact constructor</td><td>validated values</td><td><span class="b">16</span></td></tr>
+          <tr><td><code>Map.computeIfAbsent</code></td><td>memoize (non-recursive)</td><td><span class="b">8</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>andThen vs compose (real output)</h2>
+<pre>plus2.andThen(times10).apply(1)   30
+plus2.compose(times10).apply(1)   12
+pipeline(List.of()).apply(1240.50) 1240.50</pre>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: functional core</h2>
+        <div class="belt">
+          <div style="background:#C93C3C">shell<small>clock · DB</small></div><span>▶</span>
+          <div style="background:#1E8E5A">pure core<small>data → data</small></div><span>▶</span>
+          <div style="background:#C93C3C">shell<small>print · save</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td>expiring in 30 days of 2026-11-07</td><td>POL-509 (5), POL-505 (13), POL-502 (23), POL-508 (28)</td></tr>
+        <tr><td>unmodifiable view vs copy</td><td>view=[A, B] copy=[A]</td></tr>
+        <tr><td>orElse vs orElseGet</td><td>evaluated 1 vs 0</td></tr>
+        <tr><td>memoized FX rate</td><td>12 calls, 2 real lookups</td></tr>
+      </table>
+      <table>
+        <tr><th>Worked example / exercise</th><th>Result</th></tr>
+        <tr><td>T023 audit trail</td><td>base=2.29, min=2.29, fx=11.43, cap=10.00</td></tr>
+        <tr><td>fee totals</td><td>{SGD=42.95, USD=16.66} on 45 debits</td></tr>
+        <tr><td>renewal quote POL-502</td><td>1240.50 → GOLD 5% → −25 → +GST = 1257.29</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>LocalDate.now()</code> in logic</td><td>date / Clock parameter</td></tr>
+        <tr><td>record keeps caller's List</td><td><code>List.copyOf</code> in constructor</td></tr>
+        <tr><td>one method, 4 fused rules</td><td>small named functions, composed</td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>orElse(expensive())</code></td><td><code>orElseGet(this::expensive)</code></td></tr>
+        <tr><td>memoize an impure function</td><td>memoize pure functions only</td></tr>
+        <tr><td>recursive <code>computeIfAbsent</code></td><td>get, compute, then put</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 15</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 15 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>Pure core</h3><p>clock, DB, console<br>live at the edges</p></div>
+    <div class="note g"><h3>Records are shallow</h3><p>List.copyOf in the<br>compact constructor</p></div>
+    <div class="note p"><h3>View ≠ copy</h3><p>unmodifiableList: view<br>List.copyOf: copy</p></div>
+    <div class="note bl"><h3>Currying</h3><p>rate -&gt; amount -&gt; fee<br>fix the rate, reuse</p></div>
+    <div class="note o"><h3>andThen vs compose</h3><p>andThen: left → right<br>compose: right → left</p></div>
+    <div class="note l"><h3>identity()</h3><p>the 0 of composition:<br>empty pipeline = input</p></div>
+    <div class="note g"><h3>Lazy</h3><p>orElseGet, not orElse<br>Supplier for messages</p></div>
+    <div class="note y"><h3>Memoize safely</h3><p>pure · bounded<br>no recursive computeIfAbsent</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 15</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

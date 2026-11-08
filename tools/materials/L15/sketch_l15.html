@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body><!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>FP principles <span style="font-size:22pt" class="amber">· my notes L15</span></h1>
+  <div class="sub">small, pure, <span class="hl">composable</span> pieces</div>
+
+  <div class="sec">
+    <h2>Functional core, imperative shell 🥚</h2>
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick" font-size="14">
+        <ellipse cx="330" cy="75" rx="300" ry="68" fill="#FFC2D4" stroke="#C93C3C" stroke-width="2.5"/>
+        <ellipse cx="330" cy="75" rx="160" ry="42" fill="#A8F0C6" stroke="#1E8E5A" stroke-width="2.5"/>
+        <text x="270" y="70" font-family="Caveat" font-weight="700" font-size="22" fill="#1E8E5A">pure core</text>
+        <text x="245" y="92">expiringSoon(ps, today, 30)</text>
+        <text x="45" y="70" fill="#C93C3C">shell: Clock,</text>
+        <text x="45" y="90" fill="#C93C3C">DB, input</text>
+        <text x="520" y="70" fill="#C93C3C">shell: print,</text>
+        <text x="520" y="90" fill="#C93C3C">save, send</text>
+      </g>
+    </svg>
+    <p style="font-family:Patrick;font-size:14px;margin:4px 0 0 4px">→ POL-509 in 5 days, POL-505 in 13, POL-502 in 23, POL-508 in 28 · same with Clock.fixed ✓</p>
+  </div>
+
+  <div class="sec">
+    <h2>Shallow records 🪞</h2>
+    <svg width="660" height="110" viewBox="0 0 660 110">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="15" width="200" height="60" rx="10" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="22" y="40">record Statement</text><text x="22" y="60" font-size="12">txnIds → caller's list!</text>
+        <path d="M215 45 h60" stroke="#C93C3C" stroke-width="2.5"/>
+        <rect x="280" y="20" width="160" height="50" rx="10" fill="#FFC2D4" stroke="#C93C3C" stroke-width="2"/><text x="292" y="50">[T009, T012, T999]</text>
+        <text x="460" y="35" fill="#1E8E5A">fix: List.copyOf(..)</text>
+        <text x="460" y="58" fill="#1E8E5A">→ [T009, T012]</text>
+        <text x="10" y="100">unmodifiableList = a window onto a mutable list: view=[A, B], copy=[A]</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>Curry 🍛</h2>
+      <p><span class="code">rate -&gt; amount -&gt; fee</span><br>fix the rate → standardFee<br>1432.93 → 3.58 · premium → 1.43</p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Factories 🏭</h2>
+      <p><span class="code">percentOff(10)</span> → a function<br>1240.50 → 1116.45<br>3 times → 904.33</p>
+    </div>
+  </div>
+  <div class="row sec">
+    <div class="sk t2 col">
+      <h2>Compose 🔗</h2>
+      <p>andThen: (1+2)×10 = 30<br>compose: 1×10+2 = 12<br>reduce(identity(), andThen)</p>
+    </div>
+    <div class="sk t1 col" style="background:#E8F8EE">
+      <h2>Lazy 😴</h2>
+      <p>orElse → evaluated 1×<br>orElseGet → 0×<br>Supplier log message: built only when on</p>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 15</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">Rules as a pipeline 🧪</h2>
+  <div class="sec">
+    <svg width="660" height="140" viewBox="0 0 660 140">
+      <g font-family="Patrick" font-size="14">
+        <text x="10" y="20">T023 914.46 USD</text>
+        <rect x="10" y="35" width="130" height="50" rx="10" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="40" y="58">base</text><text x="40" y="76" font-size="12">0.25% = 2.29</text>
+        <path d="M145 60 h20 M157 52 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="170" y="35" width="130" height="50" rx="10" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="200" y="58">min</text><text x="200" y="76" font-size="12">≥ 0.50 → 2.29</text>
+        <path d="M305 60 h20 M317 52 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="330" y="35" width="130" height="50" rx="10" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="360" y="58">fx</text><text x="360" y="76" font-size="12">+1% → 11.43</text>
+        <path d="M465 60 h20 M477 52 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <rect x="490" y="35" width="130" height="50" rx="10" fill="#D1C4E9" stroke="#23302B" stroke-width="2"/><text x="520" y="58">cap</text><text x="520" y="76" font-size="12">≤ 10 → 10.00</text>
+        <text x="10" y="120">record FeeRule(name, step) · List of rules · fold over an immutable Quote → fee + audit trail</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sk t2 sec" style="background:#E3F2FD">
+    <h2>Worked example: fee calculator</h2>
+    <p>BEFORE: one class, fused if/else, hidden state · AFTER [8]: BASE.andThen(MINIMUM).andThen(FX).andThen(CAP) · MODERN: rules as data + audit · {SGD=42.95, USD=16.66} on 45 debits · all 3 agree ✓</p>
+  </div>
+
+  <div class="sk t1 sec">
+    <h2>Memoize: the trap 🪤</h2>
+    <p>12 FX calls → 2 real lookups ✓ · recursive <span class="code">computeIfAbsent</span> → ConcurrentModificationException ✗ · fix: get, compute, put → fib(90) instantly</p>
+  </div>
+
+  <div class="sk t1 sec">
+    <h2>Exercise: renewal quotes 📄</h2>
+    <p>tierDiscount(tier) → when(&gt; 500, −25) → +9% GST · POL-502 GOLD: 1240.50 → 1257.29 · POL-509 SILVER: 210.00 → 228.90</p>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>pure core, I/O at the edges · copy collections in records · factories, curry, partial · compose with identity · lazy Supplier · memoize pure only · next → L16 records, sealed types, patterns</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 15</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

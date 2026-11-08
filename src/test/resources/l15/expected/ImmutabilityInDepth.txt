@@ -1,0 +1,6 @@
+naive record after caller adds : [T009, T012, T999]
+safe record (List.copyOf)       : [T009, T012]
+unmodifiable view vs copy       : view=[A, B] copy=[A]
+List.copyOf rejects add         : true
+copyOf of List.of: same object  : true (JDK behaviour, not a guarantee)
+wither                          : original 12500.00, updated 12000.00

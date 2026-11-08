@@ -1,0 +1,10 @@
+ 1 percentOff(10)       : 1116.45
+ 2 flatOff(25.00)       : 1215.50, on 10.00: 0.00
+ 3 capAt(1000.00)       : 1000.00
+ 4 addGst               : 1352.15
+ 5 pipeline(10%, -25)   : 1091.45
+ 6 RISK_LOADING(15)     : 1426.58
+ 7 tierDiscount(GOLD)   : 1178.48
+ 8 when(>500, -25) on 400.00: 400.00
+ 9 renewalQuote(POL-502): 1257.29
+10 all renewal quotes   : {POL-501=1888.43, POL-502=1257.29, POL-503=1019.15, POL-504=679.07, POL-505=181.49, POL-506=1117.75, POL-507=2327.15, POL-508=1329.26, POL-509=228.90, POL-510=848.01}

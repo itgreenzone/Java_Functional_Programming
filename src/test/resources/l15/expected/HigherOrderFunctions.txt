@@ -1,0 +1,9 @@
+percentOff(10).apply(1240.50)   : 1116.45
+10% off, three times             : 904.33
+debits above 1000.00             : 3
+FEE.apply(rate, 1432.93)         : 3.58
+CURRIED_FEE.apply(rate).apply(..): 3.58
+partial: standard / premium fee  : 3.58 / 1.43
+andThen vs compose on 1          : andThen=30 compose=12
+pipeline(10% off, -25, +GST)     : 1189.68
+empty pipeline = identity        : 1240.50

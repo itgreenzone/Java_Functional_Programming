@@ -1,0 +1,5 @@
+expiring in 30 days (pure)  : [POL-509 in 5 days, POL-505 in 13 days, POL-502 in 23 days, POL-508 in 28 days]
+same via a fixed Clock      : [POL-509 in 5 days, POL-505 in 13 days, POL-502 in 23 days, POL-508 in 28 days]
+expiring in 7 days          : [POL-509 in 5 days]
+call == call (transparent)  : true
+impure supplier differs     : true

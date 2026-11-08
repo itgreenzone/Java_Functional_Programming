@@ -1,0 +1,6 @@
+Optional.of("SQ12")             : orElse evaluated=1, orElseGet evaluated=0
+lazy log, debug off then on      : message built 1 time
+memoized supplier x3             : rates-v1, rates-v1, rates-v1 (loaded 1x)
+memoized FX rate                 : 12 calls, 2 real lookups
+recursive computeIfAbsent        : HashMap.computeIfAbsent -> ConcurrentModificationException
+fixed memoized fib(90)           : 2880067194370816120
