@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Body"; src: url("Carlito-Regular.ttf"); }
+@font-face { font-family: "Body"; src: url("Carlito-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Body"; src: url("Carlito-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "Head"; src: url("Caladea-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Regular.ttf"); }
+@font-face { font-family: "Mono"; src: url("LiberationMono-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+:root { --forest:#0E3B2E; --green:#1E8E5A; --mint:#EAF4EE; --amber:#F2A93B; --red:#C93C3C; --ink:#1A2421; --muted:#6B7D76; --code:#15211C; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Body"; color:var(--ink); font-variant-ligatures:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:210mm; height:297mm; padding:9mm 10mm 8mm; position:relative; overflow:hidden; page-break-after:always; }
+.page:last-child { page-break-after:auto; }
+.foot { position:absolute; left:10mm; right:10mm; bottom:5mm; font-size:7.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3mm; }
+header .k { color:var(--green); font-weight:700; font-size:8pt; letter-spacing:.12em; }
+header h1 { font-family:"Head"; font-size:19pt; margin:0; color:var(--forest); line-height:1.1; }
+header .sub { font-size:8.5pt; color:var(--muted); text-align:right; }
+.grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:3.2mm; }
+.box { background:var(--mint); border-radius:2.5mm; padding:2.6mm 3mm; margin-bottom:3mm; }
+.box h2 { font-family:"Head"; font-size:10.5pt; color:var(--forest); margin:0 0 1.5mm; }
+.box.white { background:#fff; border:0.3mm solid #D5E3DA; }
+ol, ul { margin:0; padding-left:4.5mm; font-size:9.2pt; line-height:1.36; }
+li { margin-bottom:.6mm; }
+pre { background:var(--code); color:#E8EFEB; font-family:"Mono"; font-size:7.4pt; line-height:1.38; border-radius:1.8mm; padding:2mm 2.4mm; margin:1mm 0 0; white-space:pre; }
+pre .c { color:#8FA89D; font-style:italic; } pre .k { color:#F78C6C; } pre .s { color:#C3E88D; } pre .m { color:#82AAFF; } pre .t { color:#FFCB6B; }
+.lbl { font-size:7.8pt; font-weight:700; color:var(--green); margin-top:1.6mm; }
+.b { display:inline-block; background:var(--amber); color:var(--ink); font-weight:700; font-size:6.8pt; border-radius:1.2mm; padding:.1mm 1.2mm; white-space:nowrap; }
+.b.n { background:#F6C9C9; }
+table { width:100%; border-collapse:collapse; font-size:7.6pt; }
+th { background:var(--forest); color:#fff; text-align:left; padding:1mm 1.2mm; font-weight:700; }
+td { padding:.85mm 1.2mm; border-bottom:.25mm solid #D5E3DA; vertical-align:top; }
+tr:nth-child(even) td { background:#F4F9F6; }
+td code, li code, p code { font-family:"Mono"; font-size:7pt; }
+.dd { display:grid; grid-template-columns:1fr 1fr; gap:2mm; font-size:8.3pt; }
+.do h3, .dont h3 { margin:0 0 1mm; font-size:9pt; }
+.do h3 { color:var(--green); } .dont h3 { color:var(--red); }
+.belt { display:flex; align-items:center; gap:1.2mm; margin:1.5mm 0 1mm; }
+.belt div { flex:1; text-align:center; border-radius:1.8mm; padding:1.6mm .5mm; color:#fff; font-family:"Mono"; font-size:7.6pt; font-weight:700; }
+.belt div small { display:block; font-family:"Body"; font-weight:400; font-size:6.8pt; opacity:.9; }
+.belt span { color:var(--muted); font-weight:700; }
+.tl { display:flex; justify-content:space-between; position:relative; margin:2.5mm 0 1mm; }
+.tl:before { content:""; position:absolute; left:3mm; right:3mm; top:3.1mm; height:.6mm; background:var(--forest); }
+.tl .v { position:relative; text-align:center; width:11%; font-size:6.6pt; line-height:1.15; }
+.tl .v b { display:block; margin:0 auto 1mm; width:6.4mm; height:6.4mm; line-height:6.4mm; border-radius:50%; background:var(--green); color:#fff; font-size:7.5pt; }
+.tl .v.lts b { background:var(--amber); color:var(--ink); }
+p.small { font-size:7.8pt; margin:1mm 0 0; color:var(--ink); }
+.out { font-family:"Mono"; font-size:7pt; background:#fff; border:.3mm solid var(--green); border-radius:1.5mm; padding:1mm 1.6mm; margin-top:1mm; }
+/* ---- sticky notes page ---- */
+.page2 { background:#FBFCFB; }
+.page2 h1 { font-family:"Caveat"; font-weight:700; font-size:30pt; color:var(--forest); margin:0 0 1mm; }
+.page2 .intro { font-family:"Patrick"; font-size:12pt; color:var(--muted); margin:0 0 5mm; }
+.notes { display:grid; grid-template-columns:1fr 1fr; gap:7mm 8mm; padding:0 3mm; }
+.note { height:56mm; padding:5mm 5.5mm; box-shadow:1mm 1.6mm 2.5mm rgba(0,0,0,.18); position:relative; }
+.note:before { content:""; position:absolute; top:-3mm; left:50%; width:22mm; height:6mm; margin-left:-11mm; background:rgba(255,255,255,.55); border:.2mm solid rgba(0,0,0,.06); transform:rotate(-2deg); }
+.note h3 { font-family:"Caveat"; font-weight:700; font-size:24pt; margin:0 0 2mm; line-height:1; color:#1A2421; }
+.note p { font-family:"Patrick"; font-size:14pt; margin:0; line-height:1.25; color:#2B3330; }
+.note code { font-family:"Patrick"; font-size:13pt; background:rgba(255,255,255,.55); padding:0 1mm; border-radius:1mm; }
+.y { background:#FFF176; transform:rotate(-1.6deg); } .g { background:#B9F6CA; transform:rotate(1.2deg); }
+.p { background:#F8BBD0; transform:rotate(-0.8deg); } .bl { background:#B3E5FC; transform:rotate(1.8deg); }
+.o { background:#FFCC80; transform:rotate(-1.2deg); } .l { background:#D1C4E9; transform:rotate(0.9deg); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">LESSON 11 · CHEAT SHEET</div><h1>Grouping &amp; Partitioning</h1></div>
+    <div class="sub">Java 8 → Java 21 · results use the shared course dataset<br>course "today" = 2026-11-07</div>
+  </header>
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h2>Key rules</h2>
+        <ol>
+          <li><code>groupingBy(classifier)</code> = <code>Map&lt;K, List&lt;T&gt;&gt;</code> in a <b>HashMap</b>, so the order is not defined. <span class="b">8</span></li>
+          <li>3-argument form: <code>groupingBy(k, TreeMap::new / EnumMap, downstream)</code>.</li>
+          <li><b>Downstream</b> = what to do with each bucket: counting, mapping, reducing, maxBy, joining…</li>
+          <li><code>filter</code> before grouping <b>removes keys</b>; <code>filtering</code> keeps them with 0. <span class="b">9</span></li>
+          <li><code>partitioningBy</code> always has <b>both</b> keys, false first. <span class="b">8</span></li>
+          <li>maxBy gives an Optional; unwrap with <code>collectingAndThen(…, o -&gt; o.orElseThrow())</code>.</li>
+          <li>Several dimensions? Nested maps for drill-down, a <b>record key</b> for flat reports.</li>
+        </ol>
+      </div>
+      <div class="box white">
+        <h2>Canonical snippets</h2>
+        <div class="lbl" style="margin-top:0">1 · Count per key, sorted</div>
+<pre>customers.<span class="m">stream</span>().<span class="m">collect</span>(<span class="m">groupingBy</span>(
+    <span class="t">Customer</span>::<span class="m">city</span>, <span class="t">TreeMap</span>::<span class="k">new</span>, <span class="m">counting</span>()));
+<span class="c">// {Bangkok=1, Colombo=1, Jakarta=2,</span>
+<span class="c">//  Kuala Lumpur=2, Singapore=4}</span></pre>
+        <div class="lbl">2 · Keep empty groups</div>
+<pre><span class="m">groupingBy</span>(<span class="t">Payment</span>::<span class="m">method</span>, <span class="t">TreeMap</span>::<span class="k">new</span>,
+    <span class="m">filtering</span>(p -&gt; p.<span class="m">status</span>() == FAILED, <span class="m">counting</span>()))
+<span class="c">// {CARD=0, PAYNOW=1, PAYPAL=1}</span></pre>
+        <div class="lbl">3 · Largest per key, unwrapped</div>
+<pre><span class="m">groupingBy</span>(<span class="t">Transaction</span>::<span class="m">accountNumber</span>,
+    <span class="t">TreeMap</span>::<span class="k">new</span>, <span class="m">collectingAndThen</span>(
+        <span class="m">maxBy</span>(<span class="m">comparing</span>(<span class="t">Transaction</span>::<span class="m">amount</span>)),
+        o -&gt; o.<span class="m">orElseThrow</span>().<span class="m">id</span>()))
+<span class="c">// {ACC-1001=T018, ACC-1002=T005, …}</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="box white">
+        <h2>Downstream menu</h2>
+        <table>
+          <tr><th>Downstream</th><th>Each bucket becomes</th><th>Since</th></tr>
+          <tr><td><code>(none)</code> / <code>toList()</code></td><td>List&lt;T&gt;</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>counting()</code></td><td>Long</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>summingInt / averagingInt</code></td><td>Integer / Double</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>reducing(ZERO, amount, add)</code></td><td>BigDecimal total</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>mapping(f, toCollection(TreeSet::new))</code></td><td>sorted set of f</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>mapping(name, joining(", "))</code></td><td>String</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>maxBy / minBy</code></td><td>Optional&lt;T&gt;</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>collectingAndThen(c, f)</code></td><td>f(result)</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>groupingBy(k2, …)</code></td><td>nested Map</td><td><span class="b">8</span></td></tr>
+          <tr><td><code>filtering(p, c)</code></td><td>c over matching items, 0/empty kept</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>flatMapping(f, c)</code></td><td>c over flattened items</td><td><span class="b">9</span></td></tr>
+          <tr><td><code>teeing(c1, c2, merger)</code></td><td>two answers, one pass</td><td><span class="b">12</span></td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h2>partitioningBy vs groupingBy (real output)</h2>
+<pre>flights where booked &gt; seats (none are):
+partitioningBy = {false=8, true=0}
+groupingBy     = {false=8}       <span class="c">// true key missing</span></pre>
+      </div>
+      <div class="box">
+        <h2>Mini diagram: classify → buckets → downstream</h2>
+        <div class="belt">
+          <div style="background:#0E3B2E">10 customers<small>stream</small></div><span>▶</span>
+          <div style="background:#1E8E5A">classifier<small>city</small></div><span>▶</span>
+          <div style="background:#F2A93B;color:#1A2421">counting()<small>per bucket</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box white" style="margin-top:0">
+    <h2>Real results from the course code</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Call</th><th>Result</th></tr>
+        <tr><td>seats per origin</td><td>{CGK=162, SIN=1916}</td></tr>
+        <tr><td>partition SUCCESS totals</td><td>{false=1430.65, true=2999.19}</td></tr>
+        <tr><td>teeing per method <span class="b">12</span></td><td>{CARD=5/2070.29, PAYNOW=4/1824.30, PAYPAL=3/535.25}</td></tr>
+        <tr><td>top 3 categories by count</td><td>[TRANSFER=15, DINING=10, SALARY=8]</td></tr>
+      </table>
+      <table>
+        <tr><th>Worked example: debit report</th><th>Result</th></tr>
+        <tr><td>first line</td><td>TRANSFER: 8 debits, total 7190.92, largest T042 1432.93</td></tr>
+        <tr><td>last line</td><td>DINING: 10 debits, total 839.28, largest T020 170.53</td></tr>
+        <tr><td>Exercise: avg premium</td><td>LIFE=2125.00 · HEALTH=1032.88 · MOTOR=1275.25 · TRAVEL=197.50 · HOME=782.63</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <h2>Anti-patterns → fixes</h2>
+    <div class="grid">
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td>filter, then group, when every key must show</td><td><code>filtering(p, counting())</code> <span class="b">9</span></td></tr>
+        <tr><td><code>maxBy</code>, then <code>.get()</code> later</td><td><code>collectingAndThen(maxBy, unwrap)</code></td></tr>
+        <tr><td>print the default HashMap</td><td><code>TreeMap::new</code> / <code>EnumMap</code></td></tr>
+      </table>
+      <table>
+        <tr><th>Don't</th><th>Do</th></tr>
+        <tr><td><code>summingDouble(amount)</code></td><td><code>reducing(ZERO, amount, add)</code></td></tr>
+        <tr><td>3-level nested maps</td><td>a record key, e.g. <code>CityTier(city, tier)</code></td></tr>
+        <tr><td>a loop with <code>map.get(k) == null</code></td><td><code>groupingBy</code> / <code>computeIfAbsent</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 11</span><span>Page 1 · Cheat sheet</span></div>
+</div>
+
+<div class="page page2">
+  <h1>Lesson 11 · sticky notes</h1>
+  <p class="intro">Cut out, stick on your wall, and read one every morning.</p>
+  <div class="notes">
+    <div class="note y"><h3>groupingBy = buckets</h3><p>classifier picks the bucket<br>downstream fills it</p></div>
+    <div class="note g"><h3>Default = HashMap</h3><p>No order! Use<br>TreeMap::new / EnumMap</p></div>
+    <div class="note p"><h3>filter vs filtering [9]</h3><p>filter first → key gone<br>filtering → key = 0</p></div>
+    <div class="note bl"><h3>partitioningBy</h3><p>ALWAYS false AND true<br>{false=8, true=0}</p></div>
+    <div class="note o"><h3>maxBy is Optional</h3><p>collectingAndThen(<br>  maxBy(..), o -&gt; o.orElseThrow())</p></div>
+    <div class="note l"><h3>Money per group</h3><p><code>reducing(ZERO,</code><br><code>  amount, BigDecimal::add)</code></p></div>
+    <div class="note g"><h3>flatMapping [9]</h3><p>customer → many accounts<br>inside the bucket</p></div>
+    <div class="note y"><h3>Many dimensions?</h3><p>nested map = drill-down<br>record key = flat report</p></div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 11</span><span>Page 2 · Sticky notes</span></div>
+</div>
+</body></html>

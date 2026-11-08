@@ -1,0 +1,5 @@
+city -> tier -> count : {Bangkok={SILVER=1}, Colombo={GOLD=1}, Jakarta={SILVER=1, GOLD=1}, Kuala Lumpur={SILVER=1, PLATINUM=1}, Singapore={SILVER=1, GOLD=2, PLATINUM=1}}
+record key (flat)     : {Bangkok/SILVER=1, Colombo/GOLD=1, Jakarta/SILVER=1, Jakarta/GOLD=1, Kuala Lumpur/SILVER=1, Kuala Lumpur/PLATINUM=1, Singapore/SILVER=1, Singapore/GOLD=2, Singapore/PLATINUM=1}
+partition SUCCESS     : {false=4, true=8}
+partition totals      : {false=1430.65, true=2999.19}
+overbooked            : partitioningBy={false=8, true=0} groupingBy={false=8}

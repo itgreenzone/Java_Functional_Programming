@@ -1,0 +1,8 @@
+groupingBy(city) -> HashMap; Singapore = [C001, C003, C005, C010]
+count per city (TreeMap)   : {Bangkok=1, Colombo=1, Jakarta=2, Kuala Lumpur=2, Singapore=4}
+cities per tier (EnumMap)  : {SILVER=[Bangkok, Jakarta, Kuala Lumpur, Singapore], GOLD=[Colombo, Jakarta, Singapore], PLATINUM=[Kuala Lumpur, Singapore]}
+seats per origin           : {CGK=162, SIN=1916}
+avg booked per origin      : {CGK=120.0, SIN=241.14285714285714}
+maxBy (Optional) ACC-1001  : Optional[T018]
+largest id per account     : {ACC-1001=T018, ACC-1002=T005, ACC-1003=T049, ACC-1004=T025, ACC-1005=T029, ACC-1007=T019, ACC-1008=T038, ACC-1009=T040, ACC-1010=T027, ACC-1011=T033, ACC-1012=T057, ACC-1013=T039, ACC-1014=T052}
+names per tier (joining)   : {SILVER=Bala Kumar, Ethan Lim, Hana Sato, Irfan Hakim, GOLD=Alice Tan, Dewi Lestari, Ganesh Perera, Jasmine Ong, PLATINUM=Chen Wei, Farah Aziz}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: "Caveat"; src: url("caveat-latin-400-normal.woff2"); }
+@font-face { font-family: "Caveat"; src: url("caveat-latin-700-normal.woff2"); font-weight: 700; }
+@font-face { font-family: "Patrick"; src: url("patrick-hand-latin-400-normal.woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Patrick"; color: #23302B; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 10mm 11mm 9mm 20mm;
+  background-color: #FFFEF8;
+  background-image: linear-gradient(#DCE8F2 .25mm, transparent .25mm), linear-gradient(90deg, #DCE8F2 .25mm, transparent .25mm);
+  background-size: 5mm 5mm; }
+.page:last-child { page-break-after: auto; }
+.page:before { content: ""; position: absolute; left: 14mm; top: 0; bottom: 0; width: .5mm; background: #F2A0A0; }
+.holes { position: absolute; left: 4mm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-around; }
+.holes i { width: 5mm; height: 5mm; border-radius: 50%; background: #E3E6E4; box-shadow: inset .4mm .4mm .8mm rgba(0,0,0,.25); }
+h1 { font-family: "Caveat"; font-weight: 700; font-size: 34pt; margin: 0; color: #0E3B2E; line-height: 1; }
+h2 { font-family: "Caveat"; font-weight: 700; font-size: 21pt; margin: 0 0 1.5mm; color: #0E3B2E; line-height: 1; }
+.sub { font-size: 13pt; color: #5B6B65; margin: 1mm 0 4mm; }
+.hl { background: rgba(255,236,90,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlg { background: rgba(140,232,178,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.hlp { background: rgba(255,178,204,.75); border-radius: 1mm 2.5mm 1mm 2mm; padding: 0 1mm; }
+.sk { border: .6mm solid #23302B; border-radius: 3mm 9mm 2mm 7mm / 7mm 2mm 8mm 3mm; padding: 3mm 3.5mm; background: rgba(255,255,255,.75); position: relative; }
+.sk.t1 { transform: rotate(-.7deg); } .sk.t2 { transform: rotate(.6deg); } .sk.t3 { transform: rotate(-.3deg); }
+p, li { font-size: 12.5pt; line-height: 1.25; margin: 0; }
+ul { margin: 0; padding-left: 5mm; }
+.code { font-family: "Patrick"; font-size: 12pt; background: #EEF3EF; border-radius: 1.5mm; padding: 1mm 2mm; display: inline-block; line-height: 1.25; }
+.row { display: flex; gap: 5mm; align-items: stretch; }
+.col { flex: 1; }
+.label { font-family: "Caveat"; font-weight: 700; font-size: 17pt; }
+.red { color: #C93C3C; } .green { color: #1E8E5A; } .amber { color: #C77A0A; } .blue { color: #2D6CDF; }
+.foot { position: absolute; left: 20mm; right: 11mm; bottom: 4mm; font-size: 10pt; color: #7A8A84; display: flex; justify-content: space-between; }
+svg { display: block; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.idea { display: flex; gap: 3mm; align-items: center; }
+.idea p { font-size: 12pt; }
+.sec { margin-bottom: 5mm; }
+</style></head>
+<body><!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h1>Grouping <span style="font-size:22pt" class="amber">· my notes L11</span></h1>
+  <div class="sub">sort the items into <span class="hl">buckets</span>, then do something with each bucket</div>
+
+  <div class="sec">
+    <h2>groupingBy = buckets 🪣</h2>
+    <svg width="660" height="170" viewBox="0 0 660 170">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="60" width="130" height="44" rx="8" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="20" y="80">10 customers</text><text x="20" y="97" font-size="12">C001 … C010</text>
+        <path d="M145 82 h40 M177 74 l8 8 l-8 8" fill="none" stroke="#23302B" stroke-width="2"/>
+        <text x="150" y="68" font-size="12">city?</text>
+        <g>
+          <path d="M200 10 h80 l-8 40 h-64 z" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/><text x="208" y="34" font-size="12">Singapore</text><text x="290" y="34">4</text>
+          <path d="M200 58 h80 l-8 40 h-64 z" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="206" y="82" font-size="12">Kuala Lumpur</text><text x="290" y="82">2</text>
+          <path d="M200 106 h80 l-8 40 h-64 z" fill="#FFCC80" stroke="#23302B" stroke-width="2"/><text x="214" y="130" font-size="12">Jakarta</text><text x="290" y="130">2</text>
+          <text x="310" y="160" font-size="12">+ Bangkok 1, Colombo 1</text>
+        </g>
+        <text x="330" y="34">downstream = what each bucket becomes:</text>
+        <text x="330" y="58" fill="#1E8E5A">counting() → {Bangkok=1, …, Singapore=4}</text>
+        <text x="330" y="82" fill="#1E8E5A">mapping(id, toList()) → [C001, C003, C005, C010]</text>
+        <text x="330" y="106" fill="#1E8E5A">reducing(ZERO, amount, add) → BigDecimal</text>
+        <text x="330" y="130" fill="#C93C3C">default map = HashMap → order?? use TreeMap</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sec">
+    <h2>partitioningBy = exactly 2 buckets ⚖</h2>
+    <svg width="660" height="130" viewBox="0 0 660 130">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="40" width="140" height="44" rx="8" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="20" y="60">12 payments</text><text x="20" y="77" font-size="12">status == SUCCESS ?</text>
+        <path d="M155 55 L230 25 M155 70 L230 100" stroke="#23302B" stroke-width="2"/>
+        <path d="M235 5 h110 l-10 40 h-90 z" fill="#FFC2D4" stroke="#23302B" stroke-width="2"/><text x="250" y="30">false: 4</text>
+        <path d="M235 80 h110 l-10 40 h-90 z" fill="#A8F0C6" stroke="#23302B" stroke-width="2"/><text x="250" y="105">true: 8</text>
+        <text x="365" y="30">total 1430.65</text>
+        <text x="365" y="105">total 2999.19</text>
+        <text x="480" y="60" fill="#C93C3C">empty bucket?</text>
+        <text x="480" y="80" fill="#C93C3C">still there: true=0</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="row sec">
+    <div class="sk t1 col">
+      <h2>filter vs filtering [9] 🔍</h2>
+      <p>filter first → <span class="code">{PAYNOW=1, PAYPAL=1}</span><br><span class="red">CARD vanished!</span><br>filtering inside → <span class="code">{CARD=0, PAYNOW=1, PAYPAL=1}</span></p>
+    </div>
+    <div class="sk t2 col">
+      <h2>Optional per bucket 🎁</h2>
+      <p><span class="code">maxBy</span> → Optional[T018]<br><span class="code">collectingAndThen(…, orElseThrow)</span><br>→ ACC-1001=T018 (a bucket is never empty)</p>
+    </div>
+  </div>
+  <div class="row sec">
+    <div class="sk t2 col">
+      <h2>Pick the map 🗺</h2>
+      <p>TreeMap::new → Bangkok … Singapore<br>EnumMap → SILVER, GOLD, PLATINUM<br><span class="red">default HashMap → no order</span></p>
+    </div>
+    <div class="sk t1 col">
+      <h2>Money per bucket 💰</h2>
+      <p><span class="code">reducing(ZERO, amount, add)</span><br>TRANSFER → 10362.65<br><span class="red">summingDouble ✗</span></p>
+    </div>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 11</span><span>sketch notes · 1 / 2</span></div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <div class="holes"><i></i><i></i><i></i></div>
+  <h2 style="font-size:26pt">Buckets inside buckets</h2>
+  <div class="sec">
+    <svg width="660" height="150" viewBox="0 0 660 150">
+      <g font-family="Patrick" font-size="14">
+        <rect x="10" y="10" width="300" height="130" rx="12" fill="#B3E5FC" stroke="#23302B" stroke-width="2"/>
+        <text x="22" y="34" font-family="Caveat" font-weight="700" font-size="22">Singapore</text>
+        <rect x="25" y="48" width="80" height="70" rx="8" fill="#FFF" stroke="#23302B" stroke-width="2"/><text x="35" y="78">SILVER</text><text x="55" y="102">1</text>
+        <rect x="115" y="48" width="80" height="70" rx="8" fill="#FFF27A" stroke="#23302B" stroke-width="2"/><text x="135" y="78">GOLD</text><text x="148" y="102">2</text>
+        <rect x="205" y="48" width="90" height="70" rx="8" fill="#D1C4E9" stroke="#23302B" stroke-width="2"/><text x="212" y="78">PLATINUM</text><text x="242" y="102">1</text>
+        <text x="330" y="36">nested: groupingBy(city, groupingBy(tier, counting()))</text>
+        <text x="330" y="62" fill="#1E8E5A">Singapore={SILVER=1, GOLD=2, PLATINUM=1}</text>
+        <text x="330" y="94">flat: groupingBy(c -&gt; new CityTier(city, tier))</text>
+        <text x="330" y="120" fill="#1E8E5A">Singapore/GOLD=2 · easy to sort and export</text>
+      </g>
+    </svg>
+  </div>
+  <div class="ideas sec">
+    <div class="idea sk t1"><p><span class="code">mapping(name, joining(", "))</span> → names per tier</p></div>
+    <div class="idea sk t2"><p><span class="code">flatMapping</span> [9] → accounts per tier</p></div>
+    <div class="idea sk t2"><p><span class="code">teeing</span> [12] → CARD=5/2070.29</p></div>
+    <div class="idea sk t1"><p><span class="code">groupingBy(YearMonth)</span> → 2026-11=[POL-502, POL-505, POL-509]</p></div>
+    <div class="idea sk t1"><p>group, then sort the entries → [TRANSFER=15, DINING=10, SALARY=8]</p></div>
+    <div class="idea sk t2"><p>sum of all groups == grand total ✓ (tested)</p></div>
+  </div>
+
+  <div class="sk t2 sec" style="background:#E3F2FD">
+    <h2>Worked example: debit report per category</h2>
+    <p>BEFORE: HashMaps + if-null loops · AFTER [8]: 3 groupingBy passes · MODERN: one <span class="code">groupingBy(category, EnumMap, collectingAndThen(toList(), CategoryStats::of))</span> · TRANSFER: 8 debits, total 7190.92, largest T042 1432.93 … DINING: 10 debits, 839.28 · all 3 versions agree ✓</p>
+  </div>
+
+  <div class="sk t1 sec">
+    <h2>Exercise: 12 grouping problems 🧩</h2>
+    <p>avg premium {LIFE=2125.00, HEALTH=1032.88, MOTOR=1275.25, TRAVEL=197.50, HOME=782.63} · richest account per customer · top-3 per account · FAILED per method with zeros</p>
+  </div>
+
+  <div class="sk t3" style="background:#FFF9C4">
+    <h2>★ Remember</h2>
+    <p>classifier + downstream · pick the map · filter removes keys, filtering keeps them · partitioningBy always has 2 keys · unwrap the Optional inside · next → L12 primitive streams</p>
+  </div>
+  <div class="foot"><span>ITGreenZone · Java Functional Programming · Lesson 11</span><span>sketch notes · 2 / 2</span></div>
+</div>
+</body></html>

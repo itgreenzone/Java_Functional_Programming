@@ -1,0 +1,9 @@
+top-3 per account (first 3 accounts):
+  ACC-1001=[T018, T009, T012]
+  ACC-1002=[T005, T020]
+  ACC-1003=[T049, T055, T042]
+richest account per customer : {C001=ACC-1001, C002=ACC-1003, C003=ACC-1006, C004=ACC-1007, C005=ACC-1008, C006=ACC-1009, C007=ACC-1011, C008=ACC-1012, C009=ACC-1013, C010=ACC-1015}
+flights per origin           : {CGK=1, SIN=7}
+policies by expiry month     : {2026-11=[POL-502, POL-505, POL-509], 2026-12=[POL-503, POL-508], 2027-01=[POL-506], 2027-02=[POL-510], 2027-03=[POL-501], 2027-06=[POL-504], 2028-09=[POL-507]}
+top 3 categories by count    : [TRANSFER=15, DINING=10, SALARY=8]
+invert id->city              : {Bangkok=[C008], Colombo=[C007], Jakarta=[C004, C009], Kuala Lumpur=[C002, C006], Singapore=[C001, C003, C005, C010]}

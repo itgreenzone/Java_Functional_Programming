@@ -1,0 +1,7 @@
+TRANSFER: 8 debits, total 7190.92, largest T042 1432.93
+TRAVEL: 3 debits, total 3173.90, largest T026 1726.41
+UTILITIES: 8 debits, total 1578.49, largest T033 306.29
+SHOPPING: 4 debits, total 1577.27, largest T005 538.57
+INSURANCE: 5 debits, total 1200.78, largest T018 447.37
+GROCERIES: 7 debits, total 1131.80, largest T035 242.78
+DINING: 10 debits, total 839.28, largest T020 170.53
